@@ -2,4 +2,6 @@
     <string name="app_name">Diet Helper App</string>
     <string name="ingredientsNameString">Ингредиенты:</string>
     <string name="nutritionString">Пищевая ценность:</string>
+    <string name="testRecipeString">Тестовый рецепт</string>
+    <string name="toDietListString">Выбрать диету</string>
 </resources>
