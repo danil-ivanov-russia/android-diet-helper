@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/titleFragment">
+
+    <fragment
+        android:id="@+id/titleFragment"
+        android:name="com.example.diethelperapp.title.TitleFragment"
+        android:label="TitleFragment" >
+        <action
+            android:id="@+id/action_titleFragment_to_dietListFragment"
+            app:destination="@id/dietListFragment" />
+        <action
+            android:id="@+id/action_titleFragment_to_recipeFragment"
+            app:destination="@id/recipeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeFragment"
+        android:name="com.example.diethelperapp.recipe.RecipeFragment"
+        android:label="RecipeFragment" />
+    <fragment
+        android:id="@+id/dietListFragment"
+        android:name="com.example.diethelperapp.dietList.DietListFragment"
+        android:label="DietListFragment" >
+        <action
+            android:id="@+id/action_dietListFragment_to_dietFragment"
+            app:destination="@id/dietFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dietFragment"
+        android:name="com.example.diethelperapp.diet.DietFragment"
+        android:label="DietFragment" />
+</navigation>
