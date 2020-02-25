@@ -13,16 +13,16 @@ class DietRepositoryMocked: DietRepository {
     override suspend fun getDietsNames(): List<String> {
         delay(1500L)
         return listOf(
-            "123",
-            "456",
-            "789")
+            "Гречневая диета",
+            "Низкоуглеводная диета",
+            "Болгарская диета")
     }
 
     override suspend fun loadDiet(dietId: String): DietRepository.Diet {
         delay(1500L)
         return DietRepository.Diet(
             dietId = "0",
-            name = "Гречневая",
+            name = "Гречневая диета",
             description = "Есть можно только гречку, лучше диеты ещё не придумали.",
             recommendations = listOf("Гречка - хорошо.", "Остальное - плохо"),
             duration = "1 неделя",
