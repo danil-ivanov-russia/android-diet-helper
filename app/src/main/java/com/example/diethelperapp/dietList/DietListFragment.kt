@@ -26,7 +26,7 @@ class DietListFragment :  Fragment()  {
     private val viewModel: DietListViewModel by viewModels {
         object: ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-                DietListViewModel(DietRepositoryMocked()) as T
+                DietListViewModel(DietRepositoryMocked()) as T // здесь по мне нужно добавить даггер: App.repositories.diet()
         }
     }
 

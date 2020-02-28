@@ -8,7 +8,6 @@ import com.example.diethelperapp.DB2.Models.DietModel
 import kotlinx.coroutines.launch
 class WorkWithDB: ViewModel()
 {// Первоначальное заполнение БД.
-
     init {
         val db: AppDatabase? = App.instance?.getDatabase()
         val dietDAO: DietDAO? = db?.getDietDAO()
@@ -17,7 +16,6 @@ class WorkWithDB: ViewModel()
     companion object
     {
         var DB_work: DietDAO? = null
-
     }
     fun getCountLines(): Int
     {
@@ -38,8 +36,6 @@ class WorkWithDB: ViewModel()
         // Сделать коллекцию, в нее добавить эти элементы.
         // В корутине сделать цикл и просто исполнять insert с разными объектами.
         // Не очень способ, но для начала сойдет.
-
-
         var diets: MutableCollection<DietDAO.Diet> = mutableListOf()
         diets.add(DietDAO.Diet(0,"Гречневая","Принцип гречневой диеты заключается в питании в течение недели или двух одной лишь гречкой.",7))
         diets.add(DietDAO.Diet(1,"Белковая","Отлично подходит для быстрого снижения веса, а также при активных тренировках.",14))
@@ -50,7 +46,6 @@ class WorkWithDB: ViewModel()
                 {
                     DB_work?.insert(i)
                 }
-
             } catch (t: Throwable){
                 print(t.message)
             }
@@ -58,14 +53,10 @@ class WorkWithDB: ViewModel()
     }
     fun getLogs()
     {
-
         var test: List<DietDAO.Diet>
         viewModelScope.launch {
             try{
-
-
                     test = DB_work!!.getAllDiet()
-
 
             } catch (t: Throwable){
                 print(t.message)

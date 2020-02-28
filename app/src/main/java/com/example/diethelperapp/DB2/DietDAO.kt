@@ -6,8 +6,6 @@ import com.example.diethelperapp.DB2.Models.DietModel
 
 @Dao
 abstract class DietDAO {
-
-
     @Query("SELECT * FROM diet_table")
     abstract suspend fun getAllDiet(): List<Diet>
 
@@ -32,19 +30,19 @@ abstract class DietDAO {
     @Query("SELECT COUNT(*) FROM diet_table")
     abstract suspend fun getCountLines(): Int
 
-//
-//    // не верно, нужно исправить
+    // очень не уверен что этот запрос работает
 //    @Transaction
-//    @Query("SELECT * FROM dishes_table Where id_dishes = :name_certain_diet")
-//    abstract suspend fun getDishesByCertainDiet(name_certain_diet:String): List<Diet>
-//
+//    @Query("SELECT * FROM diet_table")
+//    abstract suspend fun getDishesByCertainDiet(): List<Diet>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insert(diet: Diet)
 
-
+// хорошо бы добавить автогенерацию id
     @Entity(tableName = "diet_table")
     class Diet (
         @PrimaryKey
+
                 override  var id_diet: Int = 0,
                 override var diet_name: String?,
                 override var supporting_information: String?,

@@ -24,17 +24,17 @@ class DietListViewModel(
         }
     val isLoading: LiveData<Boolean> = MutableLiveData(_isLoading)
 
-//    init {
-//        viewModelScope.launch {
-//            val dietsNames: List<String>? = try{
-//                repository.getAllNameDiets()
-//            } catch (t: Throwable){
-//                print(t.message)
-//                null
-//            }
-//
-//            _isLoading = false
-//            dietsNames?.let {_dietsNames = it}
-//        }
-//    }
+    init {
+        viewModelScope.launch {
+            val dietsNames: List<String>? = try{
+                repository.getAllNameDiets()
+            } catch (t: Throwable){
+                print(t.message)
+                null
+            }
+
+            _isLoading = false
+            dietsNames?.let {_dietsNames = it}
+        }
+    }
 }
