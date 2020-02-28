@@ -14,8 +14,8 @@ abstract class DietDAO {
     @Query("SELECT id_diet FROM diet_table Where diet_name = :name_certain_diet")
     abstract suspend fun getIdCertainDiet(name_certain_diet:String): Int
 
-    @Query("SELECT id_diet FROM diet_table Where id_diet = :id_certain_diet")
-    abstract suspend fun getNameCertainDiet(id_certain_diet:Int): Int
+    @Query("SELECT diet_name FROM diet_table Where id_diet = :id_certain_diet")
+    abstract suspend fun getNameCertainDiet(id_certain_diet:Int): String
 
     @Query("SELECT diet_name FROM diet_table")
     abstract suspend fun getAllNameDiets(): List<String>

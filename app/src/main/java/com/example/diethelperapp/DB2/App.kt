@@ -21,6 +21,7 @@ class App : Application() {
             .fallbackToDestructiveMigration()
             .build()
         db_work.fillTable()
+        db_work.getLogs()
 
     }
 

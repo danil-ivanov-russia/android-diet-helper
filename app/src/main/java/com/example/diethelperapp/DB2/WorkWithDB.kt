@@ -1,5 +1,6 @@
 package com.example.diethelperapp.DB
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.diethelperapp.DB2.AppDatabase
@@ -27,11 +28,30 @@ class WorkWithDB: ViewModel()
                 for (i in diets)
                 {
                     dietDAO?.insert(i)
+
                 }
 
             } catch (t: Throwable){
                 print(t.message)
             }
         }
+    }
+    fun getLogs()
+    {
+        val db: AppDatabase? = App.instance?.getDatabase()
+        val dietDAO: DietDAO? = db?.getDietDAO()
+        var test: String
+        viewModelScope.launch {
+            try{
+
+                if (dietDAO != null) {
+                    test = dietDAO.getNameCertainDiet(1).toString()
+
+                }
+            } catch (t: Throwable){
+                print(t.message)
+            }
+        }
+
     }
 }
