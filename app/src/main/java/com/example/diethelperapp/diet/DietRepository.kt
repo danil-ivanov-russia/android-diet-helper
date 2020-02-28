@@ -4,18 +4,24 @@ import com.example.diethelperapp.recipe.RecipeRepository
 
 interface DietRepository {
 
-    suspend fun getDiets(): List<Diet>
+    suspend fun getAllDiet(): List<Diet>
 
-    suspend fun getDietsNames(): List<String>
+    suspend fun getIdCertainDiet(name_certain_diet:String): Int
 
-    suspend fun loadDiet(dietId: String): Diet
+    suspend fun getNameCertainDiet(id_certain_diet:Int): String
+
+    suspend fun getAllNameDiets(): List<String>
+
+    suspend fun getDescriptionCertainDiet(id_certain_diet:Int): String
+
+    suspend fun getDurationCertainDiet(id_certain_diet:Int): Int
+
 
     class Diet(
-        val dietId: String,
-        val name: String,
-        val description: String,
-        val recommendations: List<String>,
-        val recipes: List<RecipeRepository.Recipe>,
-        val duration: String
+        var id_diet: Int = 0,
+        var diet_name: String? = null,
+        var supporting_information: String? = null,
+        var duration: Int = 0
     )
+
 }

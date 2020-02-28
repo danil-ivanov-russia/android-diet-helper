@@ -27,7 +27,7 @@ class DietListViewModel(
     init {
         viewModelScope.launch {
             val dietsNames: List<String>? = try{
-                repository.getDietsNames()
+                repository.getAllNameDiets()
             } catch (t: Throwable){
                 print(t.message)
                 null

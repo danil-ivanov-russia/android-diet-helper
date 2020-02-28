@@ -9,5 +9,5 @@ import com.example.diethelperapp.DB.DietDAO
     version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun cities(): DietDAO
+    abstract fun getDietDAO(): DietDAO
 }
