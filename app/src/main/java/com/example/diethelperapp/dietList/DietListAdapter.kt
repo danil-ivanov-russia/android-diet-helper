@@ -8,12 +8,13 @@ import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.diethelperapp.DB2.Models.DietModel
 import com.example.diethelperapp.R
 import com.example.diethelperapp.databinding.ListItemDietBinding
 
-class DietListAdapter(_dietsNamesList: List<String>):RecyclerView.Adapter<DietListAdapter.DietListViewHolder>() {
-    var dietsNamesList:List<String> = _dietsNamesList
-    //var onDietClickListener: OnDietClickListener = _onDietClickListener
+class DietListAdapter(_dietsNamesList: List<DietModel>, _viewModel: DietListViewModel):RecyclerView.Adapter<DietListAdapter.DietListViewHolder>() {
+    var dietsNamesList:List<DietModel> = _dietsNamesList
+    var viewModel = _viewModel
 
     override fun getItemCount() = dietsNamesList.size
 
@@ -23,10 +24,12 @@ class DietListAdapter(_dietsNamesList: List<String>):RecyclerView.Adapter<DietLi
         return DietListViewHolder(dietBinding)
     }
     override fun onBindViewHolder(holder: DietListViewHolder, position: Int) {
-        holder.dietBinding.dietName = dietsNamesList[position]
+        holder.dietBinding.dietName = dietsNamesList[position].diet_name
+        holder.dietBinding.dietId = dietsNamesList[position].id_diet
+        holder.dietBinding.viewModel = viewModel
 
     }
-    fun setEmployeeList(_dietsNamesList: List<String>) {
+    fun setEmployeeList(_dietsNamesList: List<DietModel>) {
         this.dietsNamesList = _dietsNamesList
         notifyDataSetChanged()
     }
@@ -34,11 +37,5 @@ class DietListAdapter(_dietsNamesList: List<String>):RecyclerView.Adapter<DietLi
 
         }
 
-/*
-    public interface OnDietClickListener{
-        abstract var navController: NavController
-        fun onDietClick( position: Int)
-    }
-    */
 
 }

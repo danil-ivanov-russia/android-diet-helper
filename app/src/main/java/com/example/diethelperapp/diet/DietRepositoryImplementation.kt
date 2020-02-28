@@ -6,8 +6,7 @@ import com.example.diethelperapp.DB2.Models.DietModel
 
 class DietRepositoryImplementation(private val dao: DietDAO) : DietRepository {
     override suspend fun getAllDiet(): List<DietDAO.Diet> {
-       // return dao.getAllDiet()
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       return dao.getAllDiet()
     }
 
     override suspend fun getIdCertainDiet(name_certain_diet: String): Int {
@@ -21,8 +20,7 @@ class DietRepositoryImplementation(private val dao: DietDAO) : DietRepository {
     }
 
     override suspend fun getAllNameDiets(): List<String> {
-      //  return dao.getAllNameDiets()
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return dao.getAllNameDiets()
     }
 
     override suspend fun getDescriptionCertainDiet(id_certain_diet: Int): String {
@@ -36,8 +34,7 @@ class DietRepositoryImplementation(private val dao: DietDAO) : DietRepository {
     }
 
     override suspend fun getCertainDietById(id_certain_diet: Int): DietModel {
-        // return dao.getCertainDietById(id_certain_diet)
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+         return dao.getCertainDietById(id_certain_diet)
     }
 
 

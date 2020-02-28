@@ -5,17 +5,44 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
+import com.example.diethelperapp.DB.App
 import com.example.diethelperapp.R
+import com.example.diethelperapp.databinding.FragmentDietBinding
+import com.example.diethelperapp.databinding.FragmentRecipeBinding
+import com.example.diethelperapp.recipe.RecipeRepositoryMocked
+import com.example.diethelperapp.recipe.RecipeViewModel
 
 class DietFragment: Fragment() {
+
+    val args: DietFragmentArgs by navArgs()
+
+    private val viewModel: DietViewModel by viewModels {
+
+        object: ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+                DietViewModel(args.dietId, App.repositories.diet()) as T
+        }
+    }
+
+    private lateinit var dataBinding: FragmentDietBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_diet, container, false)
+    ): View? {
+        dataBinding = FragmentDietBinding.inflate(inflater, container, false)
+        return dataBinding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        dataBinding.viewModel = viewModel
+        dataBinding.lifecycleOwner = viewLifecycleOwner
     }
 }

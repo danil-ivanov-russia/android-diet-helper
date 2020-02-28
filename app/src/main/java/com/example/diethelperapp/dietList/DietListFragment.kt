@@ -1,5 +1,6 @@
 package com.example.diethelperapp.dietList
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.diethelperapp.DB.App
+import com.example.diethelperapp.DB2.Models.DietModel
 import com.example.diethelperapp.R
 import com.example.diethelperapp.databinding.FragmentDietlistBinding
 import com.example.diethelperapp.diet.DietRepositoryMocked
@@ -22,29 +25,23 @@ import com.example.diethelperapp.recipe.RecipeViewModel
 import com.example.diethelperapp.title.TitleFragmentDirections
 import kotlinx.android.synthetic.main.fragment_dietlist.*
 
-class DietListFragment :  Fragment()  {
+class DietListFragment :  Fragment(), DietListItemClickNavigator  {
     private val viewModel: DietListViewModel by viewModels {
         object: ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-                DietListViewModel(DietRepositoryMocked()) as T // здесь по мне нужно добавить даггер: App.repositories.diet()
+                DietListViewModel(App.repositories.diet(), this@DietListFragment) as T
         }
     }
 
     private lateinit var dataBinding: FragmentDietlistBinding
-
-    //private lateinit var recyclerView: RecyclerView
-    //private lateinit var viewAdapter: RecyclerView.Adapter<*>
-    //private lateinit var viewManager: RecyclerView.LayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         dataBinding = FragmentDietlistBinding.inflate(inflater, container, false)
         return dataBinding.root
-        //return inflater.inflate(R.layout.fragment_dietlist, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,15 +52,20 @@ class DietListFragment :  Fragment()  {
 
         recyclerViewDiet.apply{
             layoutManager = LinearLayoutManager(requireContext())
-            //adapter = DietListAdapter(listOf(""))
         }
-        //getDietNames()
-        val dietNameObserver = Observer<List<String>> { it ->
+        val dietNameObserver = Observer<List<DietModel>> { it ->
             recyclerViewDiet.apply{
-                adapter = DietListAdapter(it)
+                adapter = DietListAdapter(it, viewModel)
             }
         }
         viewModel.dietsNames.observe(viewLifecycleOwner, dietNameObserver)
+    }
+
+    override fun onItemClick(id: Int) {
+        val action =
+            DietListFragmentDirections
+                .actionDietListFragmentToDietFragment(id)
+        this.findNavController().navigate(action)
     }
 
 

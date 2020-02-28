@@ -5,12 +5,26 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.example.diethelperapp.dietList.DietListViewModel" />
+
         <variable
             name="dietName"
             type="String" />
+
+        <variable
+            name="dietId"
+            type="Integer" />
     </data>
 
+
     <LinearLayout
+        android:onClick="@{()-> viewModel.itemClick(dietId)}"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"

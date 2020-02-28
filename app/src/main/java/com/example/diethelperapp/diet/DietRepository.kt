@@ -19,12 +19,5 @@ interface DietRepository {
 
     suspend fun getCertainDietById(id_certain_diet:Int): DietModel
 
-// Модель DietModel заменяет этот класс
-    class Diet(
-        var id_diet: Int = 0,
-        var diet_name: String? = null,
-        var supporting_information: String? = null,
-        var duration: Int = 0
-    )
 
 }

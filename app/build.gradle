@@ -39,6 +39,11 @@ android {
         //noinspection DataBindingWithoutKapt
         dataBinding = true
     }
+
+    kapt {
+        correctErrorTypes = true
+    }
+
 }
 
 dependencies {

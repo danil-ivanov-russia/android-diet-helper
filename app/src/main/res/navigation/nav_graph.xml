@@ -24,10 +24,19 @@
         android:label="DietListFragment" >
         <action
             android:id="@+id/action_dietListFragment_to_dietFragment"
-            app:destination="@id/dietFragment" />
+            app:destination="@id/dietFragment" >
+            <argument
+                android:name="dietId"
+                android:defaultValue="0" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/dietFragment"
         android:name="com.example.diethelperapp.diet.DietFragment"
-        android:label="DietFragment" />
+        android:label="DietFragment" >
+        <argument
+            android:name="dietId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>
