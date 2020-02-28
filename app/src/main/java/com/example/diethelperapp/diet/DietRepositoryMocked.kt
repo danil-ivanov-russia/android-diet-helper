@@ -1,5 +1,6 @@
 package com.example.diethelperapp.diet
 
+import com.example.diethelperapp.DB2.Models.DietModel
 import com.example.diethelperapp.recipe.RecipeRepository
 import com.example.diethelperapp.recipe.RecipeRepositoryMocked
 import kotlinx.coroutines.delay
@@ -47,7 +48,7 @@ class DietRepositoryMocked: DietRepository {
 //        )
 //    }
 
-    override suspend fun getAllDiet(): List<DietRepository.Diet> {
+    override suspend fun getAllDiet(): List<DietModel> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -68,6 +69,10 @@ class DietRepositoryMocked: DietRepository {
     }
 
     override suspend fun getDurationCertainDiet(id_certain_diet: Int): Int {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+//
+    override suspend fun getCertainDietById(id_certain_diet: Int): DietModel {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

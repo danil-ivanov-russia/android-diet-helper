@@ -2,6 +2,7 @@ package com.example.diethelperapp.DB
 
 import androidx.room.*
 import androidx.lifecycle.LiveData
+import com.example.diethelperapp.DB2.Models.DietModel
 
 @Dao
 abstract class DietDAO {
@@ -11,11 +12,11 @@ abstract class DietDAO {
     abstract suspend fun getAllDiet(): List<Diet>
 
     @Query("SELECT id_diet FROM diet_table Where diet_name = :name_certain_diet")
-    abstract suspend fun getIdCertainDiet(name_certain_diet:String): Int?
+    abstract suspend fun getIdCertainDiet(name_certain_diet:String): Int
 
     @Query("SELECT id_diet FROM diet_table Where id_diet = :id_certain_diet")
-    abstract suspend fun getNameCertainDiet(id_certain_diet:Int): Int?
-//
+    abstract suspend fun getNameCertainDiet(id_certain_diet:Int): Int
+
     @Query("SELECT diet_name FROM diet_table")
     abstract suspend fun getAllNameDiets(): List<String>
 
@@ -24,6 +25,10 @@ abstract class DietDAO {
 
     @Query("SELECT duration  FROM diet_table Where id_diet = :id_certain_diet")
     abstract suspend fun getDurationCertainDiet(id_certain_diet:Int): Int
+
+    @Query("SELECT * FROM diet_table Where id_diet = :id_certain_diet")
+    abstract suspend fun getCertainDietById(id_certain_diet:Int): Diet
+
 //
 //    // не верно, нужно исправить
 //    @Transaction
@@ -35,16 +40,16 @@ abstract class DietDAO {
 
 
     @Entity(tableName = "diet_table")
-    class Diet {
-        @PrimaryKey(autoGenerate = true)
-        var id_diet: Int = 0
-        var diet_name: String? = null
-        var supporting_information: String? = null
-        var duration: Int = 0
-    }
+    class Diet (
+        @PrimaryKey
+                override  var id_diet: Int = 0,
+                override var diet_name: String?,
+                override var supporting_information: String?,
+                override var duration: Int
+    ): DietModel
     @Entity(tableName = "ingredients_table")
     class Ingredients {
-        @PrimaryKey(autoGenerate = true)
+        @PrimaryKey
         var id_ingred: Int = 0
         var ingred_name: String? = null
         var protein: Double? = null

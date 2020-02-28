@@ -1,10 +1,11 @@
 package com.example.diethelperapp.diet
 
+import com.example.diethelperapp.DB2.Models.DietModel
 import com.example.diethelperapp.recipe.RecipeRepository
 
 interface DietRepository {
 
-    suspend fun getAllDiet(): List<Diet>
+    suspend fun getAllDiet(): List<DietModel> // не уверен что правильно тип возвращаю
 
     suspend fun getIdCertainDiet(name_certain_diet:String): Int
 
@@ -15,6 +16,8 @@ interface DietRepository {
     suspend fun getDescriptionCertainDiet(id_certain_diet:Int): String
 
     suspend fun getDurationCertainDiet(id_certain_diet:Int): Int
+
+    suspend fun getCertainDietById(id_certain_diet:Int): DietModel
 
 
     class Diet(

@@ -3,6 +3,7 @@ package com.example.diethelperapp.DB
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.diethelperapp.DB2.AppDatabase
+import com.example.diethelperapp.DB2.Models.DietModel
 import kotlinx.coroutines.launch
 
 class WorkWithDB: ViewModel()
@@ -12,13 +13,22 @@ class WorkWithDB: ViewModel()
     {
         val db: AppDatabase? = App.instance?.getDatabase()
         val dietDAO: DietDAO? = db?.getDietDAO()
-        var diet: DietDAO.Diet = DietDAO.Diet()
-        diet.diet_name = "Гречневая"
-        diet.supporting_information = "Тест информация для Гречневое диеты"
+        // По рабоче крестьянски.
+        // Сделать коллекцию, в нее добавить эти элементы.
+        // В корутине сделать цикл и просто исполнять insert с разными объектами.
+        // Не очень способ, но для начала сойдет.
 
+        var diets: MutableCollection<DietDAO.Diet> = mutableListOf()
+        diets.add(DietDAO.Diet(0,"Гречневая","Принцип гречневой диеты заключается в питании в течение недели или двух одной лишь гречкой.",7))
+        diets.add(DietDAO.Diet(1,"Белковая","Отлично подходит для быстрого снижения веса, а также при активных тренировках.",14))
+        diets.add(DietDAO.Diet(2,"Диета парижанки","Простой метод сбалансированного питания, основанный на медицинских знаниях и приспособленный к современному образу жизни",23))
         viewModelScope.launch {
             try{
-                dietDAO?.insert(diet)
+                for (i in diets)
+                {
+                    dietDAO?.insert(i)
+                }
+
             } catch (t: Throwable){
                 print(t.message)
             }
