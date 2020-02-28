@@ -11,7 +11,7 @@ import com.example.diethelperapp.DB2.AppDatabase
 
 class App : Application() {
     private var database: AppDatabase? = null
-    private val db_work = WorkWithDB()
+    private var db_work: WorkWithDB? = null
 
 
     override fun onCreate() {
@@ -20,8 +20,14 @@ class App : Application() {
         database = Room.databaseBuilder(this, AppDatabase::class.java, "database")
             .fallbackToDestructiveMigration()
             .build()
-        db_work.fillTable()
-        db_work.getLogs()
+        db_work = WorkWithDB()
+        if (db_work!!.getCountLines()>0)
+        {
+
+
+        }
+        db_work!!.fillTable()
+        db_work!!.getLogs()
 
     }
 

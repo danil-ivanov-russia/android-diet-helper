@@ -6,18 +6,39 @@ import androidx.lifecycle.viewModelScope
 import com.example.diethelperapp.DB2.AppDatabase
 import com.example.diethelperapp.DB2.Models.DietModel
 import kotlinx.coroutines.launch
-
 class WorkWithDB: ViewModel()
 {// Первоначальное заполнение БД.
 
-    fun fillTable()
-    {
+    init {
         val db: AppDatabase? = App.instance?.getDatabase()
         val dietDAO: DietDAO? = db?.getDietDAO()
+        DB_work = dietDAO
+    }
+    companion object
+    {
+        var DB_work: DietDAO? = null
+
+    }
+    fun getCountLines(): Int
+    {
+        var  count: Int = 0
+        viewModelScope.launch {
+            try{
+                    count = DB_work!!.getCountLines()
+
+            } catch (t: Throwable){
+                print(t.message)
+            }
+        }
+        return count
+    }
+    fun fillTable()
+    {
         // По рабоче крестьянски.
         // Сделать коллекцию, в нее добавить эти элементы.
         // В корутине сделать цикл и просто исполнять insert с разными объектами.
         // Не очень способ, но для начала сойдет.
+
 
         var diets: MutableCollection<DietDAO.Diet> = mutableListOf()
         diets.add(DietDAO.Diet(0,"Гречневая","Принцип гречневой диеты заключается в питании в течение недели или двух одной лишь гречкой.",7))
@@ -27,8 +48,7 @@ class WorkWithDB: ViewModel()
             try{
                 for (i in diets)
                 {
-                    dietDAO?.insert(i)
-
+                    DB_work?.insert(i)
                 }
 
             } catch (t: Throwable){
@@ -38,16 +58,15 @@ class WorkWithDB: ViewModel()
     }
     fun getLogs()
     {
-        val db: AppDatabase? = App.instance?.getDatabase()
-        val dietDAO: DietDAO? = db?.getDietDAO()
-        var test: String
+
+        var test: List<DietDAO.Diet>
         viewModelScope.launch {
             try{
 
-                if (dietDAO != null) {
-                    test = dietDAO.getNameCertainDiet(1).toString()
 
-                }
+                    test = DB_work!!.getAllDiet()
+
+
             } catch (t: Throwable){
                 print(t.message)
             }

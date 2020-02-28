@@ -29,13 +29,16 @@ abstract class DietDAO {
     @Query("SELECT * FROM diet_table Where id_diet = :id_certain_diet")
     abstract suspend fun getCertainDietById(id_certain_diet:Int): Diet
 
+    @Query("SELECT COUNT(*) FROM diet_table")
+    abstract suspend fun getCountLines(): Int
+
 //
 //    // не верно, нужно исправить
 //    @Transaction
 //    @Query("SELECT * FROM dishes_table Where id_dishes = :name_certain_diet")
 //    abstract suspend fun getDishesByCertainDiet(name_certain_diet:String): List<Diet>
 //
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insert(diet: Diet)
 
 
