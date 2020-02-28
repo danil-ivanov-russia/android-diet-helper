@@ -42,7 +42,6 @@ abstract class DietDAO {
     @Entity(tableName = "diet_table")
     class Diet (
         @PrimaryKey
-
                 override  var id_diet: Int = 0,
                 override var diet_name: String?,
                 override var supporting_information: String?,
