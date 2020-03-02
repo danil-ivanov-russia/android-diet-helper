@@ -33,9 +33,8 @@ class DietRepositoryImplementation(private val dao: DietDAO) : DietRepository {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun getCertainDietById(id_certain_diet: Int): DietModel {
-         return dao.getCertainDietById(id_certain_diet)
-    }
-
+    override suspend fun getCertainDietById(
+        id_certain_diet: Int
+    ): DietModel = dao.getCertainDietById(id_certain_diet)
 
 }

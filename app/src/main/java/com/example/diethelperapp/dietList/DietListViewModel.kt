@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class DietListViewModel(
     private val repository: DietRepository,
-    private val navigator: DietListItemClickNavigator
+    var navigator: DietListItemClickNavigator
 ): ViewModel() {
     private var _dietsNames: List<DietModel>? = null
         set(value) {

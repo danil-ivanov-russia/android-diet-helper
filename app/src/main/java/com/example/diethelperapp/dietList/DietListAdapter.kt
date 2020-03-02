@@ -19,8 +19,11 @@ class DietListAdapter(_dietsNamesList: List<DietModel>, _viewModel: DietListView
     override fun getItemCount() = dietsNamesList.size
 
     override fun onCreateViewHolder( viewGroup:ViewGroup, i:Int):DietListViewHolder {
-        val dietBinding = ListItemDietBinding.inflate(LayoutInflater.from(viewGroup.context),
-            viewGroup, false)
+        val dietBinding = ListItemDietBinding.inflate(
+            LayoutInflater.from(viewGroup.context),
+            viewGroup,
+            false
+        )
         return DietListViewHolder(dietBinding)
     }
     override fun onBindViewHolder(holder: DietListViewHolder, position: Int) {

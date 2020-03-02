@@ -46,24 +46,21 @@ class DietListFragment :  Fragment(), DietListItemClickNavigator  {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        viewModel.navigator = this
         dataBinding.viewModel = viewModel
         dataBinding.lifecycleOwner = viewLifecycleOwner
 
-        recyclerViewDiet.apply{
-            layoutManager = LinearLayoutManager(requireContext())
-        }
+        recyclerViewDiet.layoutManager = LinearLayoutManager(requireContext())
+
         val dietNameObserver = Observer<List<DietModel>> { it ->
-            recyclerViewDiet.apply{
-                adapter = DietListAdapter(it, viewModel)
-            }
+            recyclerViewDiet.adapter = DietListAdapter(it, viewModel)
+
         }
         viewModel.dietsNames.observe(viewLifecycleOwner, dietNameObserver)
     }
 
     override fun onItemClick(id: Int) {
-        val action =
-            DietListFragmentDirections
+        val action = DietListFragmentDirections
                 .actionDietListFragmentToDietFragment(id)
         this.findNavController().navigate(action)
     }

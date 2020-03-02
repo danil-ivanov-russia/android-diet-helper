@@ -9,11 +9,12 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.diethelperapp.R
+import com.example.diethelperapp.databinding.FragmentTitleBinding
 import kotlinx.android.synthetic.main.fragment_title.*
 
 class TitleFragment : Fragment() {
 
-
+    private lateinit var binding: FragmentTitleBinding
 
 
     override fun onCreateView(
@@ -21,31 +22,27 @@ class TitleFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        return inflater.inflate(R.layout.fragment_title, container, false)
+        binding = FragmentTitleBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        buttonToDietList.setOnClickListener{
-            val action =
-                TitleFragmentDirections
-                    .actionTitleFragmentToDietListFragment()
+        binding.buttonToDietList.setOnClickListener {
+            val action = TitleFragmentDirections
+                .actionTitleFragmentToDietListFragment()
             this.findNavController().navigate(action)
         }
 
-        buttonToTestRecipe.setOnClickListener{
-            val action =
-                TitleFragmentDirections
-                    .actionTitleFragmentToRecipeFragment()
+
+        binding.buttonToTestRecipe.setOnClickListener {
+            val action = TitleFragmentDirections
+                .actionTitleFragmentToRecipeFragment()
             this.findNavController().navigate(action)
         }
 
     }
-
-
-
 
 
 }
