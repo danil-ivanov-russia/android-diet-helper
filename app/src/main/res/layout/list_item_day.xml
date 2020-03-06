@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <!--<variable
+           name="day"
+           type="com.example.diethelperapp.dietplan.DietPlanRepository.DietPlanDay" />-->
+
+       <import type="android.view.View" />
+
+       <variable
+           name="viewModel"
+           type="com.example.diethelperapp.dietplan.DietPlanViewModel" />
+
+       <variable
+           name="dayName"
+           type="String" />
+
+       <variable
+           name="dietId"
+           type="Integer" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="10dp">
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/dietCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/colorPrimary"
+                card_view:cardElevation="5dp"
+                card_view:cardCornerRadius="2dp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/dayNameTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:textSize="25sp"
+                    android:textColor="#ffffff"
+                    android:text="@{ dayName}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Название" />
+
+                    <TextView
+                        android:id="@+id/breakfastTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:text="Завтрак"
+                        android:textColor="#ffffff"
+                        android:textSize="25sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintTop_toBottomOf="@+id/dayNameTextView"
+                        tools:text="Завтрак" />
+
+                    <RelativeLayout
+                        android:id="@+id/breakfastLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintTop_toBottomOf="@+id/breakfastTextView">
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/breakfastRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        />
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/breakfastAddButton"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="+"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintTop_toBottomOf="@+id/breakfastLayout"/>
+
+                    <TextView
+                        android:id="@+id/lunchTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:text="Обед"
+                        android:textColor="#ffffff"
+                        android:textSize="25sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintTop_toBottomOf="@+id/breakfastAddButton"
+                        tools:text="Обед" />
+
+                    <RelativeLayout
+                        android:id="@+id/lunchLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintTop_toBottomOf="@+id/lunchTextView">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/lunchRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"/>
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/lunchAddButton"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="+"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintTop_toBottomOf="@+id/lunchLayout"/>
+
+                    <TextView
+                        android:id="@+id/dinnerTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:text="Ужин"
+                        android:textColor="#ffffff"
+                        android:textSize="25sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintTop_toBottomOf="@+id/lunchAddButton"
+                        tools:text="Ужин" />
+
+                    <RelativeLayout
+                    android:id="@+id/dinnerLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    card_view:layout_constraintTop_toBottomOf="@+id/dinnerTextView">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/dinnerRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"/>
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/dinnerAddButton"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="+"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintTop_toBottomOf="@+id/dinnerLayout"/>
+
+                    <TextView
+                        android:id="@+id/otherTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:text="Перекусы"
+                        android:textColor="#ffffff"
+                        android:textSize="25sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintTop_toBottomOf="@+id/dinnerAddButton"
+                        tools:text="Перекусы" />
+
+                    <RelativeLayout
+                        android:id="@+id/otherLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintTop_toBottomOf="@+id/otherTextView">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/otherRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"/>
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/otherAddButton"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="+"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintTop_toBottomOf="@+id/otherLayout"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

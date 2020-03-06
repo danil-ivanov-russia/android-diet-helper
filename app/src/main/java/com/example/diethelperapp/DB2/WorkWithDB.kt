@@ -1,11 +1,10 @@
 package com.example.diethelperapp.DB
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.diethelperapp.DB2.AppDatabase
-import com.example.diethelperapp.DB2.Models.DietModel
 import kotlinx.coroutines.launch
+
 class WorkWithDB: ViewModel()
 {// Первоначальное заполнение БД.
     init {
@@ -39,7 +38,7 @@ class WorkWithDB: ViewModel()
         var diets: MutableCollection<DietDAO.Diet> = mutableListOf()
         diets.add(DietDAO.Diet(0,"Гречневая","Принцип гречневой диеты заключается в питании в течение недели или двух одной лишь гречкой.",7))
         diets.add(DietDAO.Diet(1,"Белковая","Отлично подходит для быстрого снижения веса, а также при активных тренировках.",14))
-        diets.add(DietDAO.Diet(2,"Диета парижанки","Простой метод сбалансированного питания, основанный на медицинских знаниях и приспособленный к современному образу жизни",23))
+        diets.add(DietDAO.Diet(2,"Диета парижанки","Простой метод сбалансированного питания, основанный на медицинских знаниях и приспособленный к современному образу жизни. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",23))
         viewModelScope.launch {
             try{
                 for (i in diets)

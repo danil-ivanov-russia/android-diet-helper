@@ -8,13 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.diethelperapp.DB.App
-import com.example.diethelperapp.R
 import com.example.diethelperapp.databinding.FragmentDietBinding
-import com.example.diethelperapp.databinding.FragmentRecipeBinding
-import com.example.diethelperapp.recipe.RecipeRepositoryMocked
-import com.example.diethelperapp.recipe.RecipeViewModel
 
 class DietFragment: Fragment() {
 
@@ -44,5 +41,11 @@ class DietFragment: Fragment() {
 
         dataBinding.viewModel = viewModel
         dataBinding.lifecycleOwner = viewLifecycleOwner
+
+        dataBinding.buttonToWeekPlan.setOnClickListener {
+            val action = DietFragmentDirections
+                .actionDietFragmentToDietPlanFragment()
+            this.findNavController().navigate(action)
+        }
     }
 }
