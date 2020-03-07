@@ -8,18 +8,19 @@
         <!--<variable
            name="day"
            type="com.example.diethelperapp.dietplan.DietPlanRepository.DietPlanDay" />-->
+        <import type="com.example.diethelperapp.dietplan.DietPlanUtils" />
 
-       <import type="android.view.View" />
+        <import type="android.view.View" />
 
-       <variable
+        <variable
            name="viewModel"
            type="com.example.diethelperapp.dietplan.DietPlanViewModel" />
 
-       <variable
-           name="dayName"
-           type="String" />
+        <variable
+           name="dayNumber"
+           type="Integer" />
 
-       <variable
+        <variable
            name="dietId"
            type="Integer" />
 
@@ -42,7 +43,7 @@
                 android:id="@+id/dietCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                card_view:cardBackgroundColor="@color/colorPrimary"
+                card_view:cardBackgroundColor="@{DietPlanUtils.checkIfToday(context, dayNumber) == true ? @color/colorAccent : @color/colorPrimary}"
                 card_view:cardElevation="5dp"
                 card_view:cardCornerRadius="2dp">
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,7 +57,7 @@
                     android:layout_margin="20dp"
                     android:textSize="25sp"
                     android:textColor="#ffffff"
-                    android:text="@{ dayName}"
+                    android:text="@{ DietPlanUtils.getDayOfWeekString(context, dayNumber)}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

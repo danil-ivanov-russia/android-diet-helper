@@ -39,11 +39,6 @@ class DietPlanDayAdapter(_daysList: List<DietPlanRepository.DietPlanDay>, _viewM
             3 -> holder.dayBinding.recipeName = daysList[day].otherList[position].recipeId
         }
 
-        //holder.
-        //holder.dietBinding.dietName = dietsNamesList[position].diet_name
-        //holder.dietBinding.dietId = dietsNamesList[position].id_diet
-        //holder.dietBinding.viewModel = viewModel
-
     }
 
     class  DayViewHolder(val dayBinding: ListItemDayRecipeBinding): RecyclerView.ViewHolder(dayBinding.root){
