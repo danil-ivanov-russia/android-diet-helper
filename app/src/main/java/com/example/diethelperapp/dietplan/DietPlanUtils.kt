@@ -28,7 +28,7 @@ object DietPlanUtils {
     fun checkIfToday(context: Context, day: Int): Boolean {
         val calendar = Calendar.getInstance()
         return SimpleDateFormat(
-            "u",
+            "u", // этот паттерн подерживается устройствами с уровнем API выше или равном 24
             ConfigurationCompat.getLocales(context.resources.configuration)[0]
         ).format(calendar.time).toInt() == (day + 1)
     }

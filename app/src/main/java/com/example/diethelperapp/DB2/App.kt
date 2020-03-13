@@ -8,8 +8,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.diethelperapp.DB2.AppDatabase
 import com.example.diethelperapp.common.DaggerRepositoryComponent
+import com.example.diethelperapp.common.JsonClases.LinkDietToDishes
 import com.example.diethelperapp.common.RepositoryComponent
 import com.example.diethelperapp.common.RepositoryModel
+import com.google.gson.Gson
 
 
 class App : Application() {
@@ -19,10 +21,16 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
         instance = this
         database = Room.databaseBuilder(this, AppDatabase::class.java, "database")
             .fallbackToDestructiveMigration()
             .build()
+                val textFile: String =this.assets.open("MtoM_Diet_Dishes.json").bufferedReader().use {
+            it.readText()
+        }
+        println(textFile)
+        val link: LinkDietToDishes = Gson().fromJson<LinkDietToDishes>(textFile,LinkDietToDishes::class.java)
         repositories = DaggerRepositoryComponent
             .builder()
             .appDatabase(database)
