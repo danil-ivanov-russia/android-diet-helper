@@ -1,7 +1,7 @@
 package com.example.diethelperapp.DB
 
 import androidx.room.*
-import androidx.lifecycle.LiveData
+import com.example.diethelperapp.DB2.Models.CrossRefDietOwnDishesModel
 import com.example.diethelperapp.DB2.Models.DietModel
 
 @Dao
@@ -10,22 +10,22 @@ abstract class DietDAO {
     abstract suspend fun getAllDiet(): List<Diet>
 
     @Query("SELECT id_diet FROM diet_table Where diet_name = :name_certain_diet")
-    abstract suspend fun getIdCertainDiet(name_certain_diet:String): Int
+    abstract suspend fun getIdCertainDiet(name_certain_diet: String): Int
 
     @Query("SELECT diet_name FROM diet_table Where id_diet = :id_certain_diet")
-    abstract suspend fun getNameCertainDiet(id_certain_diet:Int): String
+    abstract suspend fun getNameCertainDiet(id_certain_diet: Int): String
 
     @Query("SELECT diet_name FROM diet_table")
     abstract suspend fun getAllNameDiets(): List<String>
 
     @Query("SELECT supporting_information  FROM diet_table Where diet_name = :id_certain_diet")
-    abstract suspend fun getDescriptionCertainDiet(id_certain_diet:Int): String
+    abstract suspend fun getDescriptionCertainDiet(id_certain_diet: Int): String
 
     @Query("SELECT duration  FROM diet_table Where id_diet = :id_certain_diet")
-    abstract suspend fun getDurationCertainDiet(id_certain_diet:Int): Int
+    abstract suspend fun getDurationCertainDiet(id_certain_diet: Int): Int
 
     @Query("SELECT * FROM diet_table Where id_diet = :id_certain_diet")
-    abstract suspend fun getCertainDietById(id_certain_diet:Int): Diet
+    abstract suspend fun getCertainDietById(id_certain_diet: Int): Diet
 
     @Query("SELECT COUNT(*) FROM diet_table")
     abstract suspend fun getCountLines(): Int
@@ -38,16 +38,23 @@ abstract class DietDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insert(diet: Diet)
 
-// хорошо бы добавить автогенерацию id
-    @Entity(tableName = "diet_table")
-    class Diet (
-        @PrimaryKey
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertCrossRef(link: MutableCollection<CrossRefDietOwnDishes>?)
+//
+//
+    @Query("SELECT * FROM tb_diet_dishes_MtoM")
+    abstract suspend fun getCrossRef(): List<CrossRefDietOwnDishes>
 
-                override  var id_diet: Int = 0,
-                override var diet_name: String?,
-                override var supporting_information: String?,
-                override var duration: Int
-    ): DietModel
+    // хорошо бы добавить автогенерацию id
+    @Entity(tableName = "diet_table")
+    class Diet(
+        @PrimaryKey
+        override var id_diet: Int = 0,
+        override var diet_name: String?,
+        override var supporting_information: String?,
+        override var duration: Int
+    ) : DietModel
+
     @Entity(tableName = "ingredients_table")
     class Ingredients {
         @PrimaryKey
@@ -59,6 +66,7 @@ abstract class DietDAO {
         var calories: Double? = null
         var measure: String? = null
     }
+
     @Entity(tableName = "dishes_table")
     class Dishes {
         @PrimaryKey(autoGenerate = true)
@@ -73,6 +81,7 @@ abstract class DietDAO {
         var description: String? = null
         var link_ingred: Int = 0
     }
+
     @Entity(tableName = "list_ingredients_table")
     class ListIngredients {
 
@@ -82,12 +91,12 @@ abstract class DietDAO {
         var ingred_name: String? = null
 
     }
-    @Entity(tableName = "tb_diet_dishes_MtoM", primaryKeys = ["id_own_diet","id_link_dishes"])
-    class CrossRefDietOwnDishes {
-        val id_own_diet: Int = 0
-        val id_link_dishes: Int = 0
-    }
 
+    @Entity(tableName = "tb_diet_dishes_MtoM",primaryKeys = ["id_own_diet","id_link_dishes"])
+    class CrossRefDietOwnDishes(
+        override val id_own_diet: Int,
+        override val id_link_dishes: Int
+    ) : CrossRefDietOwnDishesModel
 
 
 }

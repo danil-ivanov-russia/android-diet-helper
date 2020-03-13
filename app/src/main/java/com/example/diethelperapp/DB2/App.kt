@@ -1,14 +1,10 @@
 package com.example.diethelperapp.DB
 
 import android.app.Application
-import androidx.lifecycle.viewModelScope
 import androidx.room.Room
-import kotlinx.coroutines.launch
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.diethelperapp.DB2.AppDatabase
 import com.example.diethelperapp.common.DaggerRepositoryComponent
-import com.example.diethelperapp.common.JsonClases.LinkDietToDishes
+import com.example.diethelperapp.common.JsonClases.DCLinkDietToDishes
 import com.example.diethelperapp.common.RepositoryComponent
 import com.example.diethelperapp.common.RepositoryModel
 import com.google.gson.Gson
@@ -30,7 +26,7 @@ class App : Application() {
             it.readText()
         }
         println(textFile)
-        val link: LinkDietToDishes = Gson().fromJson<LinkDietToDishes>(textFile,LinkDietToDishes::class.java)
+        val link: DCLinkDietToDishes = Gson().fromJson<DCLinkDietToDishes>(textFile,DCLinkDietToDishes::class.java)
         repositories = DaggerRepositoryComponent
             .builder()
             .appDatabase(database)
@@ -43,7 +39,7 @@ class App : Application() {
         // время последненго изменения?
         // время последненей синхронизации
         // Relation
-        db_work!!.fillTable()
+        db_work!!.fillTable(this)
         db_work!!.getLogs()
     }
     fun getDatabase(): AppDatabase? {
