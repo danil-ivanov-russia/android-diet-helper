@@ -13,7 +13,7 @@ import com.example.diethelperapp.DB.DietDAO
         DietDAO.CrossRefDietOwnDishes::class,
         DietDAO.Ingredients::class,
         DietDAO.ListIngredients::class],
-    version = 6
+    version = 7
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getDietDAO(): DietDAO

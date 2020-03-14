@@ -3,22 +3,16 @@ package com.example.diethelperapp.common
 import android.content.Context
 import com.example.diethelperapp.DB.DietDAO
 import com.example.diethelperapp.common.JsonClases.DCDiet
+import com.example.diethelperapp.common.JsonClases.DCDishes
 import com.example.diethelperapp.common.JsonClases.DCLinkDietToDishes
 import com.google.gson.Gson
 
-// как это сделать правильно
-// объявить пустые коллекции типов таблиц
-// сделать функцию получение строки JSON с параметром названия файла
-// сделать enum с названиями файлов
-// сделать инициализацию ВСЕХ дата классов в отдельной функции
-// сделать сеттеры для коллекции классов таблиц с функционалом парсинга из дата класса
-// сделать геттеры для коллеций классов таблиц
-// и в классе DB_Work просто вызывать нужную коллекцию в insert
-// возможно следует сделать класс с этими коллекциями, но пока так все организую.
+
 class JsonUtil(ctx: Context) {
     var listCrossRefDietOwnDishes: MutableCollection<DietDAO.CrossRefDietOwnDishes>? =
         mutableListOf()
     var listDiets: MutableCollection<DietDAO.Diet>? = mutableListOf()
+    var listDishes: MutableCollection<DietDAO.Dishes>? = mutableListOf()
 
     private var context: Context? = ctx
 
@@ -26,6 +20,7 @@ class JsonUtil(ctx: Context) {
     init {
         setListCrossRefDietOwnDishes()
         setListDiets()
+        setListDishes()
     }
 
     private fun getJsonString(fileString: String): String =
@@ -52,7 +47,7 @@ class JsonUtil(ctx: Context) {
     }
 
     private fun setListDiets() {
-        val obj:DCDiet = Gson().fromJson<DCDiet>(getJsonString("Diet.json"), DCDiet::class.java)
+        val obj: DCDiet = Gson().fromJson<DCDiet>(getJsonString("Diet.json"), DCDiet::class.java)
         var i: Int = 0;
         while (i < obj.dietId.size) {
             listDiets?.add(
@@ -61,6 +56,30 @@ class JsonUtil(ctx: Context) {
                     obj.dietName[i],
                     obj.supportingInformation[i],
                     obj.duration[i]
+                )
+            )
+            i++
+        }
+    }
+
+    private fun setListDishes() {
+        val obj: DCDishes =
+            Gson().fromJson<DCDishes>(getJsonString("Dishes.json"), DCDishes::class.java)
+        var i: Int = 0;
+        while (i < obj.dishesId.size) {
+            listDishes?.add(
+                DietDAO.Dishes(
+                    obj.dishesId[i],
+                    obj.dishesName[i],
+                    obj.protein[i],
+                    obj.fat[i],
+                    obj.carbohydrates[i],
+                    obj.calories[i],
+                    obj.category[i],
+                    obj.mark[i],
+                    obj.description[i],
+                    obj.linkIngredients[i]
+
                 )
             )
             i++

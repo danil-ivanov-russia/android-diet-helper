@@ -32,10 +32,10 @@ abstract class DietDAO {
     @Query("SELECT COUNT(*) FROM Diet")
     abstract suspend fun getCountLines(): Int
 
-    // очень не уверен что этот запрос работает
-//    @Transaction
-//    @Query("SELECT * FROM diet_table")
-//    abstract suspend fun getDishesByCertainDiet(): List<Diet>
+     //очень не уверен что этот запрос работает
+    @Transaction
+    @Query("SELECT * FROM Diet Where dietId = :id")
+    abstract suspend fun getDishesByCertainDiet(id: Int): List<Diet>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertDiets(diet: MutableCollection<Diet>?)
@@ -43,12 +43,12 @@ abstract class DietDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertCrossRef(link: MutableCollection<CrossRefDietOwnDishes>?)
 
-    //
-//
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertDishes(link: MutableCollection<Dishes>?)
+
     @Query("SELECT * FROM CrossRefDietOwnDishes")
     abstract suspend fun getCrossRef(): List<CrossRefDietOwnDishes>
 
-    // хорошо бы добавить автогенерацию id
     @Entity()
     class Diet(
         @PrimaryKey
@@ -72,20 +72,20 @@ abstract class DietDAO {
 
     @Entity()
     class Dishes(
-        @PrimaryKey(autoGenerate = true)
+        @PrimaryKey()
         override var dishesId: Int = 0,
-        override var dishesName: String?,
-        override var protein: Double? = null,
-        override var fat: Double? = null,
-        override var carbohydrates: Double? = null,
-        override var calories: Double? = null,
-        override var category: String? = null,
-        override var mark: String? = null,
-        override var description: String? = null,
+        override var dishesName: String,
+        override var protein: Double,
+        override var fat: Double,
+        override var carbohydrates: Double,
+        override var calories: Double,
+        override var category: String,
+        override var mark: String,
+        override var description: String,
         override var linkIngredients: Int = 0
     ) : DishesModel
 
-    @Entity(primaryKeys = ["ownDishesId","linkIngredientsId"])
+    @Entity(primaryKeys = ["ownDishesId", "linkIngredientsId"])
     class ListIngredients(
         override var ownDishesId: Int,
         override var linkIngredientsId: Int,

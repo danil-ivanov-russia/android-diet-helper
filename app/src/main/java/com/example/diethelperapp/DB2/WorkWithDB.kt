@@ -37,6 +37,8 @@ init {
             try {
                 DB_work?.insertDiets(tmp.listDiets)
                 DB_work?.insertCrossRef(tmp.listCrossRefDietOwnDishes)
+                DB_work?.insertDishes(tmp.listDishes)
+
             } catch (t: Throwable) {
                 print(t.message)
             }
@@ -49,7 +51,7 @@ init {
         viewModelScope.launch {
             try {
                 test = DB_work?.getCrossRef()
-                tmpTest = DB_work?.getAllDiet()
+                tmpTest = DB_work?.getDishesByCertainDiet(1)
 
             } catch (t: Throwable) {
                 print(t.message)
