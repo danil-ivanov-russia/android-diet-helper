@@ -8,8 +8,12 @@ import com.example.diethelperapp.DB.DietDAO
 
 
 @Database(
-    entities = [DietDAO.Diet::class,DietDAO.Dishes::class,DietDAO.CrossRefDietOwnDishes::class],
-    version = 4
+    entities = [DietDAO.Diet::class,
+        DietDAO.Dishes::class,
+        DietDAO.CrossRefDietOwnDishes::class,
+        DietDAO.Ingredients::class,
+        DietDAO.ListIngredients::class],
+    version = 5
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getDietDAO(): DietDAO
