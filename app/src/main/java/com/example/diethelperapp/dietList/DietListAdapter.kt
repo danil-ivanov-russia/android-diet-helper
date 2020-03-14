@@ -21,8 +21,8 @@ class DietListAdapter(_dietsNamesList: List<DietModel>, _viewModel: DietListView
         return DietListViewHolder(dietBinding)
     }
     override fun onBindViewHolder(holder: DietListViewHolder, position: Int) {
-        holder.dietBinding.dietName = dietsNamesList[position].diet_name
-        holder.dietBinding.dietId = dietsNamesList[position].id_diet
+        holder.dietBinding.dietName = dietsNamesList[position].dietName
+        holder.dietBinding.dietId = dietsNamesList[position].dietId
         holder.dietBinding.viewModel = viewModel
 
     }

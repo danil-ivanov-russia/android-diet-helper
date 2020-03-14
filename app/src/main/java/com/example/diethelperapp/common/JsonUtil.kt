@@ -2,6 +2,7 @@ package com.example.diethelperapp.common
 
 import android.content.Context
 import com.example.diethelperapp.DB.DietDAO
+import com.example.diethelperapp.common.JsonClases.DCDiet
 import com.example.diethelperapp.common.JsonClases.DCLinkDietToDishes
 import com.google.gson.Gson
 
@@ -15,33 +16,51 @@ import com.google.gson.Gson
 // и в классе DB_Work просто вызывать нужную коллекцию в insert
 // возможно следует сделать класс с этими коллекциями, но пока так все организую.
 class JsonUtil(ctx: Context) {
-    var listCrossRefDietOwnDishes: MutableCollection<DietDAO.CrossRefDietOwnDishes>? = mutableListOf()
-   private var context: Context? = ctx
+    var listCrossRefDietOwnDishes: MutableCollection<DietDAO.CrossRefDietOwnDishes>? =
+        mutableListOf()
+    var listDiets: MutableCollection<DietDAO.Diet>? = mutableListOf()
 
-init {
-    val link: DCLinkDietToDishes =
-        Gson().fromJson<DCLinkDietToDishes>(getJsonString("MtoM_Diet_Dishes.json"), DCLinkDietToDishes::class.java)
-    setListCrossRefDietOwnDishes(link)
-}
-    private var listLinkDishesToDiet: MutableCollection<DietDAO.CrossRefDietOwnDishes>? = null
+    private var context: Context? = ctx
+
+    // получше бы сделать, много дублирующего кода
+    init {
+        setListCrossRefDietOwnDishes()
+        setListDiets()
+    }
+
     private fun getJsonString(fileString: String): String =
         context?.assets?.open(fileString)?.bufferedReader().use {
             it!!.readText()
         }
 
-//    fun initListsTables() {
-//        val link: DCLinkDietToDishes =
-//            Gson().fromJson<DCLinkDietToDishes>(getJsonString("MtoM_Diet_Dishes.json"), DCLinkDietToDishes::class.java)
-//        setListCrossRefDietOwnDishes(link)
-//    }
 
-    private fun setListCrossRefDietOwnDishes(obj: DCLinkDietToDishes) {
+    private fun setListCrossRefDietOwnDishes() {
+        val obj: DCLinkDietToDishes = Gson().fromJson<DCLinkDietToDishes>(
+            getJsonString("MtoM_Diet_Dishes.json"),
+            DCLinkDietToDishes::class.java
+        )
         var i: Int = 0;
         while (i < obj.dietId.size) {
             listCrossRefDietOwnDishes?.add(
                 DietDAO.CrossRefDietOwnDishes(
                     obj.dietId[i],
                     obj.dishesId[i]
+                )
+            )
+            i++
+        }
+    }
+
+    private fun setListDiets() {
+        val obj:DCDiet = Gson().fromJson<DCDiet>(getJsonString("Diet.json"), DCDiet::class.java)
+        var i: Int = 0;
+        while (i < obj.dietId.size) {
+            listDiets?.add(
+                DietDAO.Diet(
+                    obj.dietId[i],
+                    obj.dietName[i],
+                    obj.supportingInformation[i],
+                    obj.duration[i]
                 )
             )
             i++

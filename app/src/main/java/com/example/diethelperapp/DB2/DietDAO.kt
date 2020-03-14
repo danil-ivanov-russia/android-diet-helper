@@ -38,7 +38,7 @@ abstract class DietDAO {
 //    abstract suspend fun getDishesByCertainDiet(): List<Diet>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insert(diet: Diet)
+    abstract suspend fun insertDiets(diet: MutableCollection<Diet>?)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertCrossRef(link: MutableCollection<CrossRefDietOwnDishes>?)
@@ -85,7 +85,7 @@ abstract class DietDAO {
         override var linkIngredients: Int = 0
     ) : DishesModel
 
-    @Entity()
+    @Entity(primaryKeys = ["ownDishesId","linkIngredientsId"])
     class ListIngredients(
         override var ownDishesId: Int,
         override var linkIngredientsId: Int,
