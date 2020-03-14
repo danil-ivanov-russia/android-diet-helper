@@ -15,9 +15,7 @@ class JsonUtil(ctx: Context) {
     var listDishes: MutableCollection<DietDAO.Dishes>? = mutableListOf()
 
     private var context: Context? = ctx
-
-    // получше бы сделать, много дублирующего кода
-    init {
+        init {
         setListCrossRefDietOwnDishes()
         setListDiets()
         setListDishes()
@@ -47,7 +45,7 @@ class JsonUtil(ctx: Context) {
     }
 
     private fun setListDiets() {
-        val obj: DCDiet = Gson().fromJson<DCDiet>(getJsonString("Diet.json"), DCDiet::class.java)
+        val obj: DCDiet = Gson().fromJson(getJsonString("Diet.json"), DCDiet::class.java)
         var i: Int = 0;
         while (i < obj.dietId.size) {
             listDiets?.add(
