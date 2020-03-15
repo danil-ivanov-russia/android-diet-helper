@@ -8,7 +8,8 @@ import kotlinx.coroutines.launch
 
 class DietPlanViewModel(
     private val dietId: String,
-    private val repository: DietPlanRepository
+    private val repository: DietPlanRepository,
+    var navigator: DietPlanButtonClickNavigator
 ): ViewModel() {
     private var _dietPlan: List<DietPlanRepository.DietPlanDay>? = null
         set(value) {
@@ -37,4 +38,19 @@ class DietPlanViewModel(
             dietsNames?.let {_dietPlan = it}
         }
     }
+
+    fun addRecipe(day: Int, timeOfDay: Int){
+        navigator.onRecipeAddClick(day, timeOfDay)
+    }
+
+
+    fun removeRecipe(day: Int, timeOfDay: Int){
+        //тут убирать в базе?
+        navigator.onRecipeRemoveClick(day, timeOfDay)
+    }
+
+    fun replaceRecipe(day: Int, timeOfDay: Int){
+        navigator.onRecipeReplaceClick(day, timeOfDay)
+    }
+
 }

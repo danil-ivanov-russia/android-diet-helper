@@ -9,22 +9,19 @@
 
         <variable
             name="viewModel"
-            type="com.example.diethelperapp.dietlist.DietListViewModel" />
+            type="com.example.diethelperapp.recipelist.RecipeListViewModel" />
 
         <variable
-            name="dietName"
+            name="recipeName"
             type="String" />
 
         <variable
-            name="dietId"
+            name="recipeId"
             type="Integer" />
     </data>
 
 
     <LinearLayout
-        android:onClick="@{()-> viewModel.itemClick(dietId)}"
-        android:clickable="true"
-        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -48,7 +45,7 @@
                 android:layout_margin="20dp"
                 android:textSize="25sp"
                 android:textColor="#ffffff"
-                android:text="@{ dietName}"
+                android:text="@{ recipeName}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

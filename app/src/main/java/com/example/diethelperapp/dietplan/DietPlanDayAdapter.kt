@@ -5,14 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diethelperapp.databinding.ListItemDayRecipeBinding
 
-class DietPlanDayAdapter(_daysList: List<DietPlanRepository.DietPlanDay>, _viewModel: DietPlanViewModel, _day: Int, _timeOfDay: Int):
+class DietPlanDayAdapter(var daysList: List<DietPlanRepository.DietPlanDay>, var viewModel: DietPlanViewModel, var day: Int, var timeOfDay: Int):
     RecyclerView.Adapter<DietPlanDayAdapter.DayViewHolder>() {
-    var daysList:List<DietPlanRepository.DietPlanDay> = _daysList
-    var viewModel = _viewModel
-    var day = _day
-    var timeOfDay = _timeOfDay
-
-    //override fun getItemCount() = daysList.size
 
     override fun getItemCount() =  when(timeOfDay){
         0 -> daysList[day].breakfastList.size
@@ -32,6 +26,7 @@ class DietPlanDayAdapter(_daysList: List<DietPlanRepository.DietPlanDay>, _viewM
         return DayViewHolder(dayBinding)
     }
     override fun onBindViewHolder(holder: DayViewHolder, position: Int) {
+        holder.dayBinding.viewModel = viewModel
         when(timeOfDay){
             0 -> holder.dayBinding.recipeName = daysList[day].breakfastList[position].recipeId
             1 -> holder.dayBinding.recipeName = daysList[day].lunchList[position].recipeId

@@ -94,6 +94,7 @@
                     </RelativeLayout>
 
                     <Button
+                        android:onClick="@{()-> viewModel.addRecipe(dayNumber, 0)}"
                         android:id="@+id/breakfastAddButton"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
@@ -132,6 +133,7 @@
 
                     <Button
                         android:id="@+id/lunchAddButton"
+                        android:onClick="@{()-> viewModel.addRecipe(dayNumber, 1)}"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -169,6 +171,7 @@
 
                     <Button
                         android:id="@+id/dinnerAddButton"
+                        android:onClick="@{()-> viewModel.addRecipe(dayNumber, 2)}"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -206,6 +209,7 @@
 
                     <Button
                         android:id="@+id/otherAddButton"
+                        android:onClick="@{()-> viewModel.addRecipe(dayNumber, 3)}"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"

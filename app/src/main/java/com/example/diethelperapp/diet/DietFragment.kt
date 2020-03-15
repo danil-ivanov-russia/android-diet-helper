@@ -13,13 +13,13 @@ import androidx.navigation.fragment.navArgs
 import com.example.diethelperapp.DB.App
 import com.example.diethelperapp.databinding.FragmentDietBinding
 
-class DietFragment: Fragment() {
+class DietFragment : Fragment() {
 
     val args: DietFragmentArgs by navArgs()
 
     private val viewModel: DietViewModel by viewModels {
 
-        object: ViewModelProvider.Factory {
+        object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T =
                 DietViewModel(args.dietId, App.repositories.diet()) as T
         }

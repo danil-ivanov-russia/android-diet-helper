@@ -8,6 +8,10 @@
         <import type="android.view.View" />
 
         <variable
+            name="viewModel"
+            type="com.example.diethelperapp.dietplan.DietPlanViewModel" />
+
+        <variable
             name="recipeName"
             type="String" />
 

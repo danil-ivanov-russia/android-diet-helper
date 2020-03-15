@@ -20,7 +20,7 @@
         android:label="RecipeFragment" />
     <fragment
         android:id="@+id/dietListFragment"
-        android:name="com.example.diethelperapp.dietList.DietListFragment"
+        android:name="com.example.diethelperapp.dietlist.DietListFragment"
         android:label="DietListFragment" >
         <action
             android:id="@+id/action_dietListFragment_to_dietFragment"
@@ -44,6 +44,21 @@
     </fragment>
     <fragment
         android:id="@+id/dietPlanFragment"
-        android:name="com.example.diethelperapp.dietList.DietPlanFragment"
-        android:label="DietPlanFragment" />
+        android:name="com.example.diethelperapp.dietlist.DietPlanFragment"
+        android:label="DietPlanFragment" >
+        <action
+            android:id="@+id/action_dietPlanFragment_to_recipeListFragment"
+            app:destination="@id/recipeListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeListFragment"
+        android:name="com.example.diethelperapp.recipelist.RecipeListFragment"
+        android:label="RecipeListFragment" >
+        <argument
+            android:name="day"
+            app:argType="integer" />
+        <argument
+            android:name="timeOfDay"
+            app:argType="integer" />
+    </fragment>
 </navigation>

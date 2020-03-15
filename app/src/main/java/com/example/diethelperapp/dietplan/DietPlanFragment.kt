@@ -1,4 +1,4 @@
-package com.example.diethelperapp.dietList
+package com.example.diethelperapp.dietlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,20 +9,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diethelperapp.databinding.FragmentDietplanBinding
-import com.example.diethelperapp.dietplan.DietPlanAdapter
-import com.example.diethelperapp.dietplan.DietPlanRepository
-import com.example.diethelperapp.dietplan.DietPlanRepositoryMocked
-import com.example.diethelperapp.dietplan.DietPlanViewModel
+import com.example.diethelperapp.dietplan.*
 import kotlinx.android.synthetic.main.fragment_dietlist.*
 
-class DietPlanFragment :  Fragment()  {
+class DietPlanFragment :  Fragment(), DietPlanButtonClickNavigator  {
     private val viewModel: DietPlanViewModel by viewModels {
         object: ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-                DietPlanViewModel("0", DietPlanRepositoryMocked()) as T
+                DietPlanViewModel("0", DietPlanRepositoryMocked(), this@DietPlanFragment) as T
         }
     }
 
@@ -39,7 +37,7 @@ class DietPlanFragment :  Fragment()  {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //viewModel.navigator = this
+        viewModel.navigator = this
         dataBinding.viewModel = viewModel
         dataBinding.lifecycleOwner = viewLifecycleOwner
 
@@ -53,6 +51,17 @@ class DietPlanFragment :  Fragment()  {
         viewModel.dietPlan.observe(viewLifecycleOwner, dietPlanObserver)
     }
 
+    override fun onRecipeAddClick(day: Int, timeOfDay: Int) {
+            val action = DietPlanFragmentDirections
+                .actionDietPlanFragmentToRecipeListFragment(day, timeOfDay)
+            this.findNavController().navigate(action)
+        }
 
+    override fun onRecipeRemoveClick(day: Int, timeOfDay: Int) {
+        TODO("Not yet implemented")
+    }
 
+    override fun onRecipeReplaceClick(day: Int, timeOfDay: Int) {
+        TODO("Not yet implemented")
+    }
 }

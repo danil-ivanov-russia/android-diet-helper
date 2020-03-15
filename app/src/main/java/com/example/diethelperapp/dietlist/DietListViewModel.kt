@@ -1,4 +1,4 @@
-package com.example.diethelperapp.dietList
+package com.example.diethelperapp.dietlist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

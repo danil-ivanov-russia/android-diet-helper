@@ -1,4 +1,4 @@
-package com.example.diethelperapp.dietList
+package com.example.diethelperapp.dietlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.diethelperapp.DB2.Models.DietModel
 import com.example.diethelperapp.databinding.ListItemDietBinding
 
-class DietListAdapter(_dietsNamesList: List<DietModel>, _viewModel: DietListViewModel):RecyclerView.Adapter<DietListAdapter.DietListViewHolder>() {
-    var dietsNamesList:List<DietModel> = _dietsNamesList
-    var viewModel = _viewModel
+class DietListAdapter(var dietsNamesList: List<DietModel>, var viewModel: DietListViewModel):RecyclerView.Adapter<DietListAdapter.DietListViewHolder>() {
 
     override fun getItemCount() = dietsNamesList.size
 

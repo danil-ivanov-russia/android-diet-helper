@@ -6,7 +6,7 @@
         <import type="android.view.View" />
         <variable
             name="viewModel"
-            type="com.example.diethelperapp.dietList.DietListViewModel" />
+            type="com.example.diethelperapp.dietlist.DietListViewModel" />
     </data>
 
 
