@@ -1,4 +1,4 @@
-package com.example.diethelperapp.common.JsonClases
+package com.example.diethelperapp.common.jsonClasses
 
 data class DCDishes(
     var dishesId: Array<Int>,

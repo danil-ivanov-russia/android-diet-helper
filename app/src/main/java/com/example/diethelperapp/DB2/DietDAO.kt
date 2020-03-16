@@ -1,10 +1,8 @@
-package com.example.diethelperapp.DB
+package com.example.diethelperapp.db2
 
 import androidx.room.*
-import com.example.diethelperapp.DB2.Models.CrossRefDietOwnDishesModel
-import com.example.diethelperapp.DB2.Models.DietModel
-import com.example.diethelperapp.DB2.Models.DishesModel
-import com.example.diethelperapp.DB2.Models.ListIngredientsModel
+import com.example.diethelperapp.db2.models.*
+import com.example.diethelperapp.db2.relationDataClasses.DietWithDishes
 
 @Dao
 abstract class DietDAO {
@@ -32,10 +30,10 @@ abstract class DietDAO {
     @Query("SELECT COUNT(*) FROM Diet")
     abstract suspend fun getCountLines(): Int
 
-     //очень не уверен что этот запрос работает
+
     @Transaction
     @Query("SELECT * FROM Diet Where dietId = :id")
-    abstract suspend fun getDishesByCertainDiet(id: Int): List<Diet>
+    abstract suspend fun getDishesByCertainDiet(id: Int): List<DietWithDishes>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertDiets(diet: MutableCollection<Diet>?)
@@ -94,11 +92,24 @@ abstract class DietDAO {
 
     ) : ListIngredientsModel
 
-    @Entity(primaryKeys = ["id_own_diet", "id_link_dishes"])
+    @Entity(primaryKeys = ["dietId", "dishesId"])
     class CrossRefDietOwnDishes(
-        override val id_own_diet: Int,
-        override val id_link_dishes: Int
+        override val dietId: Int,
+        override val dishesId: Int
     ) : CrossRefDietOwnDishesModel
+
+    @Entity(primaryKeys = ["calendarId", "dishesId"])
+    class CrossRefCalendarOwnDishes(
+        override val calendarId: String,
+        override val dishesId: Int
+    ) : CrossRefCalendarOwnDishesModel
+
+    @Entity()
+    class Calendar(
+        @PrimaryKey
+        override var markDiet: String,
+        override val dayOfWeek: String
+    ) : ModelCalendar
 
 
 }

@@ -1,10 +1,7 @@
-package com.example.diethelperapp.DB2
+package com.example.diethelperapp.db2
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.diethelperapp.DB.DietDAO
 
 
 @Database(
@@ -12,8 +9,10 @@ import com.example.diethelperapp.DB.DietDAO
         DietDAO.Dishes::class,
         DietDAO.CrossRefDietOwnDishes::class,
         DietDAO.Ingredients::class,
-        DietDAO.ListIngredients::class],
-    version = 7
+        DietDAO.ListIngredients::class,
+    DietDAO.Calendar::class,
+    DietDAO.CrossRefCalendarOwnDishes::class],
+    version = 9
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getDietDAO(): DietDAO

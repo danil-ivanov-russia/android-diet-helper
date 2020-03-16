@@ -1,10 +1,10 @@
-package com.example.diethelperapp.DB
+package com.example.diethelperapp.db2
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.diethelperapp.DB2.AppDatabase
 import com.example.diethelperapp.common.JsonUtil
+import com.example.diethelperapp.db2.relationDataClasses.DietWithDishes
 import kotlinx.coroutines.launch
 
 class WorkWithDB : ViewModel() {// Первоначальное заполнение БД.
@@ -47,7 +47,7 @@ init {
 
     fun getLogs() {
         var test: List<DietDAO.CrossRefDietOwnDishes>?
-        var tmpTest: List<DietDAO.Diet>?
+        var tmpTest: List<DietWithDishes>?
         viewModelScope.launch {
             try {
                 test = DB_work?.getCrossRef()

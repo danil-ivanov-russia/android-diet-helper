@@ -1,8 +1,7 @@
 package com.example.diethelperapp.diet
 
-import com.example.diethelperapp.DB.DietDAO
-import com.example.diethelperapp.DB2.AppDatabase
-import com.example.diethelperapp.DB2.Models.DietModel
+import com.example.diethelperapp.db2.DietDAO
+import com.example.diethelperapp.db2.models.DietModel
 
 class DietRepositoryImplementation(private val dao: DietDAO) : DietRepository {
     override suspend fun getAllDiet(): List<DietDAO.Diet> {

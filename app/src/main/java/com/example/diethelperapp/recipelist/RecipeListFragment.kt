@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.diethelperapp.DB2.Models.DishesModel
+import com.example.diethelperapp.db2.models.DishesModel
 import com.example.diethelperapp.R
 import com.example.diethelperapp.databinding.FragmentRecipelistBinding
 import kotlinx.android.synthetic.main.fragment_dietlist.*

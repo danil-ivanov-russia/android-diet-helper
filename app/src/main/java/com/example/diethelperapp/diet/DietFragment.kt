@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.diethelperapp.DB.App
+import com.example.diethelperapp.db2.App
 import com.example.diethelperapp.databinding.FragmentDietBinding
 
 class DietFragment : Fragment() {

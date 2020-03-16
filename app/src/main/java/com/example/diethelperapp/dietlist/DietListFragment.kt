@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.diethelperapp.DB.App
-import com.example.diethelperapp.DB2.Models.DietModel
+import com.example.diethelperapp.db2.App
+import com.example.diethelperapp.db2.models.DietModel
 import com.example.diethelperapp.databinding.FragmentDietlistBinding
 import kotlinx.android.synthetic.main.fragment_dietlist.*
 

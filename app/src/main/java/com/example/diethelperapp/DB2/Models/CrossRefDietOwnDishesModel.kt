@@ -1,6 +1,6 @@
-package com.example.diethelperapp.DB2.Models
+package com.example.diethelperapp.db2.models
 
 interface CrossRefDietOwnDishesModel {
-    val id_own_diet: Int
-    val id_link_dishes: Int
+    val dietId  : Int
+    val dishesId: Int
 }

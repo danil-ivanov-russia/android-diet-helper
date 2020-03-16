@@ -1,10 +1,9 @@
-package com.example.diethelperapp.DB
+package com.example.diethelperapp.db2
 
 import android.app.Application
 import androidx.room.Room
-import com.example.diethelperapp.DB2.AppDatabase
 import com.example.diethelperapp.common.DaggerRepositoryComponent
-import com.example.diethelperapp.common.JsonClases.DCLinkDietToDishes
+import com.example.diethelperapp.common.jsonClasses.DCLinkDietToDishes
 import com.example.diethelperapp.common.RepositoryComponent
 import com.example.diethelperapp.common.RepositoryModel
 import com.google.gson.Gson
@@ -22,7 +21,7 @@ class App : Application() {
         database = Room.databaseBuilder(this, AppDatabase::class.java, "database")
             .fallbackToDestructiveMigration()
             .build()
-                val textFile: String =this.assets.open("MtoM_Diet_Dishes.json").bufferedReader().use {
+                val textFile: String =this.assets.open("CrossRefDietToDishes.json").bufferedReader().use {
             it.readText()
         }
         println(textFile)

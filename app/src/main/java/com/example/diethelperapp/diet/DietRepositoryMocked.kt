@@ -1,9 +1,6 @@
 package com.example.diethelperapp.diet
 
-import com.example.diethelperapp.DB2.Models.DietModel
-import com.example.diethelperapp.recipe.RecipeRepository
-import com.example.diethelperapp.recipe.RecipeRepositoryMocked
-import kotlinx.coroutines.delay
+import com.example.diethelperapp.db2.models.DietModel
 
 class DietRepositoryMocked: DietRepository {
 //    override suspend fun getDiets(): List<DietRepository.Diet> {

@@ -1,4 +1,4 @@
-package com.example.diethelperapp.DB2.Models
+package com.example.diethelperapp.db2.models
 
 interface DishesModel {
     var dishesId: Int

@@ -3,7 +3,7 @@ package com.example.diethelperapp.recipelist
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.diethelperapp.DB2.Models.DishesModel
+import com.example.diethelperapp.db2.models.DishesModel
 import com.example.diethelperapp.databinding.ListItemRecipeBinding
 
 class RecipeListAdapter(var recipesList: List<DishesModel>, var viewModel: RecipeListViewModel):

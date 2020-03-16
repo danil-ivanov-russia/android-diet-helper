@@ -1,7 +1,7 @@
 package com.example.diethelperapp.recipelist
 
-import com.example.diethelperapp.DB.DietDAO
-import com.example.diethelperapp.DB2.Models.DishesModel
+import com.example.diethelperapp.db2.DietDAO
+import com.example.diethelperapp.db2.models.DishesModel
 
 class RecipeListRepositoryMocked: RecipeListRepository {
     override suspend fun loadStandartRecipes(): List<DishesModel> {
