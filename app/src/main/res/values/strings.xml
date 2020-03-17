@@ -4,4 +4,5 @@
     <string name="nutritionString">Пищевая ценность:</string>
     <string name="testRecipeString">Тестовый рецепт</string>
     <string name="toDietListString">Выбрать диету</string>
+    <string name="addDishString">Добавить блюдо</string>
 </resources>

@@ -76,6 +76,28 @@ class RecipeListRepositoryMocked: RecipeListRepository {
                 "test",
                 "test mark",
                 "lorem ipsum dolor sit"
+            ),
+            DietDAO.Dishes(
+                0,
+                "Тестовое блюдо 9",
+                12.0,
+                34.0,
+                56.0,
+                78.0,
+                "test",
+                "test mark",
+                "lorem ipsum dolor sit"
+            ),
+            DietDAO.Dishes(
+                0,
+                "Тестовое блюдо 10",
+                12.0,
+                34.0,
+                56.0,
+                78.0,
+                "test",
+                "test mark",
+                "lorem ipsum dolor sit"
             )
         )
     }

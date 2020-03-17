@@ -8,7 +8,8 @@ import com.example.diethelperapp.db2.models.DishesModel
 import kotlinx.coroutines.launch
 
 class RecipeListViewModel(
-    private val repository: RecipeListRepository
+    private val repository: RecipeListRepository,
+    var navigator: RecipeListClickNavigator
 ) : ViewModel() {
     private var _recipesNames: List<DishesModel>? = null
         set(value) {
@@ -24,6 +25,13 @@ class RecipeListViewModel(
         }
     val isLoading: LiveData<Boolean> = MutableLiveData(_isLoading)
 
+    private var _isUserRecipes = false
+        set(value) {
+            field = value
+            (isUserRecipes as MutableLiveData).postValue(value)
+        }
+    val isUserRecipes: LiveData<Boolean> = MutableLiveData(_isUserRecipes)
+
     init {
         viewModelScope.launch {
             val recipesNames: List<DishesModel>? = try {
@@ -34,8 +42,13 @@ class RecipeListViewModel(
             }
 
             _isLoading = false
+            _isUserRecipes = false
             recipesNames?.let { _recipesNames = it }
         }
+    }
+
+    fun toCreateRecipe(){
+        navigator.onRecipeCreateClick()
     }
 
     fun selectStandartRecipes(){
@@ -47,6 +60,7 @@ class RecipeListViewModel(
                 null
             }
             _isLoading = false
+            _isUserRecipes = false
             recipesNames?.let { _recipesNames = it }
         }
     }
@@ -61,6 +75,7 @@ class RecipeListViewModel(
                 null
             }
             _isLoading = false
+            _isUserRecipes = true
             recipesNames?.let { _recipesNames = it }
         }
     }
@@ -75,6 +90,7 @@ class RecipeListViewModel(
                 null
             }
             _isLoading = false
+            _isUserRecipes = false
             recipesNames?.let { _recipesNames = it }
         }
     }

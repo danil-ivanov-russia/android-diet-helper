@@ -9,17 +9,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.diethelperapp.db2.models.DishesModel
 import com.example.diethelperapp.R
 import com.example.diethelperapp.databinding.FragmentRecipelistBinding
-import kotlinx.android.synthetic.main.fragment_dietlist.*
+import com.example.diethelperapp.db2.models.DishesModel
+import kotlinx.android.synthetic.main.fragment_recipelist.*
 
-class RecipeListFragment : Fragment() {
+class RecipeListFragment : Fragment(), RecipeListClickNavigator {
     private val viewModel: RecipeListViewModel by viewModels {
         object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-                RecipeListViewModel(RecipeListRepositoryMocked()) as T
+                RecipeListViewModel(RecipeListRepositoryMocked(), this@RecipeListFragment) as T
         }
     }
 
@@ -40,10 +41,10 @@ class RecipeListFragment : Fragment() {
         dataBinding.viewModel = viewModel
         dataBinding.lifecycleOwner = viewLifecycleOwner
 
-        recyclerViewDiet.layoutManager = LinearLayoutManager(requireContext())
+        recyclerViewRecipes.layoutManager = LinearLayoutManager(requireContext())
 
         val recipesNameObserver = Observer<List<DishesModel>> { it ->
-            recyclerViewDiet.adapter = RecipeListAdapter(it, viewModel)
+            recyclerViewRecipes.adapter = RecipeListAdapter(it, viewModel)
 
         }
         viewModel.recipesNames.observe(viewLifecycleOwner, recipesNameObserver)
@@ -53,7 +54,6 @@ class RecipeListFragment : Fragment() {
             if (it.itemId != dataBinding.bottomNavigationBar.selectedItemId)
             when (it.itemId) {
                 R.id.bottomNavigationItemUserRecipes -> {
-                    //if !(dataBinding.bottomNavigationBar.menu.findItem())
                     viewModel.selectUserRecipes()
                     return@setOnNavigationItemSelectedListener true
                 }
@@ -70,6 +70,12 @@ class RecipeListFragment : Fragment() {
                 return@setOnNavigationItemSelectedListener false
 
         }
+    }
+
+    override fun onRecipeCreateClick() {
+        val action = RecipeListFragmentDirections
+            .actionRecipeListFragmentToRecipeCreateFragment()
+        this.findNavController().navigate(action)
     }
 
 

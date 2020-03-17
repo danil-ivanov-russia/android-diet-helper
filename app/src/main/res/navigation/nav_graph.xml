@@ -60,5 +60,12 @@
         <argument
             android:name="timeOfDay"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_recipeListFragment_to_recipeCreateFragment"
+            app:destination="@id/recipeCreateFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/recipeCreateFragment"
+        android:name="com.example.diethelperapp.recipecreate.RecipeCreateFragment"
+        android:label="RecipeCreateFragment" />
 </navigation>
