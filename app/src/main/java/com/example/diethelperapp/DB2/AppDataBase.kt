@@ -2,6 +2,8 @@ package com.example.diethelperapp.db2
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.example.diethelperapp.db2.typeConverter.Converters
 
 
 @Database(
@@ -12,8 +14,9 @@ import androidx.room.RoomDatabase
         DietDAO.ListIngredients::class,
     DietDAO.Calendar::class,
     DietDAO.CrossRefCalendarOwnDishes::class],
-    version = 9
+    version = 14
 )
+@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getDietDAO(): DietDAO
 

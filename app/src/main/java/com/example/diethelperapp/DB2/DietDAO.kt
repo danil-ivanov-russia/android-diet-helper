@@ -2,12 +2,16 @@ package com.example.diethelperapp.db2
 
 import androidx.room.*
 import com.example.diethelperapp.db2.models.*
+import com.example.diethelperapp.db2.relationDataClasses.CalendarWithDishes
 import com.example.diethelperapp.db2.relationDataClasses.DietWithDishes
 
 @Dao
 abstract class DietDAO {
     @Query("SELECT * FROM Diet")
     abstract suspend fun getAllDiet(): List<Diet>
+
+    @Query("SELECT * FROM Dishes")
+    abstract suspend fun getAllDishes(): List<Dishes>
 
     @Query("SELECT dietId FROM Diet Where dietName = :name_certain_diet")
     abstract suspend fun getIdCertainDiet(name_certain_diet: String): Int
@@ -30,22 +34,37 @@ abstract class DietDAO {
     @Query("SELECT COUNT(*) FROM Diet")
     abstract suspend fun getCountLines(): Int
 
+    @Query("SELECT * FROM CrossRefDietOwnDishes")
+    abstract suspend fun getCrossRefDietWithDishes(): List<CrossRefDietOwnDishes>
+
+    @Query("SELECT * FROM CrossRefCalendarOwnDishes")
+    abstract suspend fun getCrossRefCalendarWithDishes(): List<CrossRefCalendarOwnDishes>
+
 
     @Transaction
     @Query("SELECT * FROM Diet Where dietId = :id")
     abstract suspend fun getDishesByCertainDiet(id: Int): List<DietWithDishes>
 
+    @Transaction
+    @Query("SELECT * FROM Calendar")
+    abstract suspend fun getCalendar(): List<CalendarWithDishes>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertDiets(diet: MutableCollection<Diet>?)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insertCrossRef(link: MutableCollection<CrossRefDietOwnDishes>?)
+    abstract suspend fun insertCrossRefDietWithDishes(link: MutableCollection<CrossRefDietOwnDishes>?)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertDishes(link: MutableCollection<Dishes>?)
 
-    @Query("SELECT * FROM CrossRefDietOwnDishes")
-    abstract suspend fun getCrossRef(): List<CrossRefDietOwnDishes>
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertCalendar(link: MutableCollection<Calendar>?)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertCrossRefCalendarWithDishes(link: MutableCollection<CrossRefCalendarOwnDishes>?)
+
+
 
     @Entity()
     class Diet(
@@ -64,13 +83,12 @@ abstract class DietDAO {
         var protein: Double?,
         var fat: Double?,
         var carbohydrates: Double?,
-        var calories: Double?,
-        var measure: String?
+        var calories: Double?
     )
 
     @Entity()
     class Dishes(
-        @PrimaryKey()
+        @PrimaryKey
         override var dishesId: Int = 0,
         override var dishesName: String,
         override var protein: Double,
@@ -78,17 +96,16 @@ abstract class DietDAO {
         override var carbohydrates: Double,
         override var calories: Double,
         override var category: String,
-        override var mark: String,
+        override var mark: List<String>,
         override var description: String,
-        override var linkIngredients: Int = 0
+        override var amount: Int = 1
     ) : DishesModel
 
     @Entity(primaryKeys = ["ownDishesId", "linkIngredientsId"])
     class ListIngredients(
         override var ownDishesId: Int,
         override var linkIngredientsId: Int,
-        override var ingredientsCount: Int?,
-        override var ingredientsName: String?
+        override var ingredientsCount: Int?
 
     ) : ListIngredientsModel
 
@@ -98,9 +115,9 @@ abstract class DietDAO {
         override val dishesId: Int
     ) : CrossRefDietOwnDishesModel
 
-    @Entity(primaryKeys = ["calendarId", "dishesId"])
+    @Entity(primaryKeys = ["markDiet", "dishesId"])
     class CrossRefCalendarOwnDishes(
-        override val calendarId: String,
+        override val markDiet: String,
         override val dishesId: Int
     ) : CrossRefCalendarOwnDishesModel
 

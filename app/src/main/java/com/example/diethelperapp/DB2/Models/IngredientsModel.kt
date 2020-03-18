@@ -6,6 +6,5 @@ interface IngredientsModel {
     var protein: Double?  
     var fat: Double?  
     var carbohydrates: Double?  
-    var calories: Double?  
-    var measure: String?  
+    var calories: Double?
 }

@@ -8,8 +8,9 @@ data class DCDishes(
     var carbohydrates: Array<Double>,
     var calories: Array<Double>,
     var category: Array<String>,
-    var mark: Array<String>,
+    var mark: Array<List<String>>,
     var description: Array<String>,
-    var linkIngredients: Array<Int>
+    var amount: Array<Int>
 
 )
+

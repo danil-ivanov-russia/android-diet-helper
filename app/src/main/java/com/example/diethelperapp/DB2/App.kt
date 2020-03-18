@@ -6,7 +6,6 @@ import com.example.diethelperapp.common.DaggerRepositoryComponent
 import com.example.diethelperapp.common.jsonClasses.DCLinkDietToDishes
 import com.example.diethelperapp.common.RepositoryComponent
 import com.example.diethelperapp.common.RepositoryModel
-import com.google.gson.Gson
 
 
 class App : Application() {
@@ -19,18 +18,18 @@ class App : Application() {
 
         instance = this
         database = Room.databaseBuilder(this, AppDatabase::class.java, "database")
-            .fallbackToDestructiveMigration()
-            .build()
-                val textFile: String =this.assets.open("CrossRefDietToDishes.json").bufferedReader().use {
-            it.readText()
-        }
-        println(textFile)
-        val link: DCLinkDietToDishes = Gson().fromJson<DCLinkDietToDishes>(textFile,DCLinkDietToDishes::class.java)
+                .fallbackToDestructiveMigration()
+                .build()
+        val tmpStr: String = listOf<String>("ddd", "ddd").joinToString()
+        val qwe = tmpStr.split(",").toList()
+
+
+
         repositories = DaggerRepositoryComponent
-            .builder()
-            .appDatabase(database)
-            .repositoryModel(RepositoryModel())
-            .build()
+                .builder()
+                .appDatabase(database)
+                .repositoryModel(RepositoryModel())
+                .build()
         db_work = WorkWithDB()
         // где то здесь надо бы сделать проверку на наличие данных в базе, чтобы заново таблицы не заполнять
         // причем они должны отличаться от предпологаемой замены

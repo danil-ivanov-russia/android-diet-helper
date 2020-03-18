@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.diethelperapp.common.JsonUtil
+import com.example.diethelperapp.db2.relationDataClasses.CalendarWithDishes
 import com.example.diethelperapp.db2.relationDataClasses.DietWithDishes
 import kotlinx.coroutines.launch
 
@@ -32,12 +33,15 @@ init {
     }
 
     fun fillTable(context: Context) {
-        val tmp:JsonUtil = JsonUtil(context)
+        val tmp: JsonUtil = JsonUtil(context)
         viewModelScope.launch {
             try {
                 DB_work?.insertDiets(tmp.listDiets)
-                DB_work?.insertCrossRef(tmp.listCrossRefDietOwnDishes)
+                DB_work?.insertCrossRefDietWithDishes(tmp.listCrossRefDietOwnDishes)
                 DB_work?.insertDishes(tmp.listDishes)
+                DB_work?.insertCalendar(tmp.listCalendar)
+                DB_work?.insertCrossRefCalendarWithDishes(tmp.listCrossRefCalendarOwnDishes)
+
 
             } catch (t: Throwable) {
                 print(t.message)
@@ -46,12 +50,18 @@ init {
     }
 
     fun getLogs() {
-        var test: List<DietDAO.CrossRefDietOwnDishes>?
-        var tmpTest: List<DietWithDishes>?
+        var diet: List<DietDAO.Diet>?
+        var testD: List<DietDAO.Dishes>?
+        var testC: List<DietDAO.CrossRefCalendarOwnDishes>?
+        var tmpTest: List<CalendarWithDishes>?
+
         viewModelScope.launch {
             try {
-                test = DB_work?.getCrossRef()
-                tmpTest = DB_work?.getDishesByCertainDiet(1)
+                diet = DB_work?.getAllDiet()
+                testC = DB_work?.getCrossRefCalendarWithDishes()
+                testD = DB_work?.getAllDishes()
+                tmpTest = DB_work?.getCalendar()
+
 
             } catch (t: Throwable) {
                 print(t.message)

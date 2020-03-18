@@ -14,7 +14,7 @@ class RecipeListRepositoryMocked: RecipeListRepository {
                 56.0,
                 78.0,
                 "test",
-                "test mark",
+                listOf("123"),
                 "lorem ipsum dolor sit"
             ),
             DietDAO.Dishes(
@@ -25,7 +25,7 @@ class RecipeListRepositoryMocked: RecipeListRepository {
                 56.0,
                 78.0,
                 "test",
-                "test mark",
+                listOf("123"),
                 "lorem ipsum dolor sit"
             ),
             DietDAO.Dishes(
@@ -36,7 +36,7 @@ class RecipeListRepositoryMocked: RecipeListRepository {
                 56.0,
                 78.0,
                 "test",
-                "test mark",
+                listOf("123"),
                 "lorem ipsum dolor sit"
             )
         )
@@ -52,7 +52,7 @@ class RecipeListRepositoryMocked: RecipeListRepository {
                 56.0,
                 78.0,
                 "test",
-                "test mark",
+                listOf("123"),
                 "lorem ipsum dolor sit"
             ),
             DietDAO.Dishes(
@@ -63,7 +63,7 @@ class RecipeListRepositoryMocked: RecipeListRepository {
                 56.0,
                 78.0,
                 "test",
-                "test mark",
+                listOf("123"),
                 "lorem ipsum dolor sit"
             ),
             DietDAO.Dishes(
@@ -74,7 +74,7 @@ class RecipeListRepositoryMocked: RecipeListRepository {
                 56.0,
                 78.0,
                 "test",
-                "test mark",
+                listOf("123"),
                 "lorem ipsum dolor sit"
             ),
             DietDAO.Dishes(
@@ -85,7 +85,7 @@ class RecipeListRepositoryMocked: RecipeListRepository {
                 56.0,
                 78.0,
                 "test",
-                "test mark",
+                listOf("123"),
                 "lorem ipsum dolor sit"
             ),
             DietDAO.Dishes(
@@ -96,7 +96,7 @@ class RecipeListRepositoryMocked: RecipeListRepository {
                 56.0,
                 78.0,
                 "test",
-                "test mark",
+                listOf("123"),
                 "lorem ipsum dolor sit"
             )
         )
@@ -112,7 +112,7 @@ class RecipeListRepositoryMocked: RecipeListRepository {
                 56.0,
                 78.0,
                 "test",
-                "test mark",
+                listOf("123"),
                 "lorem ipsum dolor sit"
             ),
             DietDAO.Dishes(
@@ -123,7 +123,7 @@ class RecipeListRepositoryMocked: RecipeListRepository {
                 56.0,
                 78.0,
                 "test",
-                "test mark",
+                listOf("123"),
                 "lorem ipsum dolor sit"
             ),
             DietDAO.Dishes(
@@ -134,7 +134,7 @@ class RecipeListRepositoryMocked: RecipeListRepository {
                 56.0,
                 78.0,
                 "test",
-                "test mark",
+                listOf("123"),
                 "lorem ipsum dolor sit"
             )
         )

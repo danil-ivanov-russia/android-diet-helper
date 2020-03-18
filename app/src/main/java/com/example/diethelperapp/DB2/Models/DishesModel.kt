@@ -1,5 +1,7 @@
 package com.example.diethelperapp.db2.models
 
+
+
 interface DishesModel {
     var dishesId: Int
     var dishesName: String
@@ -7,8 +9,8 @@ interface DishesModel {
     var fat: Double  
     var carbohydrates: Double  
     var calories: Double  
-    var category: String  
-    var mark: String  
+    var category: String
+    var mark: List<String>
     var description: String  
-    var linkIngredients: Int
+    var amount: Int
 }
