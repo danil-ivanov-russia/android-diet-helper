@@ -122,16 +122,16 @@ abstract class DietDAO {
 
     @Entity()
     class Dishes(
-        @PrimaryKey
-        override var dishesId: Int = 0,
-        override var dishesName: String,
-        override var protein: Double,
-        override var fat: Double,
-        override var carbohydrates: Double,
-        override var calories: Double,
-        override var category: String,
-        override var mark: MutableList<String>,
-        override var description: String,
+        @PrimaryKey(autoGenerate = true)
+        override var dishesId: Int = 99,
+        override var dishesName: String = "DishesTest",
+        override var protein: Double = 10.0,
+        override var fat: Double = 10.0,
+        override var carbohydrates: Double = 10.0,
+        override var calories: Double = 10.0,
+        override var category: String = "10.0",
+        override var mark: MutableList<String> = mutableListOf("1","2"),
+        override var description: String  ="Test",
         override var amount: Int = 1
     ) : DishesModel
 

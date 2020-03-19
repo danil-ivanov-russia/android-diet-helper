@@ -2,6 +2,7 @@ package com.example.diethelperapp.common
 
 import com.example.diethelperapp.db2.AppDatabase
 import com.example.diethelperapp.diet.DietRepository
+import com.example.diethelperapp.dietplan.DietPlanRepository
 import dagger.Component
 
 @Component(
@@ -13,4 +14,6 @@ import dagger.Component
 abstract class RepositoryComponent
 {
     abstract fun diet(): DietRepository
+
+    abstract fun calendar(): DietPlanRepository
 }

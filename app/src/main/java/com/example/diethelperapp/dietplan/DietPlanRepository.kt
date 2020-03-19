@@ -4,15 +4,18 @@ import com.example.diethelperapp.recipe.RecipeRepository
 
 interface DietPlanRepository {
 
-    suspend fun loadDietPlan(dietId: String): List<DietPlanDay>
+    suspend fun loadDietPlan(dietId: String): List<DietPlanDay>?
 
     suspend fun addDishes(dishesName: String, day: String, mark: String)
 
+
+
+
     class DietPlanDay(
-        val breakfastList: List<RecipeRepository.Recipe>,
-        val lunchList: List<RecipeRepository.Recipe>,
-        val dinnerList: List<RecipeRepository.Recipe>,
-        val otherList: List<RecipeRepository.Recipe>
+        val breakfastList: MutableList<RecipeRepository.Recipe>,
+        val lunchList: MutableList<RecipeRepository.Recipe>,
+        val dinnerList: MutableList<RecipeRepository.Recipe>,
+        val otherList: MutableList<RecipeRepository.Recipe>
     )
 }
 

@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diethelperapp.databinding.FragmentDietplanBinding
+import com.example.diethelperapp.db2.App
 import com.example.diethelperapp.dietplan.*
 import kotlinx.android.synthetic.main.fragment_dietlist.*
 
@@ -20,7 +21,7 @@ class DietPlanFragment :  Fragment(), DietPlanButtonClickNavigator  {
     private val viewModel: DietPlanViewModel by viewModels {
         object: ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-                DietPlanViewModel("0", DietPlanRepositoryMocked(), this@DietPlanFragment) as T
+                DietPlanViewModel("0", App.repositories.calendar(), this@DietPlanFragment) as T
         }
     }
 
