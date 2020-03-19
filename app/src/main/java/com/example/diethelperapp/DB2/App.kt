@@ -23,6 +23,12 @@ class App : Application() {
         val tmpStr: String = listOf<String>("ddd", "ddd").joinToString()
         val qwe = tmpStr.split(",").toList()
 
+        val tmpList = mutableListOf(1,3)
+        val mark = 3
+        val a = tmpList.indexOf(mark)
+        val b = tmpList[0]
+        tmpList[a] = b.also { tmpList[0] = mark}
+
 
 
         repositories = DaggerRepositoryComponent

@@ -8,7 +8,7 @@ data class DCDishes(
     var carbohydrates: Array<Double>,
     var calories: Array<Double>,
     var category: Array<String>,
-    var mark: Array<List<String>>,
+    var mark: Array<MutableList<String>>,
     var description: Array<String>,
     var amount: Array<Int>
 

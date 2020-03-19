@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.diethelperapp.common.JsonUtil
 import com.example.diethelperapp.db2.relationDataClasses.CalendarWithDishes
 import com.example.diethelperapp.db2.relationDataClasses.DietWithDishes
+import com.example.diethelperapp.db2.relationDataClasses.DishesWithIngredients
 import kotlinx.coroutines.launch
 
 class WorkWithDB : ViewModel() {// Первоначальное заполнение БД.
@@ -41,7 +42,8 @@ init {
                 DB_work?.insertDishes(tmp.listDishes)
                 DB_work?.insertCalendar(tmp.listCalendar)
                 DB_work?.insertCrossRefCalendarWithDishes(tmp.listCrossRefCalendarOwnDishes)
-
+                DB_work?.insertIngredients(tmp.listIngredients)
+                DB_work?.insertCrossRefIngredients(tmp.listCrossRefIngredients)
 
             } catch (t: Throwable) {
                 print(t.message)
@@ -50,16 +52,16 @@ init {
     }
 
     fun getLogs() {
-        var diet: List<DietDAO.Diet>?
-        var testD: List<DietDAO.Dishes>?
+        var testLi: List<DietDAO.Ingredients>?
+        var testD: List<DishesWithIngredients>?
         var testC: List<DietDAO.CrossRefCalendarOwnDishes>?
         var tmpTest: List<CalendarWithDishes>?
 
         viewModelScope.launch {
             try {
-                diet = DB_work?.getAllDiet()
+                testLi = DB_work?.getListIngredients()
                 testC = DB_work?.getCrossRefCalendarWithDishes()
-                testD = DB_work?.getAllDishes()
+                testD = DB_work?.getDishesWithListIngredients()
                 tmpTest = DB_work?.getCalendar()
 
 

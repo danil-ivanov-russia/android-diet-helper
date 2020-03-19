@@ -6,6 +6,8 @@ interface DietPlanRepository {
 
     suspend fun loadDietPlan(dietId: String): List<DietPlanDay>
 
+    suspend fun addDishes(dishesName: String, day: String, mark: String)
+
     class DietPlanDay(
         val breakfastList: List<RecipeRepository.Recipe>,
         val lunchList: List<RecipeRepository.Recipe>,

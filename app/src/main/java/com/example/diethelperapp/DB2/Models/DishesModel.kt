@@ -10,7 +10,7 @@ interface DishesModel {
     var carbohydrates: Double  
     var calories: Double  
     var category: String
-    var mark: List<String>
+    var mark: MutableList<String>
     var description: String  
     var amount: Int
 }

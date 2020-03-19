@@ -1,8 +1,9 @@
 package com.example.diethelperapp.dietplan
 
+import com.example.diethelperapp.db2.DietDAO
 import com.example.diethelperapp.recipe.RecipeRepository
 
-class DietPlanRepositoryMocked: DietPlanRepository {
+class DietPlanRepositoryMocked(): DietPlanRepository {
     override suspend fun loadDietPlan(dietId: String): List<DietPlanRepository.DietPlanDay> {
         return listOf(
             DietPlanRepository.DietPlanDay(
@@ -696,4 +697,11 @@ class DietPlanRepositoryMocked: DietPlanRepository {
         )
 
     }
+
+    override suspend fun addDishes(dishesName: String, day: String, mark: String) {
+        TODO("Not yet implemented")
+    }
+
+
 }
+
