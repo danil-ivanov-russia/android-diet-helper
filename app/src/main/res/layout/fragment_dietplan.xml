@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text='@{String.format("Недельное потребление:\nКалории: %s ккал\nБелки: %s г\nЖиры: %s г\nУглеводы: %s г", RecipeViewUtils.amountToString(viewModel.calculateWeeklyNutrition().calories), RecipeViewUtils.amountToString(viewModel.calculateWeeklyNutrition().protein), RecipeViewUtils.amountToString(viewModel.calculateWeeklyNutrition().fat), RecipeViewUtils.amountToString(viewModel.calculateWeeklyNutrition().carbohydrate))}'
+                android:text='@{ viewModel.isLoading() == true ? String.format("Загрузка...") : String.format("Недельное потребление:\nКалории: %s ккал\nБелки: %s г\nЖиры: %s г\nУглеводы: %s г", RecipeViewUtils.amountToString(viewModel.calculateWeeklyNutrition().calories), RecipeViewUtils.amountToString(viewModel.calculateWeeklyNutrition().protein), RecipeViewUtils.amountToString(viewModel.calculateWeeklyNutrition().fat), RecipeViewUtils.amountToString(viewModel.calculateWeeklyNutrition().carbohydrate))}'
                 android:textSize="14sp"
                 android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -6,34 +6,37 @@ import com.example.diethelperapp.recipe.RecipeRepository
 
 class DietPlanRepositoryImplementation(private val dao: DietDAO) : DietPlanRepository {
     override suspend fun loadDietPlan(dietId: String): List<DietPlanRepository.DietPlanDay> {
-        var listDietPlanDay = mutableListOf<DietPlanRepository.DietPlanDay>()
+        val listDietPlanDay = mutableListOf<DietPlanRepository.DietPlanDay>()
         val tmpObj = dao.getCalendar()
-        var  k = 0
-        for(i in tmpObj.listIterator())
+        for((k, i) in tmpObj.withIndex())
         {
-           for (j in i.Dishes.listIterator())
+            val currentBreakfastList = mutableListOf<RecipeRepository.Recipe>()
+            val currentLunchList = mutableListOf<RecipeRepository.Recipe>()
+            val currentDinnerList = mutableListOf<RecipeRepository.Recipe>()
+            val currentOtherList = mutableListOf<RecipeRepository.Recipe>()
+           for (j in i.Dishes)
            {
                when(j.mark[0])
                {
-                   "Завтрак" -> listDietPlanDay[k].breakfastList.add(
+                   "Завтрак" -> currentBreakfastList.add(
                        RecipeRepository.Recipe(j.dishesName,getListIngredient(),j.calories,j.protein,j.fat,j.carbohydrates)
 
                    )
-                   "Обед" -> listDietPlanDay[k].lunchList.add(
+                   "Обед" -> currentLunchList.add(
                        RecipeRepository.Recipe(j.dishesName,getListIngredient(),j.calories,j.protein,j.fat,j.carbohydrates)
 
                    )
-                   "Ужин" -> listDietPlanDay[k].dinnerList.add(
+                   "Ужин" -> currentDinnerList.add(
                        RecipeRepository.Recipe(j.dishesName,getListIngredient(),j.calories,j.protein,j.fat,j.carbohydrates)
 
                    )
-                   "Перекус" -> listDietPlanDay[k].otherList.add(
+                   "Перекус" -> currentOtherList.add(
                        RecipeRepository.Recipe(j.dishesName,getListIngredient(),j.calories,j.protein,j.fat,j.carbohydrates)
 
                    )
                }
            }
-            k++
+            listDietPlanDay.add(DietPlanRepository.DietPlanDay(currentBreakfastList, currentLunchList, currentDinnerList, currentOtherList))
         }
         return listDietPlanDay
     }

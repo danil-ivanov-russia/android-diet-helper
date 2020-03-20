@@ -222,7 +222,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-                        android:text='@{String.format("Дневное потребление:\nКалории: %s ккал\nБелки: %s г\nЖиры: %s г\nУглеводы: %s г", RecipeViewUtils.amountToString(viewModel.calculateDailyNutrition(dayNumber).calories), RecipeViewUtils.amountToString(viewModel.calculateDailyNutrition(dayNumber).protein), RecipeViewUtils.amountToString(viewModel.calculateDailyNutrition(dayNumber).fat), RecipeViewUtils.amountToString(viewModel.calculateDailyNutrition(dayNumber).carbohydrate))}'
+                        android:text='@{ viewModel.isLoading() == true ? String.format("Загрузка...") : String.format("Дневное потребление:\nКалории: %s ккал\nБелки: %s г\nЖиры: %s г\nУглеводы: %s г", RecipeViewUtils.amountToString(viewModel.calculateDailyNutrition(dayNumber).calories), RecipeViewUtils.amountToString(viewModel.calculateDailyNutrition(dayNumber).protein), RecipeViewUtils.amountToString(viewModel.calculateDailyNutrition(dayNumber).fat), RecipeViewUtils.amountToString(viewModel.calculateDailyNutrition(dayNumber).carbohydrate))}'
                         android:textColor="#ffffff"
                         android:textSize="20sp"
                         app:layout_constraintEnd_toEndOf="parent"
