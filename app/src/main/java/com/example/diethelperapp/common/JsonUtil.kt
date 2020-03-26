@@ -172,9 +172,9 @@ class JsonUtil(_ctx: Context) {
     }
 
     private fun chooseCalendarJSON(nameDiet: String): String = when (nameDiet) {
-        "Гречневая" -> "CalendarBuckwheat.json"
-        "Белковая" -> "CalendarParis.json"
-        "Диета Парижанки" -> "CalendarParis"
+        "Гречневая диета" -> "CalendarBuckwheat.json"
+        "Белковая диета" -> "CalendarProtein.json"
+        "Диета парижанки" -> "CalendarParis.json"
         else -> "CalendarBuckwheat.json"
     }
 

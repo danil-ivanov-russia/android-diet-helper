@@ -36,9 +36,11 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+
+                <!--android:onClick="@{()-> viewModel.toCreateRecipe()}"-->
+
                 <Button
                     android:id="@+id/addDishButton"
-                    android:onClick="@{()-> viewModel.toCreateRecipe()}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"

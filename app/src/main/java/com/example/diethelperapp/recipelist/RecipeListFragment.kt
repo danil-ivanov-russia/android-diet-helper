@@ -52,29 +52,36 @@ class RecipeListFragment : Fragment(), RecipeListClickNavigator {
 
         dataBinding.bottomNavigationBar.setOnNavigationItemSelectedListener {
             if (it.itemId != dataBinding.bottomNavigationBar.selectedItemId)
-            when (it.itemId) {
-                R.id.bottomNavigationItemUserRecipes -> {
-                    viewModel.selectUserRecipes()
-                    return@setOnNavigationItemSelectedListener true
+                when (it.itemId) {
+                    R.id.bottomNavigationItemUserRecipes -> {
+                        viewModel.selectUserRecipes()
+                        return@setOnNavigationItemSelectedListener true
+                    }
+                    R.id.bottomNavigationItemWebRecipes -> {
+                        viewModel.selectWebRecipes()
+                        return@setOnNavigationItemSelectedListener true
+                    }
+                    else -> {
+                        viewModel.selectStandartRecipes()
+                        return@setOnNavigationItemSelectedListener true
+                    }
                 }
-                R.id.bottomNavigationItemWebRecipes -> {
-                    viewModel.selectWebRecipes()
-                    return@setOnNavigationItemSelectedListener true
-                }
-                else -> {
-                    viewModel.selectStandartRecipes()
-                    return@setOnNavigationItemSelectedListener true
-                }
-            }
             else
                 return@setOnNavigationItemSelectedListener false
 
         }
+
+        dataBinding.addDishButton.setOnClickListener {
+            val action = RecipeListFragmentDirections
+                    .actionRecipeListFragmentToRecipeCreateNavigation()
+            this.findNavController().navigate(action)
+        }
+
     }
 
     override fun onRecipeCreateClick() {
         val action = RecipeListFragmentDirections
-            .actionRecipeListFragmentToRecipeCreateFragment()
+            .actionRecipeListFragmentToRecipeCreateNavigation()
         this.findNavController().navigate(action)
     }
 

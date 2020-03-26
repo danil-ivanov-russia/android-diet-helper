@@ -1,6 +1,5 @@
 package com.example.diethelperapp.diet
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -47,8 +46,8 @@ class DietFragment : Fragment() {
         dataBinding.lifecycleOwner = viewLifecycleOwner
 
         dataBinding.buttonToWeekPlan.setOnClickListener {
-            val action = DietFragmentDirections
-                .actionDietFragmentToDietPlanFragment()
+            val action = DietFragmentDirections.
+                actionDietFragmentToDietPlanFragment(viewModel.diet.value!!.dietId)
             this.findNavController().navigate(action)
         }
     }

@@ -5,6 +5,8 @@ import com.example.diethelperapp.diet.DietRepository
 import com.example.diethelperapp.diet.DietRepositoryImplementation
 import com.example.diethelperapp.dietplan.DietPlanRepository
 import com.example.diethelperapp.dietplan.DietPlanRepositoryImplementation
+import com.example.diethelperapp.recipecreate.RecipeCreateRepository
+import com.example.diethelperapp.recipecreate.RecipeCreateRepositoryImplementation
 import dagger.Module
 import dagger.Provides
 @Module
@@ -21,6 +23,13 @@ class RepositoryModel
     fun calendar(
         dao: AppDatabase
     ): DietPlanRepository = DietPlanRepositoryImplementation(
+        dao = dao.getDietDAO()
+    )
+
+    @Provides
+    fun recipeCreate(
+        dao: AppDatabase
+    ): RecipeCreateRepository = RecipeCreateRepositoryImplementation(
         dao = dao.getDietDAO()
     )
 }

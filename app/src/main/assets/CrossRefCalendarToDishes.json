@@ -3,13 +3,18 @@
     "Buckwheat1",
     "Buckwheat1",
     "Buckwheat1",
-    "Buckwheat1"
-   
+    "Buckwheat1",
+    "Protein1",
+    "Protein2",
+    "Protein3"
   ],
   "dishesId":[
     1,
     2,
     3,
-    4
+    4,
+    3,
+    3,
+    3
     ]
 }

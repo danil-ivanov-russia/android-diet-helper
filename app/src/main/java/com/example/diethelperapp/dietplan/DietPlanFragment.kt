@@ -11,18 +11,25 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diethelperapp.databinding.FragmentDietplanBinding
 import com.example.diethelperapp.db2.App
-import com.example.diethelperapp.dietplan.*
+import com.example.diethelperapp.dietplan.DietPlanAdapter
+import com.example.diethelperapp.dietplan.DietPlanButtonClickNavigator
+import com.example.diethelperapp.dietplan.DietPlanRepository
+import com.example.diethelperapp.dietplan.DietPlanViewModel
 import kotlinx.android.synthetic.main.fragment_dietlist.*
 
 class DietPlanFragment :  Fragment(), DietPlanButtonClickNavigator  {
+
+    val args: DietPlanFragmentArgs by navArgs()
+
     private val viewModel: DietPlanViewModel by viewModels {
         object: ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-                DietPlanViewModel(1, App.repositories.calendar(), this@DietPlanFragment,mContext) as T
+                DietPlanViewModel(args.dietId, App.repositories.calendar(), this@DietPlanFragment,mContext) as T
         }
     }
 

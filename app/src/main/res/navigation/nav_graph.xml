@@ -49,6 +49,10 @@
         <action
             android:id="@+id/action_dietPlanFragment_to_recipeListFragment"
             app:destination="@id/recipeListFragment" />
+        <argument
+            android:name="dietId"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/recipeListFragment"
@@ -61,11 +65,27 @@
             android:name="timeOfDay"
             app:argType="integer" />
         <action
-            android:id="@+id/action_recipeListFragment_to_recipeCreateFragment"
-            app:destination="@id/recipeCreateFragment" />
+            android:id="@+id/action_recipeListFragment_to_recipe_create_navigation"
+            app:destination="@id/recipe_create_navigation" />
     </fragment>
-    <fragment
-        android:id="@+id/recipeCreateFragment"
-        android:name="com.example.diethelperapp.recipecreate.RecipeCreateFragment"
-        android:label="RecipeCreateFragment" />
+    <navigation android:id="@+id/recipe_create_navigation"
+        app:startDestination="@id/recipeCreateFragment">
+        <fragment
+            android:id="@+id/ingredientListFragment"
+            android:name="com.example.diethelperapp.ingredientlist.IngredientListFragment"
+            android:label="IngredientListFragment">
+            <action
+                android:id="@+id/action_ingredientListFragment_to_recipeCreateFragment"
+                app:popUpTo="@id/recipeCreateFragment"
+                app:popUpToInclusive="false" />
+        </fragment>
+        <fragment
+            android:id="@+id/recipeCreateFragment"
+            android:name="com.example.diethelperapp.recipecreate.RecipeCreateFragment"
+            android:label="RecipeCreateFragment">
+            <action
+                android:id="@+id/action_recipeCreateFragment_to_ingredientListFragment"
+                app:destination="@id/ingredientListFragment" />
+        </fragment>
+    </navigation>
 </navigation>

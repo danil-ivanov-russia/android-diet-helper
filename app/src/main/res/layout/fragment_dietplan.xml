@@ -63,7 +63,6 @@
             android:id="@+id/rect"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            ight="match_parent"
             android:visibility="@{ viewModel.isLoading() == true ? View.VISIBLE : View.INVISIBLE}"
             android:background="@color/colorGrey" />
 
