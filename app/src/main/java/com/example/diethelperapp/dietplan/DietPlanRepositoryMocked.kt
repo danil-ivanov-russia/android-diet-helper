@@ -1,10 +1,11 @@
 package com.example.diethelperapp.dietplan
 
+import android.content.Context
 import com.example.diethelperapp.db2.DietDAO
 import com.example.diethelperapp.recipe.RecipeRepository
 
 class DietPlanRepositoryMocked(): DietPlanRepository {
-    override suspend fun loadDietPlan(dietId: String): List<DietPlanRepository.DietPlanDay>? {
+    override suspend fun loadDietPlan(): List<DietPlanRepository.DietPlanDay>? {
        // return MutableList( DietPlanRepository.DietPlanDay())
 //        return listOf(
 //            DietPlanRepository.DietPlanDay(
@@ -700,6 +701,10 @@ return null
     }
 
     override suspend fun addDishes(dishesName: String, day: String, mark: String) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun fillCalendar(dietId: Int, ctx: Context) {
         TODO("Not yet implemented")
     }
 

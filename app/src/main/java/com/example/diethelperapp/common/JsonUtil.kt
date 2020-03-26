@@ -6,7 +6,7 @@ import com.example.diethelperapp.db2.DietDAO
 import com.google.gson.Gson
 
 
-class JsonUtil(ctx: Context) {
+class JsonUtil(_ctx: Context) {
     var listCrossRefDietOwnDishes: MutableCollection<DietDAO.CrossRefDietOwnDishes>? =
         mutableListOf()
     var listDiets: MutableCollection<DietDAO.Diet>? = mutableListOf()
@@ -16,19 +16,25 @@ class JsonUtil(ctx: Context) {
     var listCalendar: MutableCollection<DietDAO.Calendar>? = mutableListOf()
     var listIngredients: MutableCollection<DietDAO.Ingredients>? = mutableListOf()
     var listCrossRefIngredients: MutableCollection<DietDAO.ListIngredients>? = mutableListOf()
+    private var context: Context? = _ctx
 
+    private var nameDiet: String = ""
 
-    private var context: Context? = ctx
+    constructor(_ctx: Context, _nameDiet: String) : this(_ctx) {
+        nameDiet = _nameDiet
+    }
+
 
     init {
         setListCrossRefDietOwnDishes()
         setListDiets()
         setListDishes()
         setListCrossRefCalendarToDishes()
-        setCalendar()
+      //  setCalendar()
         setIngredients()
         setCrossRefListIngredient()
     }
+
 
     private fun getJsonString(fileString: String): String =
         context?.assets?.open(fileString)?.bufferedReader().use {
@@ -109,15 +115,16 @@ class JsonUtil(ctx: Context) {
         }
     }
 
-    private fun setCalendar() {
+     fun setCalendar() {
         val obj: DCCalendar =
-            Gson().fromJson(getJsonString("Calendar.json"), DCCalendar::class.java)
+            Gson().fromJson(getJsonString(chooseCalendarJSON(nameDiet)), DCCalendar::class.java)
         var i = 0;
         while (i < obj.markDiet.size) {
             listCalendar?.add(
                 DietDAO.Calendar(
                     obj.markDiet[i],
                     obj.dayOfWeek[i]
+
 
                 )
             )
@@ -144,9 +151,12 @@ class JsonUtil(ctx: Context) {
         }
     }
 
-    private fun setCrossRefListIngredient() {
+   private fun setCrossRefListIngredient() {
         val obj: DCListIngredients =
-            Gson().fromJson(getJsonString("ListIngredients.json"), DCListIngredients::class.java)
+            Gson().fromJson(
+                getJsonString("ListIngredients.json"),
+                DCListIngredients::class.java
+            )
         var i = 0;
         while (i < obj.ownDishesId.size) {
             listCrossRefIngredients?.add(
@@ -160,5 +170,13 @@ class JsonUtil(ctx: Context) {
             i++
         }
     }
+
+    private fun chooseCalendarJSON(nameDiet: String): String = when (nameDiet) {
+        "Гречневая" -> "CalendarBuckwheat.json"
+        "Белковая" -> "CalendarParis.json"
+        "Диета Парижанки" -> "CalendarParis"
+        else -> "CalendarBuckwheat.json"
+    }
+
 
 }

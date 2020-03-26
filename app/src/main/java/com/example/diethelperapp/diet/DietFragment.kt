@@ -1,5 +1,6 @@
 package com.example.diethelperapp.diet
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +11,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.diethelperapp.db2.App
 import com.example.diethelperapp.databinding.FragmentDietBinding
+import com.example.diethelperapp.db2.App
 
 class DietFragment : Fragment() {
 
+
     val args: DietFragmentArgs by navArgs()
+
 
     private val viewModel: DietViewModel by viewModels {
 
@@ -26,6 +29,7 @@ class DietFragment : Fragment() {
     }
 
     private lateinit var dataBinding: FragmentDietBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater,

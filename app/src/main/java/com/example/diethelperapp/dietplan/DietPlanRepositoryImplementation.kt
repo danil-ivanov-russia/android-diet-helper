@@ -1,14 +1,16 @@
 package com.example.diethelperapp.dietplan
 
+import android.content.Context
+import com.example.diethelperapp.common.JsonUtil
 import com.example.diethelperapp.db2.DietDAO
 import com.example.diethelperapp.db2.models.ListIngredientsModel
 import com.example.diethelperapp.recipe.RecipeRepository
 
 class DietPlanRepositoryImplementation(private val dao: DietDAO) : DietPlanRepository {
-    override suspend fun loadDietPlan(dietId: String): List<DietPlanRepository.DietPlanDay> {
+    override suspend fun loadDietPlan(): List<DietPlanRepository.DietPlanDay> {
         val listDietPlanDay = mutableListOf<DietPlanRepository.DietPlanDay>()
         val tmpObj = dao.getCalendar()
-        for((k, i) in tmpObj.withIndex())
+        for(i in tmpObj)
         {
             val currentBreakfastList = mutableListOf<RecipeRepository.Recipe>()
             val currentLunchList = mutableListOf<RecipeRepository.Recipe>()
@@ -56,6 +58,14 @@ class DietPlanRepositoryImplementation(private val dao: DietDAO) : DietPlanRepos
         val tmpObjDishes = changeDishesMark(dao.getDishes(dishesName), mark)
         dao.updateDishes(tmpObjDishes)
 
+    }
+
+    override suspend fun fillCalendar(dietId: Int, ctx: Context) {
+
+        val dietName = dao.getNameCertainDiet(dietId)
+        var jsonUtil = JsonUtil(ctx, dietName)
+        jsonUtil.setCalendar()
+        dao.insertCalendar(jsonUtil.listCalendar)
     }
 }
 

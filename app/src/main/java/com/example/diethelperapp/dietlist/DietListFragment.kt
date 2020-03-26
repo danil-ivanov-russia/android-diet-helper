@@ -1,5 +1,6 @@
 package com.example.diethelperapp.dietlist
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,8 @@ class DietListFragment :  Fragment(), DietListItemClickNavigator {
     }
 
     private lateinit var dataBinding: FragmentDietlistBinding
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,

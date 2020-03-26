@@ -8,7 +8,7 @@
     "Суббота",
     "Воскресенье"
   ],
-  "markDiet":[
+  "markDiet": [
     "Buckwheat1",
     "Buckwheat2",
     "Buckwheat3",
@@ -16,5 +16,5 @@
     "Buckwheat5",
     "Buckwheat6",
     "Buckwheat7"
-    ]
+  ]
 }

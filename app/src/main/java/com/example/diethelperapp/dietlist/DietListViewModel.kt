@@ -1,5 +1,6 @@
 package com.example.diethelperapp.dietlist
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +12,8 @@ import kotlinx.coroutines.launch
 class DietListViewModel(
     private val repository: DietRepository,
     var navigator: DietListItemClickNavigator
-): ViewModel() {
+
+    ) : ViewModel() {
     private var _dietsNames: List<DietModel>? = null
         set(value) {
             field = value
@@ -28,15 +30,16 @@ class DietListViewModel(
 
     init {
         viewModelScope.launch {
-            val dietsNames: List<DietModel>? = try{
+            val dietsNames: List<DietModel>? = try {
+
                 repository.getAllDiet()
-            } catch (t: Throwable){
+            } catch (t: Throwable) {
                 print(t.message)
                 null
             }
 
             _isLoading = false
-            dietsNames?.let {_dietsNames = it}
+            dietsNames?.let { _dietsNames = it }
         }
     }
 

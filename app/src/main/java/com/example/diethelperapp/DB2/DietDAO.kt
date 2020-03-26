@@ -41,6 +41,7 @@ abstract class DietDAO {
     @Query("SELECT * FROM CrossRefDietOwnDishes")
     abstract suspend fun getCrossRefDietWithDishes(): List<CrossRefDietOwnDishes>
 
+
     @Query("SELECT * FROM CrossRefCalendarOwnDishes")
     abstract suspend fun getCrossRefCalendarWithDishes(): List<CrossRefCalendarOwnDishes>
 

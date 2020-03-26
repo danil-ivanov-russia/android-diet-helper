@@ -1,5 +1,6 @@
 package com.example.diethelperapp.dietplan
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,9 +8,10 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 class DietPlanViewModel(
-    private val dietId: String,
+    private val dietId: Int,
     private val repository: DietPlanRepository,
-    var navigator: DietPlanButtonClickNavigator
+    var navigator: DietPlanButtonClickNavigator,
+    val ctx: Context?
 ): ViewModel() {
     private var _dietPlan: List<DietPlanRepository.DietPlanDay>? = null
         set(value) {
@@ -28,7 +30,10 @@ class DietPlanViewModel(
     init {
         viewModelScope.launch {
             val dietPlan: List<DietPlanRepository.DietPlanDay>? = try{
-                repository.loadDietPlan(dietId)
+                if (ctx != null) {
+                    repository.fillCalendar(dietId,ctx)
+                }
+                repository.loadDietPlan()
             } catch (t: Throwable){
                 print(t.message)
                 null

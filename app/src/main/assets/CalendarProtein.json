@@ -1,0 +1,19 @@
+{"dayOfWeek": [
+  "Понедельник",
+  "Вторник",
+  "Среда",
+  "Четверг",
+  "Пятница",
+  "Суббота",
+  "Воскресенье"
+],
+  "markDiet":[
+    "Protein1",
+    "Protein2",
+    "Protein3",
+    "Protein4",
+    "Protein",
+    "Protein6",
+    "Protein7"
+    ]
+}

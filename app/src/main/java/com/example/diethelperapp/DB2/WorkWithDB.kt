@@ -40,7 +40,7 @@ init {
                 DB_work?.insertDiets(tmp.listDiets)
                 DB_work?.insertCrossRefDietWithDishes(tmp.listCrossRefDietOwnDishes)
                 DB_work?.insertDishes(tmp.listDishes)
-                DB_work?.insertCalendar(tmp.listCalendar)
+//                DB_work?.insertCalendar(tmp.listCalendar)
                 DB_work?.insertCrossRefCalendarWithDishes(tmp.listCrossRefCalendarOwnDishes)
                 DB_work?.insertIngredients(tmp.listIngredients)
                 DB_work?.insertCrossRefIngredients(tmp.listCrossRefIngredients)
@@ -62,7 +62,7 @@ init {
                 testLi = DB_work?.getListIngredients()
                 testC = DB_work?.getCrossRefCalendarWithDishes()
                 testD = DB_work?.getDishesWithListIngredients()
-                tmpTest = DB_work?.getCalendar()
+//                tmpTest = DB_work?.getCalendar()
 
 
             } catch (t: Throwable) {

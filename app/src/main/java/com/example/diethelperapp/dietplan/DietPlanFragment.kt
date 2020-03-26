@@ -1,5 +1,6 @@
 package com.example.diethelperapp.dietlist
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,11 +22,21 @@ class DietPlanFragment :  Fragment(), DietPlanButtonClickNavigator  {
     private val viewModel: DietPlanViewModel by viewModels {
         object: ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-                DietPlanViewModel("0", App.repositories.calendar(), this@DietPlanFragment) as T
+                DietPlanViewModel(1, App.repositories.calendar(), this@DietPlanFragment,mContext) as T
         }
     }
 
     private lateinit var dataBinding: FragmentDietplanBinding
+    private  var mContext: Context? = null
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        mContext = null
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
