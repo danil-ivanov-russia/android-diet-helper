@@ -54,6 +54,15 @@ abstract class DietDAO {
     @Query("SELECT markDiet FROM Calendar Where dayOfWeek =:day")
     abstract suspend fun getMarkDietByDay(day: String): String
 
+    @Query("SELECT currentDiet From User ")
+    abstract suspend fun getCurrentDiet(): String
+
+    @Query("SELECT * From Ingredients ")
+    abstract suspend fun getAllIngredient(): List<Ingredients>
+
+    @Query("SELECT * FROM Ingredients Where ingredientsId = :idIngredient")
+    abstract suspend fun getCertainIngredientById(idIngredient: Int): Ingredients
+
 
 
 
@@ -94,6 +103,11 @@ abstract class DietDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertCrossRefIngredients(link: MutableCollection<ListIngredients>?)
+
+
+// не уверен что запрос сработает
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertUserCurrentDiet(user: User)
 
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
@@ -163,5 +177,19 @@ abstract class DietDAO {
         override val dayOfWeek: String
     ) : ModelCalendar
 
+    @Entity()
+    class User(
+        @PrimaryKey
+        override val currentDiet: String
+    ): UserModel
+
 
 }
+/* @Entity()
+    class User(
+        @PrimaryKey
+        override val currentDiet: String
+    ): UserModel
+
+
+*/

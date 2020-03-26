@@ -12,9 +12,10 @@ import com.example.diethelperapp.db2.typeConverter.Converters
         DietDAO.CrossRefDietOwnDishes::class,
         DietDAO.Ingredients::class,
         DietDAO.ListIngredients::class,
-    DietDAO.Calendar::class,
-    DietDAO.CrossRefCalendarOwnDishes::class],
-    version = 25
+        DietDAO.Calendar::class,
+        DietDAO.CrossRefCalendarOwnDishes::class,
+        DietDAO.User::class],
+    version = 27
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {

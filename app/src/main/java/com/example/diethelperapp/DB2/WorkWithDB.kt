@@ -55,14 +55,16 @@ init {
         var testLi: List<DietDAO.Ingredients>?
         var testD: List<DishesWithIngredients>?
         var testC: List<DietDAO.CrossRefCalendarOwnDishes>?
-        var tmpTest: List<CalendarWithDishes>?
+        var tmpTest: List<DietDAO.Ingredients>
+        var tmpI: DietDAO.Ingredients
 
         viewModelScope.launch {
             try {
                 testLi = DB_work?.getListIngredients()
                 testC = DB_work?.getCrossRefCalendarWithDishes()
                 testD = DB_work?.getDishesWithListIngredients()
-//                tmpTest = DB_work?.getCalendar()
+                tmpTest = DB_work?.getAllIngredient()!!
+                tmpI = DB_work?.getCertainIngredientById(1)!!
 
 
             } catch (t: Throwable) {
