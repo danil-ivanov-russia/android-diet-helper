@@ -80,6 +80,7 @@
                         android:importantForAutofill="no"
                         android:inputType="number"
                         android:textColor="#ffffff"
+                        android:text="100"
                         android:hint="Кол-во (г)"/>
 
                 </com.google.android.material.textfield.TextInputLayout>

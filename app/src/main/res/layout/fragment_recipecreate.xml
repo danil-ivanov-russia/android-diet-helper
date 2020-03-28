@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <import type="android.view.View" />
 
         <import type="com.example.diethelperapp.recipecreate.RecipeCreateUtils" />
+        <import type="com.example.diethelperapp.recipe.RecipeViewUtils" />
 
         <variable
             name="viewModel"
@@ -38,7 +40,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@={ viewModel.customRecipe.dishesName }" />
+                android:text="@={ viewModel.customRecipeName }" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -54,7 +56,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@={ viewModel.customRecipe.description }" />
+                android:text="@={ viewModel.customRecipeDescription }" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -113,12 +115,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonAddIngredient" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/nutritionRecipeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:text='@{ viewModel.isLoading() == true ? String.format("Загрузка...") : String.format("Калории: %s ккал\nБелки: %s г\nЖиры: %s г\nУглеводы: %s г", RecipeViewUtils.amountToString(viewModel.customRecipeCalories), RecipeViewUtils.amountToString(viewModel.customRecipeProtein), RecipeViewUtils.amountToString(viewModel.customRecipeFat), RecipeViewUtils.amountToString(viewModel.customRecipeCarbohydrate))}'
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nutritionTitleTextView"
+            tools:text="Недельное потребление"/>
+
         <Button
             android:id="@+id/buttonCreateDish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/nutritionTitleTextView"
+            app:layout_constraintTop_toBottomOf="@+id/nutritionRecipeTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:text="Создать блюдо" />

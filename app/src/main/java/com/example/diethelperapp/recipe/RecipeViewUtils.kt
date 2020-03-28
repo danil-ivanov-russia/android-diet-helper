@@ -1,5 +1,7 @@
 package com.example.diethelperapp.recipe
 
+import java.text.DecimalFormat
+
 object RecipeViewUtils {
     @JvmStatic
     fun listOfIngredientsToString(list: List<RecipeRepository.Ingredient>?): String? {
@@ -20,9 +22,12 @@ object RecipeViewUtils {
 
     @JvmStatic
     fun amountToString(double: Double): String{
-        if (double % 1.0 == 0.0){
+        val df = DecimalFormat("0.##")
+        /*if (double % 1.0 == 0.0){
             return "%.0f".format(double)
         }
-        else return double.toString()
+        else return "%.3f".format(double)
+         */
+        return df.format(double)
     }
 }

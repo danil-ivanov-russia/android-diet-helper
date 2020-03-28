@@ -40,6 +40,41 @@ class RecipeCreateViewModel(
         }
     val customRecipeName: MutableLiveData<String> = MutableLiveData()
 
+    private var _customRecipeDescription: String? = null
+        set(value) {
+            field = value
+            (customRecipeDescription as MutableLiveData).postValue(value)
+        }
+    val customRecipeDescription: MutableLiveData<String> = MutableLiveData()
+
+    private var _customRecipeCalories: Double? = 0.0
+        set(value) {
+            field = value
+            (customRecipeCalories as MutableLiveData).postValue(value)
+        }
+    val customRecipeCalories: MutableLiveData<Double> = MutableLiveData()
+
+    private var _customRecipeProtein: Double? = 0.0
+        set(value) {
+            field = value
+            (customRecipeProtein as MutableLiveData).postValue(value)
+        }
+    val customRecipeProtein: MutableLiveData<Double> = MutableLiveData()
+
+    private var _customRecipeFat: Double? = 0.0
+        set(value) {
+            field = value
+            (customRecipeFat as MutableLiveData).postValue(value)
+        }
+    val customRecipeFat: MutableLiveData<Double> = MutableLiveData()
+
+    private var _customRecipeCarbohydrate: Double? = 0.0
+        set(value) {
+            field = value
+            (customRecipeCarbohydrate as MutableLiveData).postValue(value)
+        }
+    val customRecipeCarbohydrate: MutableLiveData<Double> = MutableLiveData()
+
     private var _isLoading = true
         set(value) {
             field = value
@@ -60,6 +95,7 @@ class RecipeCreateViewModel(
 
             _isLoading = false
             allIngredientsList?.let { _allIngredientsList = it }
+            calculateNutrition()
         }
     }
 
@@ -67,10 +103,18 @@ class RecipeCreateViewModel(
         navigator.onIngredientAddClick()
     }
 
+    fun calculateNutrition(){
+        _customRecipeCalories = _thisIngredientsList!!.sumByDouble { it.calories!! }
+        _customRecipeProtein = _thisIngredientsList!!.sumByDouble { it.protein!! }
+        _customRecipeFat = _thisIngredientsList!!.sumByDouble { it.fat!! }
+        _customRecipeCarbohydrate = _thisIngredientsList!!.sumByDouble { it.carbohydrates!! }
+    }
+
     fun chooseIngredient(id: Int){
         viewModelScope.launch {
             _thisIngredientsList?.add(repository.getIngredientById(id))
             _thisIngredientsList = _thisIngredientsList
+            calculateNutrition()
             navigator.onIngredientChooseClick()
         }
     }
@@ -78,7 +122,7 @@ class RecipeCreateViewModel(
     fun removeIngredient(position: Int){
         _thisIngredientsList?.remove(_thisIngredientsList!![position])
         _thisIngredientsList = _thisIngredientsList
-
+        calculateNutrition()
     }
 
 }
