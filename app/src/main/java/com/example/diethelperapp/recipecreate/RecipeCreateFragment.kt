@@ -60,6 +60,12 @@ class RecipeCreateFragment:  Fragment(), RecipeCreateClickNavigator {
 
         }
         viewModel.thisIngredientsList.observe(viewLifecycleOwner, ingredientObserver)
+
+        dataBinding.buttonAddIngredient.setOnClickListener{
+            val action = RecipeCreateFragmentDirections
+                .actionRecipeCreateFragmentToIngredientListFragment()
+            this.findNavController().navigate(action)
+        }
     }
 
     override fun onIngredientAddClick() {
