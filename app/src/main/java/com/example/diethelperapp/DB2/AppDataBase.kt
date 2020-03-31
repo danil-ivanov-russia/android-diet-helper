@@ -15,7 +15,7 @@ import com.example.diethelperapp.db2.typeConverter.Converters
         DietDAO.Calendar::class,
         DietDAO.CrossRefCalendarOwnDishes::class,
         DietDAO.User::class],
-    version = 27
+    version = 28
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {

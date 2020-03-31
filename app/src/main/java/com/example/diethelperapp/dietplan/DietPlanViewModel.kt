@@ -8,10 +8,10 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 class DietPlanViewModel(
-    private val dietId: Int,
-    private val repository: DietPlanRepository,
-    var navigator: DietPlanButtonClickNavigator,
-    val ctx: Context?
+        private val dietId: Int,
+        private val repository: DietPlanRepository,
+        var navigator: DietPlanButtonClickNavigator,
+        private val ctx: Context?
 ): ViewModel() {
     private var _dietPlan: List<DietPlanRepository.DietPlanDay>? = null
         set(value) {

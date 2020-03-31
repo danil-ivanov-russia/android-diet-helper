@@ -55,13 +55,16 @@ abstract class DietDAO {
     abstract suspend fun getMarkDietByDay(day: String): String
 
     @Query("SELECT currentDiet From User ")
-    abstract suspend fun getCurrentDiet(): String
+    abstract suspend fun getCurrentDiet(): Int
 
     @Query("SELECT * From Ingredients ")
     abstract suspend fun getAllIngredient(): List<Ingredients>
 
     @Query("SELECT * FROM Ingredients Where ingredientsId = :idIngredient")
     abstract suspend fun getCertainIngredientById(idIngredient: Int): Ingredients
+
+    @Query("DELETE FROM Calendar ")
+    abstract suspend fun deleteCalendar()
 
 
 
@@ -180,7 +183,7 @@ abstract class DietDAO {
     @Entity()
     class User(
         @PrimaryKey
-        override val currentDiet: String
+        override val currentDiet: Int
     ): UserModel
 
 

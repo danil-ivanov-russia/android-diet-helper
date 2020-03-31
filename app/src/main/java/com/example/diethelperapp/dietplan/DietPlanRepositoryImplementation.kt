@@ -9,6 +9,8 @@ import com.example.diethelperapp.recipe.RecipeRepository
 class DietPlanRepositoryImplementation(private val dao: DietDAO) : DietPlanRepository {
     override suspend fun loadDietPlan(): List<DietPlanRepository.DietPlanDay> {
         val listDietPlanDay = mutableListOf<DietPlanRepository.DietPlanDay>()
+//        val tmpObj1 = dao.getCalendar()
+//        dao.deleteCalendar()
         val tmpObj = dao.getCalendar()
         for(i in tmpObj)
         {
@@ -62,14 +64,24 @@ class DietPlanRepositoryImplementation(private val dao: DietDAO) : DietPlanRepos
 
     override suspend fun fillCalendar(dietId: Int, ctx: Context) {
 
+       // val i =  dao.getCurrentDiet()
+//        if(!checkCurrentDiet(dietId, dao.getCurrentDiet()))
+//        {
+//            return
+//        }
+        dao.deleteCalendar()
+        val tmpObj1 = dao.getCalendar()
+        dao.insertUserCurrentDiet(DietDAO.User(dietId))
         val dietName = dao.getNameCertainDiet(dietId)
         var jsonUtil = JsonUtil(ctx, dietName)
         jsonUtil.setCalendar()
         dao.insertCalendar(jsonUtil.listCalendar)
+        val tmpObj = dao.getCalendar()
     }
 }
 
 fun changeDishesMark(tmpObj: DietDAO.Dishes, mark: String): DietDAO.Dishes {
+
 
     val a = tmpObj.mark.indexOf(mark)
     val b = tmpObj.mark[0]
@@ -78,3 +90,5 @@ fun changeDishesMark(tmpObj: DietDAO.Dishes, mark: String): DietDAO.Dishes {
 }
 fun getListIngredient(): List<RecipeRepository.Ingredient> =
    listOf(RecipeRepository.Ingredient("test",12.2,"test"))
+
+fun checkCurrentDiet(dietId: Int, currentDietId: Int): Boolean = dietId != currentDietId
