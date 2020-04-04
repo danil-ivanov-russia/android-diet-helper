@@ -76,7 +76,7 @@ abstract class DietDAO {
     abstract suspend fun getCalendar(): List<CalendarWithDishes>
 
     @Transaction
-    @Query("SELECT * FROM Calendar")
+    @Query("SELECT * FROM ListIngredients")
     abstract suspend fun getListIngredients(): List<OneToOneListToIngredient>
 
 

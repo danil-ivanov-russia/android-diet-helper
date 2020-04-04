@@ -110,9 +110,9 @@ class RecipeCreateViewModel(
         _customRecipeCarbohydrate = _thisIngredientsList!!.sumByDouble { it.carbohydrates!! }
     }
 
-    fun chooseIngredient(id: Int){
+    fun chooseIngredient(id: String){
         viewModelScope.launch {
-            _thisIngredientsList?.add(repository.getIngredientById(id))
+            _thisIngredientsList?.add(repository.getIngredientByName(id))
             _thisIngredientsList = _thisIngredientsList
             calculateNutrition()
             navigator.onIngredientChooseClick()

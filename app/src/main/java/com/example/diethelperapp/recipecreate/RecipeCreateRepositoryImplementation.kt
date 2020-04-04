@@ -11,7 +11,7 @@ class RecipeCreateRepositoryImplementation(private val dao: DietDAO) : RecipeCre
         return dao.getAllIngredient()
     }
 
-    override suspend fun getIngredientById(id: Int): DietDAO.Ingredients {
-        return dao.getCertainIngredientById(id)
+    override suspend fun getIngredientByName(name: String): DietDAO.Ingredients {
+        return dao.getCertainIngredientById(name)
     }
 }

@@ -12,12 +12,14 @@ class DietPlanRepositoryImplementation(private val dao: DietDAO) : DietPlanRepos
 //        val tmpObj1 = dao.getCalendar()
 //        dao.deleteCalendar()
         val tmpObj = dao.getCalendar()
+
         for(i in tmpObj)
         {
             val currentBreakfastList = mutableListOf<RecipeRepository.Recipe>()
             val currentLunchList = mutableListOf<RecipeRepository.Recipe>()
             val currentDinnerList = mutableListOf<RecipeRepository.Recipe>()
             val currentOtherList = mutableListOf<RecipeRepository.Recipe>()
+
            for (j in i.Dishes)
            {
                when(j.mark[0])

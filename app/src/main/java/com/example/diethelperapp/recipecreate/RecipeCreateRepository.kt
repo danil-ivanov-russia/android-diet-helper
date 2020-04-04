@@ -8,5 +8,5 @@ interface RecipeCreateRepository {
 
     suspend fun loadIngredients(): List<DietDAO.Ingredients>
 
-    suspend fun getIngredientById(id: Int): DietDAO.Ingredients
+    suspend fun getIngredientByName(name: String): DietDAO.Ingredients
 }

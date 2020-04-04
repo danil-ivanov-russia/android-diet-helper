@@ -25,7 +25,6 @@ class RecipeCreateIngredientsAdapter(var ingredientsList: List<DietDAO.Ingredien
 
     override fun onBindViewHolder(holder: RecipeCreateIngredientListViewHolder, position: Int) {
         holder.ingredientBinding.viewModel = viewModel
-        holder.ingredientBinding.ingredientId = ingredientsList[position].ingredientsId
         holder.ingredientBinding.ingredientName = ingredientsList[position].ingredientsName
         holder.ingredientBinding.ingredientListPosition = position
     }

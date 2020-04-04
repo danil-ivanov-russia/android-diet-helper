@@ -1,7 +1,6 @@
 package com.example.diethelperapp.db2.models
 
 interface IngredientsModel {
-    var ingredientsId: Int
     var ingredientsName: String?  
     var protein: Double?  
     var fat: Double?  

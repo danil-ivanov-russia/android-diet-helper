@@ -27,7 +27,6 @@ class IngredientListAdapter(var ingredientsList: List<DietDAO.Ingredients>, var 
 
     override fun onBindViewHolder(holder: IngredientListAdapter.IngredientListViewHolder, position: Int) {
         holder.ingredientBinding.viewModel = viewModel
-        holder.ingredientBinding.ingredientId = ingredientsList[position].ingredientsId
         holder.ingredientBinding.ingredientName = ingredientsList[position].ingredientsName
     }
 

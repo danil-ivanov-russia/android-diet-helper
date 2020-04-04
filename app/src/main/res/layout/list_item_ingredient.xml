@@ -15,14 +15,11 @@
             name="ingredientName"
             type="String" />
 
-        <variable
-            name="ingredientId"
-            type="Integer" />
     </data>
 
 
     <LinearLayout
-        android:onClick="@{()-> viewModel.chooseIngredient(ingredientId)}"
+        android:onClick="@{()-> viewModel.chooseIngredient(ingredientName)}"
         android:clickable="true"
         android:focusable="true"
         android:layout_width="match_parent"
