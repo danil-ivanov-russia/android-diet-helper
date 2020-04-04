@@ -1,17 +1,24 @@
 {
-  "ownDishesId": [
-    3,
-    3,
-    3
-  ],
-  "linkIngredientsId": [
-    0,
-    1,
-    2
-  ],
-  "ingredientsCount": [
-    2,
-    1,
-    1
+  "arrayDishesWithIngredients": [
+    {
+      "ingredientId": "Помидор",
+      "ingredientsCount": 2,
+      "dishesId": 2
+    },
+    {
+      "ingredientId": "Лук",
+      "ingredientsCount": 1,
+      "dishesId": 2
+    },
+    {
+      "ingredientId": "Огурец",
+      "ingredientsCount": 3,
+      "dishesId": 2
+    },
+    {
+      "ingredientId": "Масло",
+      "ingredientsCount": 1,
+      "dishesId": 2
+    }
   ]
 }

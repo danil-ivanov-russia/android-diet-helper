@@ -1,8 +1,8 @@
 package com.example.diethelperapp.db2.models
 
 interface ListIngredientsModel {
+    var ingredientId: String
     var dishesId: Int
-    var ingredientsId: Int
-   // var ingredientsCount: Int?
+    var ingredientsCount: Int?
 
 }

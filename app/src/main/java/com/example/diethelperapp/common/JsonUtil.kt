@@ -30,7 +30,7 @@ class JsonUtil(_ctx: Context) {
         setListDiets()
         setListDishes()
         setListCrossRefCalendarToDishes()
-      //  setCalendar()
+        setCalendar()
         setIngredients()
         setCrossRefListIngredient()
     }
@@ -115,7 +115,7 @@ class JsonUtil(_ctx: Context) {
         }
     }
 
-     fun setCalendar() {
+    fun setCalendar() {
         val obj: DCCalendar =
             Gson().fromJson(getJsonString(chooseCalendarJSON(nameDiet)), DCCalendar::class.java)
         var i = 0;
@@ -135,39 +135,30 @@ class JsonUtil(_ctx: Context) {
     private fun setIngredients() {
         val obj: DCIngredients =
             Gson().fromJson(getJsonString("Ingredients.json"), DCIngredients::class.java)
-        var i = 0;
-        while (i < obj.ingredientsId.size) {
+        for (i in obj.array) {
             listIngredients?.add(
                 DietDAO.Ingredients(
-                    obj.ingredientsId[i],
-                    obj.ingredientsName[i],
-                    obj.protein[i],
-                    obj.fat[i],
-                    obj.carbohydrates[i],
-                    obj.calories[i]
+                    i.ingredientsName,
+                    i.protein,
+                    i.fat,
+                    i.carbohydrates,
+                    i.calories
+
                 )
             )
-            i++
         }
     }
 
-   private fun setCrossRefListIngredient() {
+    private fun setCrossRefListIngredient() {
         val obj: DCListIngredients =
             Gson().fromJson(
                 getJsonString("ListIngredients.json"),
                 DCListIngredients::class.java
             )
-        var i = 0;
-        while (i < obj.ownDishesId.size) {
+        for (j in obj.array) {
             listCrossRefIngredients?.add(
-                DietDAO.ListIngredients(
-                    obj.ownDishesId[i],
-                    obj.linkIngredientsId[i]
-                    // obj.ingredientsCount[i]
-
-                )
+                DietDAO.ListIngredients(j.ingredientId, j.ingredientsCount, j.dishesId)
             )
-            i++
         }
     }
 

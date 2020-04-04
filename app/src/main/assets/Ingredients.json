@@ -1,34 +1,32 @@
 {
-  "ingredientsId": [
-    0,
-    1,
-    2
-  ],
-   "ingredientsName": [
-    "Помидор",
-    "Огурец",
-    "Лук"
-  ],
-   "protein": [
-    12.2,
-    13.1,
-    23.1
-  ],
-   "fat": [
-     12.2,
-    13.1,
-    23.1
-  ],
-   "carbohydrates": [
-     12.2,
-    13.1,
-    23.1
-  ],
-    "calories": [
-    12.2,
-    13.1,
-    23.1
+  "arrayIngredients": [
+    {
+      "ingredientsName": "Помидор",
+      "protein": 12.2,
+      "fat": 12.2,
+      "carbohydrates": 12.2,
+      "calories": 12.2
+    },
+    {
+      "ingredientsName": "Лук",
+      "protein": 12.2,
+      "fat": 12.2,
+      "carbohydrates": 12.2,
+      "calories": 12.2
+    },
+    {
+      "ingredientsName": "Огурец",
+      "protein": 12.2,
+      "fat": 12.2,
+      "carbohydrates": 12.2,
+      "calories": 12.2
+    },
+    {
+      "ingredientsName": "Масло",
+      "protein": 12.2,
+      "fat": 12.2,
+      "carbohydrates": 12.2,
+      "calories": 12.2
+    }
   ]
-  
-  
 }
