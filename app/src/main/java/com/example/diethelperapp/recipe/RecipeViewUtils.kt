@@ -1,10 +1,11 @@
 package com.example.diethelperapp.recipe
 
+import com.example.diethelperapp.db2.DietDAO
 import java.text.DecimalFormat
 
 object RecipeViewUtils {
     @JvmStatic
-    fun listOfIngredientsToString(list: List<RecipeRepository.Ingredient>?): String? {
+    fun listOfIngredientsToString(list: List<DietDAO.Ingredients>?): String? {
         list ?: return null
         var resultString = ingredientToString(list.first())
         list.drop(1).forEach(){
@@ -15,8 +16,8 @@ object RecipeViewUtils {
         return resultString
     }
 
-    fun ingredientToString(ingredient: RecipeRepository.Ingredient): String{
-        return ingredient.name+", "+amountToString(ingredient.amount)+" "+ingredient.amountUnits
+    fun ingredientToString(ingredient: DietDAO.Ingredients): String{
+        return ingredient.ingredientsName
 
     }
 

@@ -1,6 +1,7 @@
 package com.example.diethelperapp.dietplan
 
 import android.content.Context
+import com.example.diethelperapp.db2.models.DishesModel
 import com.example.diethelperapp.recipe.RecipeRepository
 
 interface DietPlanRepository {
@@ -13,10 +14,10 @@ interface DietPlanRepository {
 
 
     class DietPlanDay(
-        val breakfastList: MutableList<RecipeRepository.Recipe>,
-        val lunchList: MutableList<RecipeRepository.Recipe>,
-        val dinnerList: MutableList<RecipeRepository.Recipe>,
-        val otherList: MutableList<RecipeRepository.Recipe>
+        val breakfastList: MutableList<DishesModel>,
+        val lunchList: MutableList<DishesModel>,
+        val dinnerList: MutableList<DishesModel>,
+        val otherList: MutableList<DishesModel>
     )
 }
 

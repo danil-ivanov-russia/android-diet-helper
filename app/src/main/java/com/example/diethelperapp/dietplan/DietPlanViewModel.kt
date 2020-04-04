@@ -85,10 +85,10 @@ class DietPlanViewModel(
                 _dietPlan?.get(day)?.lunchList!!.sumByDouble { it.fat } +
                 _dietPlan?.get(day)?.dinnerList!!.sumByDouble { it.fat } +
                 _dietPlan?.get(day)?.otherList!!.sumByDouble { it.fat }
-        val carbohydrate: Double = _dietPlan?.get(day)?.breakfastList!!.sumByDouble { it.carbohydrate } +
-                _dietPlan?.get(day)?.lunchList!!.sumByDouble { it.carbohydrate } +
-                _dietPlan?.get(day)?.dinnerList!!.sumByDouble { it.carbohydrate } +
-                _dietPlan?.get(day)?.otherList!!.sumByDouble { it.carbohydrate }
+        val carbohydrate: Double = _dietPlan?.get(day)?.breakfastList!!.sumByDouble { it.carbohydrates } +
+                _dietPlan?.get(day)?.lunchList!!.sumByDouble { it.carbohydrates } +
+                _dietPlan?.get(day)?.dinnerList!!.sumByDouble { it.carbohydrates } +
+                _dietPlan?.get(day)?.otherList!!.sumByDouble { it.carbohydrates }
         return Nutrition(calories, protein, fat, carbohydrate)
     }
 

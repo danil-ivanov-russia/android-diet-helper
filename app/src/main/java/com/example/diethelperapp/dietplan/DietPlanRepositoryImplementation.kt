@@ -3,6 +3,7 @@ package com.example.diethelperapp.dietplan
 import android.content.Context
 import com.example.diethelperapp.common.JsonUtil
 import com.example.diethelperapp.db2.DietDAO
+import com.example.diethelperapp.db2.models.DishesModel
 import com.example.diethelperapp.db2.models.ListIngredientsModel
 import com.example.diethelperapp.recipe.RecipeRepository
 
@@ -15,30 +16,27 @@ class DietPlanRepositoryImplementation(private val dao: DietDAO) : DietPlanRepos
 
         for(i in tmpObj)
         {
-            val currentBreakfastList = mutableListOf<RecipeRepository.Recipe>()
-            val currentLunchList = mutableListOf<RecipeRepository.Recipe>()
-            val currentDinnerList = mutableListOf<RecipeRepository.Recipe>()
-            val currentOtherList = mutableListOf<RecipeRepository.Recipe>()
+            val currentBreakfastList = mutableListOf<DishesModel>()
+            val currentLunchList = mutableListOf<DishesModel>()
+            val currentDinnerList = mutableListOf<DishesModel>()
+            val currentOtherList = mutableListOf<DishesModel>()
 
            for (j in i.Dishes)
            {
                when(j.mark[0])
                {
                    "Завтрак" -> currentBreakfastList.add(
-                       RecipeRepository.Recipe(j.dishesName,getListIngredient(),j.calories,j.protein,j.fat,j.carbohydrates)
+                       DietDAO.Dishes(j.dishesId,j.dishesName,j.calories,j.protein,j.fat,j.carbohydrates)
 
                    )
                    "Обед" -> currentLunchList.add(
-                       RecipeRepository.Recipe(j.dishesName,getListIngredient(),j.calories,j.protein,j.fat,j.carbohydrates)
-
+                       DietDAO.Dishes(j.dishesId,j.dishesName,j.calories,j.protein,j.fat,j.carbohydrates)
                    )
                    "Ужин" -> currentDinnerList.add(
-                       RecipeRepository.Recipe(j.dishesName,getListIngredient(),j.calories,j.protein,j.fat,j.carbohydrates)
-
+                       DietDAO.Dishes(j.dishesId,j.dishesName,j.calories,j.protein,j.fat,j.carbohydrates)
                    )
                    "Перекус" -> currentOtherList.add(
-                       RecipeRepository.Recipe(j.dishesName,getListIngredient(),j.calories,j.protein,j.fat,j.carbohydrates)
-
+                       DietDAO.Dishes(j.dishesId,j.dishesName,j.calories,j.protein,j.fat,j.carbohydrates)
                    )
                }
            }
@@ -90,7 +88,6 @@ fun changeDishesMark(tmpObj: DietDAO.Dishes, mark: String): DietDAO.Dishes {
     tmpObj.mark[a] = b.also { tmpObj.mark[0] = mark }
     return tmpObj
 }
-fun getListIngredient(): List<RecipeRepository.Ingredient> =
-   listOf(RecipeRepository.Ingredient("test",12.2,"test"))
+
 
 fun checkCurrentDiet(dietId: Int, currentDietId: Int): Boolean = dietId != currentDietId

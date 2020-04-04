@@ -28,10 +28,10 @@ class DietPlanDayAdapter(var daysList: List<DietPlanRepository.DietPlanDay>, var
     override fun onBindViewHolder(holder: DayViewHolder, position: Int) {
         holder.dayBinding.viewModel = viewModel
         when(timeOfDay){
-            0 -> holder.dayBinding.recipeName = daysList[day].breakfastList[position].recipeId
-            1 -> holder.dayBinding.recipeName = daysList[day].lunchList[position].recipeId
-            2 -> holder.dayBinding.recipeName = daysList[day].dinnerList[position].recipeId
-            3 -> holder.dayBinding.recipeName = daysList[day].otherList[position].recipeId
+            0 -> holder.dayBinding.recipeName = daysList[day].breakfastList[position].dishesName
+            1 -> holder.dayBinding.recipeName = daysList[day].lunchList[position].dishesName
+            2 -> holder.dayBinding.recipeName = daysList[day].dinnerList[position].dishesName
+            3 -> holder.dayBinding.recipeName = daysList[day].otherList[position].dishesName
         }
 
     }

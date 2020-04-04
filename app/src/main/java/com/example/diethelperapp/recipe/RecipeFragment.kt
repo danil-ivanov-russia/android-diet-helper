@@ -15,7 +15,7 @@ class RecipeFragment : Fragment() {
     private val viewModel: RecipeViewModel by viewModels {
         object: ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-                RecipeViewModel("Яичница с беконом", RecipeRepositoryMocked()) as T
+                RecipeViewModel(1, RecipeRepositoryMocked()) as T
         }
     }
 

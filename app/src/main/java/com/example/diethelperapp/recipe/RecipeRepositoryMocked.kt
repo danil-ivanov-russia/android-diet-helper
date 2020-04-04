@@ -1,23 +1,12 @@
 package com.example.diethelperapp.recipe
 
+import com.example.diethelperapp.db2.DietDAO
+import com.example.diethelperapp.db2.models.DishesModel
+
 class RecipeRepositoryMocked: RecipeRepository {
-    override suspend fun loadRecipe(recipeId: String): RecipeRepository.Recipe {
-        return RecipeRepository.Recipe(
-            recipeId = recipeId,
-            ingredients = listOf(
-                RecipeRepository.Ingredient(
-                    "Яйцо",
-                    2.0,
-                    "штуки"),
-                RecipeRepository.Ingredient(
-                    "Бекон",
-                    100.0,
-                    "г")
-            ),
-            calories = 438.0,
-            protein = 26.7,
-            fat = 35.6,
-            carbohydrate = 0.8
+    override suspend fun loadRecipe(recipeId: Int): DishesModel {
+        return DietDAO.Dishes(
+
         )
     }
 }
