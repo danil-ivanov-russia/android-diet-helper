@@ -10,7 +10,7 @@ package com.example.diethelperapp.common.jsonClasses
 //    val ingredientsCount: Array<Int?>
 //)
 data class DCListIngredients(
-    val array: Array<tmp>
+    val arrayDishesWithIngredients: Array<tmp>
 )
 data class tmp(
     val ingredientId : String,

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.diethelperapp.common.JsonUtil
+import com.example.diethelperapp.db2.relationDataClasses.OneToOneListToIngredient
 import kotlinx.coroutines.launch
 
 class WorkWithDB : ViewModel() {// Первоначальное заполнение БД.
@@ -40,7 +41,7 @@ init {
                 DB_work?.insertCalendar(tmp.listCalendar)
                 DB_work?.insertCrossRefCalendarWithDishes(tmp.listCrossRefCalendarOwnDishes)
                 DB_work?.insertIngredients(tmp.listIngredients)
-                DB_work?.insertCrossRefIngredients(tmp.listCrossRefIngredients)
+                DB_work?.insertListIngredients(tmp.listCrossRefIngredients)
 
             } catch (t: Throwable) {
                 print(t.message)
@@ -52,14 +53,15 @@ init {
        // var testLi: List<DietDAO.Ingredients>?
         var testC: List<DietDAO.CrossRefCalendarOwnDishes>?
        // var tmpTest: List<DietDAO.Ingredients>
-        var tmpI: DietDAO.Ingredients
+        var tmpI: List<OneToOneListToIngredient>?
+
 
         viewModelScope.launch {
             try {
               //  testLi = DB_work?.getListIngredients()
                 testC = DB_work?.getCrossRefCalendarWithDishes()
              //   tmpTest = DB_work?.getAllIngredient()!!
-                tmpI = DB_work?.getCertainIngredientById("Помидор")!!
+                tmpI = DB_work?.getIngredientsByDishesId(2)
 
 
             } catch (t: Throwable) {

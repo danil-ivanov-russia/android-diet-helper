@@ -135,7 +135,7 @@ class JsonUtil(_ctx: Context) {
     private fun setIngredients() {
         val obj: DCIngredients =
             Gson().fromJson(getJsonString("Ingredients.json"), DCIngredients::class.java)
-        for (i in obj.array) {
+        for (i in obj.arrayIngredients) {
             listIngredients?.add(
                 DietDAO.Ingredients(
                     i.ingredientsName,
@@ -155,7 +155,7 @@ class JsonUtil(_ctx: Context) {
                 getJsonString("ListIngredients.json"),
                 DCListIngredients::class.java
             )
-        for (j in obj.array) {
+        for (j in obj.arrayDishesWithIngredients) {
             listCrossRefIngredients?.add(
                 DietDAO.ListIngredients(j.ingredientId, j.ingredientsCount, j.dishesId)
             )

@@ -2,7 +2,7 @@ package com.example.diethelperapp.common.jsonClasses
 
 data class DCIngredients(
 
-    val array: Array<tmpIngredient>
+    val arrayIngredients: Array<tmpIngredient>
 )
 
 data class tmpIngredient(

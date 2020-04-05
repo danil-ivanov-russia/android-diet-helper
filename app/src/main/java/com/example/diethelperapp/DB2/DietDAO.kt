@@ -68,7 +68,7 @@ abstract class DietDAO {
 
     @Transaction
     @Query("SELECT * FROM Diet Where dietId = :id")
-    abstract suspend fun getDishesByCertainDiet(id: Int): List<DietWithDishes>
+    abstract suspend fun getDishesByCertainDiet(id: Int): List<DietWithDishes?>
 
 
     @Transaction
@@ -76,8 +76,8 @@ abstract class DietDAO {
     abstract suspend fun getCalendar(): List<CalendarWithDishes>
 
     @Transaction
-    @Query("SELECT * FROM ListIngredients")
-    abstract suspend fun getListIngredients(): List<OneToOneListToIngredient>
+    @Query("SELECT * FROM ListIngredients Where dishesId = :dishesId")
+    abstract suspend fun getIngredientsByDishesId(dishesId: Int): List<OneToOneListToIngredient>
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -102,7 +102,9 @@ abstract class DietDAO {
     abstract suspend fun insertIngredients(link: MutableCollection<Ingredients>?)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insertCrossRefIngredients(link: MutableCollection<ListIngredients>?)
+    abstract suspend fun insertListIngredients(link: MutableCollection<ListIngredients>?)
+
+
 
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
