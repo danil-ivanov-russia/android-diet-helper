@@ -3,6 +3,7 @@ package com.example.diethelperapp.dietplan
 import android.content.Context
 import com.example.diethelperapp.common.JsonUtil
 import com.example.diethelperapp.db2.DietDAO
+import com.example.diethelperapp.db2.WorkWithDB
 import com.example.diethelperapp.db2.models.DishesModel
 import com.example.diethelperapp.db2.models.ListIngredientsModel
 import com.example.diethelperapp.recipe.RecipeRepository
@@ -45,22 +46,22 @@ class DietPlanRepositoryImplementation(private val dao: DietDAO) : DietPlanRepos
         return listDietPlanDay
     }
 
-    override suspend fun addDishes(
-        dishesName: String,
-        day: String,
-        mark: String
-    ) {
-        dao.insertCrossRefCalendarWithDishes(
-            DietDAO.CrossRefCalendarOwnDishes(
-                dao.getMarkDietByDay(
-                    day
-                ), dao.getDishesIdByName(dishesName)
-            )
-        )
-        val tmpObjDishes = changeDishesMark(dao.getDishes(dishesName), mark)
-        dao.updateDishes(tmpObjDishes)
-
-    }
+//    override suspend fun addDishes(
+//        dishesName: String,
+//        day: String,
+//        mark: String
+//    ) {
+//        dao.insertCrossRefCalendarWithDishes(
+//            DietDAO.CrossRefCalendarOwnDishes(
+//                dao.getmarkDayByDay(
+//                    day
+//                ), dao.getDishesIdByName(dishesName)
+//            )
+//        )
+//        val tmpObjDishes = changeDishesMark(dao.getDishes(dishesName), mark)
+//        dao.updateDishes(tmpObjDishes)
+//
+//    }
 
     override suspend fun fillCalendar(dietId: Int, ctx: Context) {
 
@@ -74,8 +75,9 @@ class DietPlanRepositoryImplementation(private val dao: DietDAO) : DietPlanRepos
         dao.insertUserCurrentDiet(DietDAO.User(dietId))
         val dietName = dao.getNameCertainDiet(dietId)
         var jsonUtil = JsonUtil(ctx, dietName)
-        jsonUtil.setCalendar()
+        jsonUtil.setCalendarAndCrossRefCalendarWithDishes()
         dao.insertCalendar(jsonUtil.listCalendar)
+        dao.insertCrossRefCalendarWithDishes(jsonUtil.listCrossRefCalendarOwnDishes)
         val tmpObj = dao.getCalendar()
     }
 }

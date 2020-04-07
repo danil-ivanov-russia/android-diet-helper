@@ -700,9 +700,9 @@ class DietPlanRepositoryMocked(): DietPlanRepository {
 return null
     }
 
-    override suspend fun addDishes(dishesName: String, day: String, mark: String) {
-        TODO("Not yet implemented")
-    }
+//    override suspend fun addDishes(dishesName: String, day: String, mark: String) {
+//        TODO("Not yet implemented")
+//    }
 
     override suspend fun fillCalendar(dietId: Int, ctx: Context) {
         TODO("Not yet implemented")

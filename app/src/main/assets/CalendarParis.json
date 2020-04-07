@@ -1,19 +1,37 @@
-{"dayOfWeek": [
-  "Понедельник",
-  "Вторник",
-  "Среда",
-  "Четверг",
-  "Пятница",
-  "Суббота",
-  "Воскресенье"
-],
-  "markDiet":[
-    "Paris1",
-    "Paris2",
-    "Paris3",
-    "Paris4",
-    "Paris5",
-    "Paris6",
-    "Paris7"
-    ]
+{
+  "arrayCalendar": [
+    {
+      "markDay": "Paris1",
+      "arrayDishes": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "markDay": "Paris2",
+      "arrayDishes": []
+    },
+    {
+      "markDay": "Paris3",
+      "arrayDishes": []
+    },
+    {
+      "markDay": "Paris4",
+      "arrayDishes": []
+    },
+    {
+      "markDay": "Paris5",
+      "arrayDishes": []
+    },
+    {
+      "markDay": "Paris6",
+      "arrayDishes": []
+    },
+    {
+      "markDay": "Paris7",
+      "arrayDishes": []
+    }
+  ]
 }

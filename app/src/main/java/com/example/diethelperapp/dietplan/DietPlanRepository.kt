@@ -8,7 +8,7 @@ interface DietPlanRepository {
 
     suspend fun loadDietPlan(): List<DietPlanDay>?
 
-    suspend fun addDishes(dishesName: String, day: String, mark: String)
+   // suspend fun addDishes(dishesName: String, day: String, mark: String)
 
     suspend fun fillCalendar(dietId: Int, ctx: Context)
 

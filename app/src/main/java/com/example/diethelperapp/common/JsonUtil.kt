@@ -8,11 +8,11 @@ import com.google.gson.Gson
 
 class JsonUtil(_ctx: Context) {
     var listCrossRefDietOwnDishes: MutableCollection<DietDAO.CrossRefDietOwnDishes>? =
-        mutableListOf()
+            mutableListOf()
     var listDiets: MutableCollection<DietDAO.Diet>? = mutableListOf()
     var listDishes: MutableCollection<DietDAO.Dishes>? = mutableListOf()
     var listCrossRefCalendarOwnDishes: MutableCollection<DietDAO.CrossRefCalendarOwnDishes>? =
-        mutableListOf()
+            mutableListOf()
     var listCalendar: MutableCollection<DietDAO.Calendar>? = mutableListOf()
     var listIngredients: MutableCollection<DietDAO.Ingredients>? = mutableListOf()
     var listCrossRefIngredients: MutableCollection<DietDAO.ListIngredients>? = mutableListOf()
@@ -26,138 +26,111 @@ class JsonUtil(_ctx: Context) {
 
 
     init {
-        setListCrossRefDietOwnDishes()
-        setListDiets()
+        setListDietsAndCrossRefDietOwnDishes()
         setListDishes()
-        setListCrossRefCalendarToDishes()
-        setCalendar()
+       // setCalendarAndCrossRefCalendarWithDishes()
         setIngredients()
         setCrossRefListIngredient()
     }
 
 
     private fun getJsonString(fileString: String): String =
-        context?.assets?.open(fileString)?.bufferedReader().use {
-            it!!.readText()
-        }
+            context?.assets?.open(fileString)?.bufferedReader().use {
+                it!!.readText()
+            }
 
 
-    private fun setListCrossRefDietOwnDishes() {
-        val obj: DCLinkDietToDishes = Gson().fromJson(
-            getJsonString("CrossRefDietToDishes.json"),
-            DCLinkDietToDishes::class.java
-        )
-        var i = 0;
-        while (i < obj.dietId.size) {
-            listCrossRefDietOwnDishes?.add(
-                DietDAO.CrossRefDietOwnDishes(
-                    obj.dietId[i],
-                    obj.dishesId[i]
-                )
-            )
-            i++
-        }
-    }
-
-    private fun setListDiets() {
+    // не нравиться мне такой подход, надо бы узнать как сделать лучше
+    private fun setListDietsAndCrossRefDietOwnDishes() {
         val obj: DCDiet = Gson().fromJson(getJsonString("Diet.json"), DCDiet::class.java)
         var i = 0;
-        while (i < obj.dietId.size) {
+        for (i in obj.arrayDiet) {
             listDiets?.add(
-                DietDAO.Diet(
-                    obj.dietId[i],
-                    obj.dietName[i],
-                    obj.supportingInformation[i],
-                    obj.duration[i]
-                )
+                    DietDAO.Diet(
+                            i.dietId,
+                            i.dietName,
+                            i.supportingInformation,
+                            i.duration
+                    )
             )
-            i++
         }
+        for (i in obj.arrayDiet) {
+            for (j in i.arrayDishesBelongDiet)
+                listCrossRefDietOwnDishes?.add(
+                        DietDAO.CrossRefDietOwnDishes(
+                                i.dietId,
+                                j
+                        )
+                )
+        }
+
+
     }
 
     private fun setListDishes() {
         val obj: DCDishes =
-            Gson().fromJson(getJsonString("Dishes.json"), DCDishes::class.java)
-        var i = 0;
-        while (i < obj.dishesId.size) {
+                Gson().fromJson(getJsonString("Dishes.json"), DCDishes::class.java)
+        for (i in obj.arrayDishes) {
             listDishes?.add(
-                DietDAO.Dishes(
-                    obj.dishesId[i],
-                    obj.dishesName[i],
-                    obj.protein[i],
-                    obj.fat[i],
-                    obj.carbohydrates[i],
-                    obj.calories[i],
-                    obj.category[i],
-                    obj.mark[i],
-                    obj.description[i],
-                    obj.amount[i]
-                )
+                    DietDAO.Dishes(
+                            i.dishesId,
+                            i.dishesName,
+                            i.protein,
+                            i.fat,
+                            i.carbohydrates,
+                            i.calories,
+                            i.category,
+                            i.mark,
+                            i.description,
+                            i.amount
+                    )
             )
-            i++
         }
+
     }
 
-    private fun setListCrossRefCalendarToDishes() {
-        val obj: DCLinkCalendarToDishes = Gson().fromJson(
-            getJsonString("CrossRefCalendarToDishes.json"),
-            DCLinkCalendarToDishes::class.java
-        )
-        var i = 0;
-        while (i < obj.dishesId.size) {
-            listCrossRefCalendarOwnDishes?.add(
-                DietDAO.CrossRefCalendarOwnDishes(
-                    obj.calendarId[i],
-                    obj.dishesId[i]
-                )
-            )
-            i++
-        }
-    }
 
-    fun setCalendar() {
+
+     fun setCalendarAndCrossRefCalendarWithDishes() {
         val obj: DCCalendar =
-            Gson().fromJson(getJsonString(chooseCalendarJSON(nameDiet)), DCCalendar::class.java)
-        var i = 0;
-        while (i < obj.markDiet.size) {
-            listCalendar?.add(
-                DietDAO.Calendar(
-                    obj.markDiet[i],
-                    obj.dayOfWeek[i]
-
-
-                )
-            )
-            i++
+                Gson().fromJson(getJsonString(chooseCalendarJSON(nameDiet)), DCCalendar::class.java)
+        for (i in obj.arrayCalendar) {
+            listCalendar?.add(DietDAO.Calendar(i.markDay))
         }
+
+        for (i in obj.arrayCalendar)
+            for (j in i.arrayDishes)
+                listCrossRefCalendarOwnDishes?.add(DietDAO.CrossRefCalendarOwnDishes(i.markDay, j))
+
+
     }
 
     private fun setIngredients() {
         val obj: DCIngredients =
-            Gson().fromJson(getJsonString("Ingredients.json"), DCIngredients::class.java)
+                Gson().fromJson(getJsonString("Ingredients.json"), DCIngredients::class.java)
         for (i in obj.arrayIngredients) {
             listIngredients?.add(
-                DietDAO.Ingredients(
-                    i.ingredientsName,
-                    i.protein,
-                    i.fat,
-                    i.carbohydrates,
-                    i.calories
+                    DietDAO.Ingredients(
+                            i.ingredientsName,
+                            i.protein,
+                            i.fat,
+                            i.carbohydrates,
+                            i.calories
 
-                )
+                    )
             )
         }
     }
 
     private fun setCrossRefListIngredient() {
         val obj: DCListIngredients =
-            Gson().fromJson(
-                getJsonString("ListIngredients.json"),
-                DCListIngredients::class.java
-            )
+                Gson().fromJson(
+                        getJsonString("ListIngredients.json"),
+                        DCListIngredients::class.java
+                )
         for (j in obj.arrayDishesWithIngredients) {
             listCrossRefIngredients?.add(
-                DietDAO.ListIngredients(j.ingredientId, j.ingredientsCount, j.dishesId)
+                    DietDAO.ListIngredients(j.ingredientId, j.ingredientsCount, j.dishesId)
             )
         }
     }

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.diethelperapp.common.JsonUtil
+import com.example.diethelperapp.db2.relationDataClasses.DietWithDishes
 import com.example.diethelperapp.db2.relationDataClasses.OneToOneListToIngredient
 import kotlinx.coroutines.launch
 
@@ -39,7 +40,6 @@ init {
                 DB_work?.insertCrossRefDietWithDishes(tmp.listCrossRefDietOwnDishes)
                 DB_work?.insertDishes(tmp.listDishes)
                 DB_work?.insertCalendar(tmp.listCalendar)
-                DB_work?.insertCrossRefCalendarWithDishes(tmp.listCrossRefCalendarOwnDishes)
                 DB_work?.insertIngredients(tmp.listIngredients)
                 DB_work?.insertListIngredients(tmp.listCrossRefIngredients)
 
@@ -53,15 +53,15 @@ init {
        // var testLi: List<DietDAO.Ingredients>?
         var testC: List<DietDAO.CrossRefCalendarOwnDishes>?
        // var tmpTest: List<DietDAO.Ingredients>
-        var tmpI: List<OneToOneListToIngredient>?
+        var tmpI: List<DietWithDishes>?
 
 
         viewModelScope.launch {
             try {
               //  testLi = DB_work?.getListIngredients()
-                testC = DB_work?.getCrossRefCalendarWithDishes()
+              //  testC = DB_work?.getCrossRefCalendarWithDishes()
              //   tmpTest = DB_work?.getAllIngredient()!!
-                tmpI = DB_work?.getIngredientsByDishesId(2)
+                tmpI = DB_work?.getDishesByCertainDiet(1) as List<DietWithDishes>?
 
 
             } catch (t: Throwable) {

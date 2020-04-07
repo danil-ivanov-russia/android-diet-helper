@@ -1,19 +1,37 @@
-{"dayOfWeek": [
-  "Понедельник",
-  "Вторник",
-  "Среда",
-  "Четверг",
-  "Пятница",
-  "Суббота",
-  "Воскресенье"
-],
-  "markDiet":[
-    "Protein1",
-    "Protein2",
-    "Protein3",
-    "Protein4",
-    "Protein",
-    "Protein6",
-    "Protein7"
-    ]
+{
+  "arrayCalendar": [
+    {
+      "markDay": "Protein1",
+      "arrayDishes": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "markDay": "Protein2",
+      "arrayDishes": []
+    },
+    {
+      "markDay": "Protein3",
+      "arrayDishes": []
+    },
+    {
+      "markDay": "Protein4",
+      "arrayDishes": []
+    },
+    {
+      "markDay": "Protein5",
+      "arrayDishes": []
+    },
+    {
+      "markDay": "Protein6",
+      "arrayDishes": []
+    },
+    {
+      "markDay": "Protein7",
+      "arrayDishes": []
+    }
+  ]
 }

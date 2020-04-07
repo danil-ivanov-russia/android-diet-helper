@@ -9,7 +9,7 @@ import com.example.diethelperapp.db2.DietDAO
 data class CalendarWithDishes(
     @Embedded val Calendar: DietDAO.Calendar,
     @Relation(
-        parentColumn = "markDiet",
+        parentColumn = "markDay",
         entityColumn = "dishesId",
         associateBy = Junction(DietDAO.CrossRefCalendarOwnDishes::class)
     )

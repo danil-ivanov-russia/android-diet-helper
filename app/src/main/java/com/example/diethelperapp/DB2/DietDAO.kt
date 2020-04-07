@@ -50,8 +50,6 @@ abstract class DietDAO {
     @Query("SELECT dishesId FROM Dishes Where dishesName =:name")
     abstract suspend fun getDishesIdByName(name: String): Int
 
-    @Query("SELECT markDiet FROM Calendar Where dayOfWeek =:day")
-    abstract suspend fun getMarkDietByDay(day: String): String
 
     @Query("SELECT currentDiet From User ")
     abstract suspend fun getCurrentDiet(): Int
@@ -164,17 +162,16 @@ abstract class DietDAO {
             override val dishesId: Int
     ) : CrossRefDietOwnDishesModel
 
-    @Entity(primaryKeys = ["markDiet", "dishesId"])
+    @Entity(primaryKeys = ["markDay", "dishesId"])
     class CrossRefCalendarOwnDishes(
-            override val markDiet: String,
+            override val markDay: String,
             override val dishesId: Int
     ) : CrossRefCalendarOwnDishesModel
 
     @Entity()
     class Calendar(
             @PrimaryKey
-            override var markDiet: String,
-            override val dayOfWeek: String
+            override var markDay: String
     ) : ModelCalendar
 
     @Entity()

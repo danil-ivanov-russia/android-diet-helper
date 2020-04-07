@@ -1,20 +1,37 @@
 {
-  "dayOfWeek": [
-    "Понедельник",
-    "Вторник",
-    "Среда",
-    "Четверг",
-    "Пятница",
-    "Суббота",
-    "Воскресенье"
-  ],
-  "markDiet": [
-    "Buckwheat1",
-    "Buckwheat2",
-    "Buckwheat3",
-    "Buckwheat4",
-    "Buckwheat5",
-    "Buckwheat6",
-    "Buckwheat7"
+  "arrayCalendar": [
+    {
+      "markDay": "Buckwheat1",
+      "arrayDishes": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "markDay": "Buckwheat2",
+      "arrayDishes": []
+    },
+    {
+      "markDay": "Buckwheat3",
+      "arrayDishes": []
+    },
+    {
+      "markDay": "Buckwheat4",
+      "arrayDishes": []
+    },
+    {
+      "markDay": "Buckwheat5",
+      "arrayDishes": []
+    },
+    {
+      "markDay": "Buckwheat6",
+      "arrayDishes": []
+    },
+    {
+      "markDay": "Buckwheat7",
+      "arrayDishes": []
+    }
   ]
 }
