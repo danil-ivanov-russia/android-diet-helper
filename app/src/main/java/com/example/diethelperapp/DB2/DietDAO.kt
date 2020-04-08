@@ -1,18 +1,28 @@
 package com.example.diethelperapp.db2
 
 import androidx.room.*
+import androidx.room.ForeignKey.CASCADE
+import com.example.diethelperapp.common.Constans
 import com.example.diethelperapp.common.models.*
 import com.example.diethelperapp.db2.relationDataClasses.CalendarWithDishes
 import com.example.diethelperapp.db2.relationDataClasses.DietWithDishes
 import com.example.diethelperapp.db2.relationDataClasses.OneToOneListToIngredient
+import retrofit2.http.DELETE
 
 @Dao
 abstract class DietDAO {
     @Query("SELECT * FROM Diet")
     abstract suspend fun getAllDiet(): List<Diet>
 
+
     @Query("SELECT * FROM Dishes")
     abstract suspend fun getAllDishes(): List<Dishes>
+
+    @Query("SELECT * FROM Dishes Where category = '" + Constans.BasicDishes + "' ")
+    abstract suspend fun getAllBasicDishes(): List<Dishes>
+
+    @Query("SELECT * FROM Dishes Where category = '" + Constans.CustomDishes + "'")
+    abstract suspend fun getAllCustomDishes(): List<Dishes>
 
     @Query("SELECT * FROM Dishes Where dishesName = :dishesName")
     abstract suspend fun getDishes(dishesName: String): Dishes
@@ -44,7 +54,6 @@ abstract class DietDAO {
 
     @Query("SELECT * FROM CrossRefCalendarOwnDishes")
     abstract suspend fun getCrossRefCalendarWithDishes(): List<CrossRefCalendarOwnDishes>
-
 
 
     @Query("SELECT dishesId FROM Dishes Where dishesName =:name")
@@ -103,8 +112,6 @@ abstract class DietDAO {
     abstract suspend fun insertListIngredients(link: MutableCollection<ListIngredients>?)
 
 
-
-
     @Update(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertUserCurrentDiet(user: User)
 
@@ -112,72 +119,82 @@ abstract class DietDAO {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun updateDishes(link: Dishes)
 
+    @Delete()
+    abstract suspend fun deleteDishes(dishes: Dishes)
 
     @Entity()
     class Diet(
-            @PrimaryKey
-            override var dietId: Int = 0,
-            override var dietName: String?,
-            override var supportingInformation: String?,
-            override var duration: Int
+        @PrimaryKey
+        override var dietId: Int = 0,
+        override var dietName: String?,
+        override var supportingInformation: String?,
+        override var duration: Int
     ) : DietModel
 
     @Entity()
     class Ingredients(
-            @PrimaryKey
-            var ingredientsName: String,
-            var protein: Double?,
-            var fat: Double?,
-            var carbohydrates: Double?,
-            var calories: Double?
+        @PrimaryKey
+        var ingredientsName: String,
+        var protein: Double?,
+        var fat: Double?,
+        var carbohydrates: Double?,
+        var calories: Double?
     )
 
     @Entity()
     class Dishes(
-            @PrimaryKey(autoGenerate = true)
-            override var dishesId: Int = 99,
-            override var dishesName: String = "DishesTest",
-            override var protein: Double = 10.0,
-            override var fat: Double = 10.0,
-            override var carbohydrates: Double = 10.0,
-            override var calories: Double = 10.0,
-            override var category: String = "10.0",
-            override var mark: MutableList<String> = mutableListOf("1", "2"),
-            override var description: String = "Test",
-            override var amount: Int = 1
+        @PrimaryKey(autoGenerate = true)
+        override var dishesId: Int = 99,
+        override var dishesName: String = "DishesTest",
+        override var protein: Double = 10.0,
+        override var fat: Double = 10.0,
+        override var carbohydrates: Double = 10.0,
+        override var calories: Double = 10.0,
+        override var category: String = "10.0",
+        override var mark: MutableList<String> = mutableListOf("1", "2"),
+        override var description: String = "Test",
+        override var amount: Int = 1
     ) : DishesModel
 
-    @Entity()
+    @Entity(
+        foreignKeys = [
+            ForeignKey(
+                entity = Dishes::class,
+                parentColumns = ["dishesId"],
+                childColumns = ["dishesId"],
+                onDelete = CASCADE
+            )]
+    )
     class ListIngredients(
-            @PrimaryKey()
-            override var ingredientId: String,
-            override var ingredientsCount: Int?,
-            override var dishesId: Int
+        @PrimaryKey
+        override var ingredientId: String,
+        override var ingredientsCount: Int?,
+        override var dishesId: Int
 
     ) : ListIngredientsModel
 
     @Entity(primaryKeys = ["dietId", "dishesId"])
     class CrossRefDietOwnDishes(
-            override val dietId: Int,
-            override val dishesId: Int
+        override val dietId: Int,
+        override val dishesId: Int
     ) : CrossRefDietOwnDishesModel
 
     @Entity(primaryKeys = ["markDay", "dishesId"])
     class CrossRefCalendarOwnDishes(
-            override val markDay: String,
-            override val dishesId: Int
+        override val markDay: String,
+        override val dishesId: Int
     ) : CrossRefCalendarOwnDishesModel
 
     @Entity()
     class Calendar(
-            @PrimaryKey
-            override var markDay: String
+        @PrimaryKey
+        override var markDay: String
     ) : ModelCalendar
 
     @Entity()
     class User(
-            @PrimaryKey
-            override val currentDiet: Int
+        @PrimaryKey
+        override val currentDiet: Int
     ) : UserModel
 
 

@@ -6,4 +6,6 @@ object Constans {
     const val Lunch = "Обед"
     const val Dinner = "Ужин"
     const val Snack = "Перекус"
+    const val BasicDishes = "Стандартная"
+    const val CustomDishes = "Пользовательская"
 }
