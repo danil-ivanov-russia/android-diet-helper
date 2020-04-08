@@ -1,8 +1,10 @@
-package com.example.diethelperapp.db2.models
+package com.example.diethelperapp.common.models
 
 
 
 interface DishesModel {
+
+
     var dishesId: Int
     var dishesName: String
     var protein: Double  

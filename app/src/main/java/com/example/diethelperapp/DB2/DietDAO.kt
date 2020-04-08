@@ -1,7 +1,7 @@
 package com.example.diethelperapp.db2
 
 import androidx.room.*
-import com.example.diethelperapp.db2.models.*
+import com.example.diethelperapp.common.models.*
 import com.example.diethelperapp.db2.relationDataClasses.CalendarWithDishes
 import com.example.diethelperapp.db2.relationDataClasses.DietWithDishes
 import com.example.diethelperapp.db2.relationDataClasses.OneToOneListToIngredient

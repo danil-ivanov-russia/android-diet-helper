@@ -1,4 +1,4 @@
-package com.example.diethelperapp.db2.models
+package com.example.diethelperapp.common.models
 
 interface CrossRefDietOwnDishesModel {
     val dietId  : Int

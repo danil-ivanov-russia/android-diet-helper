@@ -1,6 +1,5 @@
 package com.example.diethelperapp.dietlist
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.diethelperapp.db2.App
-import com.example.diethelperapp.db2.models.DietModel
+import com.example.diethelperapp.common.models.DietModel
 import com.example.diethelperapp.databinding.FragmentDietlistBinding
 import kotlinx.android.synthetic.main.fragment_dietlist.*
 

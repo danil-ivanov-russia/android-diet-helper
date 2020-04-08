@@ -1,8 +1,7 @@
 package com.example.diethelperapp.dietplan
 
 import android.content.Context
-import com.example.diethelperapp.db2.models.DishesModel
-import com.example.diethelperapp.recipe.RecipeRepository
+import com.example.diethelperapp.common.models.DishesModel
 
 interface DietPlanRepository {
 

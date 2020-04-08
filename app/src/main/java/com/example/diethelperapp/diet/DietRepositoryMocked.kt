@@ -1,6 +1,6 @@
 package com.example.diethelperapp.diet
 
-import com.example.diethelperapp.db2.models.DietModel
+import com.example.diethelperapp.common.models.DietModel
 
 class DietRepositoryMocked: DietRepository {
 //    override suspend fun getDiets(): List<DietRepository.Diet> {

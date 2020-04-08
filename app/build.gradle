@@ -85,8 +85,9 @@ dependencies {
 
 
 
-    // optional - Guava support for Room, including Optional and ListenableFuture
-    // implementation "androidx.room:room-guava:$room_version"
+    def version_retrofit = "2.7.1"
+    implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$version_retrofit"
 
 
 

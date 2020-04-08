@@ -3,10 +3,7 @@ package com.example.diethelperapp.dietplan
 import android.content.Context
 import com.example.diethelperapp.common.JsonUtil
 import com.example.diethelperapp.db2.DietDAO
-import com.example.diethelperapp.db2.WorkWithDB
-import com.example.diethelperapp.db2.models.DishesModel
-import com.example.diethelperapp.db2.models.ListIngredientsModel
-import com.example.diethelperapp.recipe.RecipeRepository
+import com.example.diethelperapp.common.models.DishesModel
 
 class DietPlanRepositoryImplementation(private val dao: DietDAO) : DietPlanRepository {
     override suspend fun loadDietPlan(): List<DietPlanRepository.DietPlanDay> {

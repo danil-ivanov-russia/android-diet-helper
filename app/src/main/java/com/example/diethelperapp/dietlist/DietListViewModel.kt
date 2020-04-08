@@ -1,11 +1,10 @@
 package com.example.diethelperapp.dietlist
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.diethelperapp.db2.models.DietModel
+import com.example.diethelperapp.common.models.DietModel
 import com.example.diethelperapp.diet.DietRepository
 import kotlinx.coroutines.launch
 

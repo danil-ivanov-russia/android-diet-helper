@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.diethelperapp.R
 import com.example.diethelperapp.databinding.FragmentRecipelistBinding
-import com.example.diethelperapp.db2.models.DishesModel
+import com.example.diethelperapp.common.models.DishesModel
 import kotlinx.android.synthetic.main.fragment_recipelist.*
 
 class RecipeListFragment : Fragment(), RecipeListClickNavigator {
