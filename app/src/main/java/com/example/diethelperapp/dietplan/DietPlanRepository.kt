@@ -12,6 +12,8 @@ interface DietPlanRepository {
 
     suspend fun fillCalendar(dietId: Int, ctx: Context)
 
+    suspend fun deleteDishesFromDay(dishes: DietDAO.Dishes,  dayLabel: String)
+
 
     class DietPlanDay(
         val breakfastList: MutableList<DishesModel>,

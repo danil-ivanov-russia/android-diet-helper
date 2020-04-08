@@ -55,6 +55,21 @@
       ],
       "description": "Хороший завтрак",
       "amount": 200
+    },
+    {
+      "dishesId": 5,
+      "dishesName": "Плов",
+      "protein": 12.2,
+      "fat": 12.2,
+      "carbohydrates": 12.2,
+      "calories": 12.2,
+      "category": "Стандартная",
+      "mark": [
+        "Обед"
+      ],
+      "description": "Великолепный обед",
+      "amount": 400
     }
+
   ]
 }

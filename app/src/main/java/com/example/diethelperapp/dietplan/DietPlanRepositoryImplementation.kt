@@ -114,6 +114,13 @@ class DietPlanRepositoryImplementation(private val dao: DietDAO) : DietPlanRepos
         dao.insertCrossRefCalendarWithDishes(jsonUtil.listCrossRefCalendarOwnDishes)
         val tmpObj = dao.getCalendar()
     }
+
+    override suspend fun deleteDishesFromDay(
+        dishes: DietDAO.Dishes,
+        dayLabel: String
+    ) {
+        dao.deleteDishesFromDay(DietDAO.CrossRefCalendarOwnDishes(dayLabel,dishes.dishesId))
+    }
 }
 
 fun changeDishesMark(tmpObj: DietDAO.Dishes, mark: String): DietDAO.Dishes {

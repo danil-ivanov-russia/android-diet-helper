@@ -122,6 +122,10 @@ abstract class DietDAO {
     @Delete()
     abstract suspend fun deleteDishes(dishes: Dishes)
 
+    @Delete()
+    abstract suspend fun deleteDishesFromDay(dishes: CrossRefCalendarOwnDishes)
+
+
     @Entity()
     class Diet(
         @PrimaryKey
