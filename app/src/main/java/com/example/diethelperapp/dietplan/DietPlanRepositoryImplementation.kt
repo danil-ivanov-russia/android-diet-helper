@@ -12,57 +12,94 @@ class DietPlanRepositoryImplementation(private val dao: DietDAO) : DietPlanRepos
 //        dao.deleteCalendar()
         val tmpObj = dao.getCalendar()
 
-        for(i in tmpObj)
-        {
+        for (i in tmpObj) {
             val currentBreakfastList = mutableListOf<DishesModel>()
             val currentLunchList = mutableListOf<DishesModel>()
             val currentDinnerList = mutableListOf<DishesModel>()
             val currentOtherList = mutableListOf<DishesModel>()
 
-           for (j in i.Dishes)
-           {
-               when(j.mark[0])
-               {
-                   "Завтрак" -> currentBreakfastList.add(
-                       DietDAO.Dishes(j.dishesId,j.dishesName,j.calories,j.protein,j.fat,j.carbohydrates)
+            for (j in i.Dishes) {
+                when (j.mark[0]) {
+                    "Завтрак" -> currentBreakfastList.add(
+                        DietDAO.Dishes(
+                            j.dishesId,
+                            j.dishesName,
+                            j.calories,
+                            j.protein,
+                            j.fat,
+                            j.carbohydrates
+                        )
 
-                   )
-                   "Обед" -> currentLunchList.add(
-                       DietDAO.Dishes(j.dishesId,j.dishesName,j.calories,j.protein,j.fat,j.carbohydrates)
-                   )
-                   "Ужин" -> currentDinnerList.add(
-                       DietDAO.Dishes(j.dishesId,j.dishesName,j.calories,j.protein,j.fat,j.carbohydrates)
-                   )
-                   "Перекус" -> currentOtherList.add(
-                       DietDAO.Dishes(j.dishesId,j.dishesName,j.calories,j.protein,j.fat,j.carbohydrates)
-                   )
-               }
-           }
-            listDietPlanDay.add(DietPlanRepository.DietPlanDay(currentBreakfastList, currentLunchList, currentDinnerList, currentOtherList))
+                    )
+                    "Обед" -> currentLunchList.add(
+                        DietDAO.Dishes(
+                            j.dishesId,
+                            j.dishesName,
+                            j.calories,
+                            j.protein,
+                            j.fat,
+                            j.carbohydrates
+                        )
+                    )
+                    "Ужин" -> currentDinnerList.add(
+                        DietDAO.Dishes(
+                            j.dishesId,
+                            j.dishesName,
+                            j.calories,
+                            j.protein,
+                            j.fat,
+                            j.carbohydrates
+                        )
+                    )
+                    "Перекус" -> currentOtherList.add(
+                        DietDAO.Dishes(
+                            j.dishesId,
+                            j.dishesName,
+                            j.calories,
+                            j.protein,
+                            j.fat,
+                            j.carbohydrates
+                        )
+                    )
+                }
+            }
+            listDietPlanDay.add(
+                DietPlanRepository.DietPlanDay(
+                    currentBreakfastList,
+                    currentLunchList,
+                    currentDinnerList,
+                    currentOtherList
+                )
+            )
         }
         return listDietPlanDay
     }
 
-//    override suspend fun addDishes(
-//        dishesName: String,
-//        day: String,
-//        mark: String
-//    ) {
-//        dao.insertCrossRefCalendarWithDishes(
-//            DietDAO.CrossRefCalendarOwnDishes(
-//                dao.getmarkDayByDay(
-//                    day
-//                ), dao.getDishesIdByName(dishesName)
-//            )
-//        )
-//        val tmpObjDishes = changeDishesMark(dao.getDishes(dishesName), mark)
-//        dao.updateDishes(tmpObjDishes)
-//
-//    }
+    /* Как это будет работать. На вход подается объект блюда, метка приема пищи и метка дня.
+    Сперва добавляю id блюда и метку дня в таблицу crossRefCalendarOwnDishes
+    После я проверяю, есть ли метка приема пищи у данного блюда
+    Если она есть, то на этом работа функции закончена
+    Если ее нет, то я в начало массива меток в блюде добавляю нужную метку, обновляю блюдо и только потом завершаю работу.
+
+        */
+    override suspend fun addDishes(dishes: DietDAO.Dishes, foodLabel: String, dayLabel: String) {
+
+        dao.insertCrossRefCalendarWithDishes(
+            DietDAO.CrossRefCalendarOwnDishes(
+                dayLabel,
+                dishes.dishesId
+            )
+        )
+        if(!dishes.mark.contains(foodLabel))
+        {
+            dishes.mark.add(0,foodLabel)
+        }
+        dao.updateDishes(dishes)
+    }
 
     override suspend fun fillCalendar(dietId: Int, ctx: Context) {
 
-       // val i =  dao.getCurrentDiet()
+        // val i =  dao.getCurrentDiet()
 //        if(!checkCurrentDiet(dietId, dao.getCurrentDiet()))
 //        {
 //            return

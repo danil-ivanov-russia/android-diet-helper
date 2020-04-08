@@ -18,6 +18,7 @@ class App : Application() {
         super.onCreate()
 
         instance = this
+
         database = Room.databaseBuilder(this, AppDatabase::class.java, "database")
             .fallbackToDestructiveMigration()
             .build()
@@ -25,10 +26,8 @@ class App : Application() {
         val qwe = tmpStr.split(",").toList()
 
         val tmpList = mutableListOf(1, 3)
-        val mark = 3
-        val a = tmpList.indexOf(mark)
-        val b = tmpList[0]
-        tmpList[a] = b.also { tmpList[0] = mark }
+        val mark = 4
+        tmpList.add(0,mark)
 
 
 
