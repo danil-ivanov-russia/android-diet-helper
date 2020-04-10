@@ -10,17 +10,23 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.diethelperapp.R
-import com.example.diethelperapp.databinding.FragmentRecipelistBinding
 import com.example.diethelperapp.common.models.DishesModel
+import com.example.diethelperapp.databinding.FragmentRecipelistBinding
+import com.example.diethelperapp.db2.App
 import kotlinx.android.synthetic.main.fragment_recipelist.*
 
 class RecipeListFragment : Fragment(), RecipeListClickNavigator {
+
+
+    val args: RecipeListFragmentArgs by navArgs()
+
     private val viewModel: RecipeListViewModel by viewModels {
         object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-                RecipeListViewModel(RecipeListRepositoryMocked(), this@RecipeListFragment) as T
+                RecipeListViewModel(App.repositories.recipeList(), this@RecipeListFragment) as T
         }
     }
 
@@ -43,12 +49,23 @@ class RecipeListFragment : Fragment(), RecipeListClickNavigator {
 
         recyclerViewRecipes.layoutManager = LinearLayoutManager(requireContext())
 
+        when (args.preopenedCategory){
+            2 -> {
+                dataBinding.bottomNavigationBar.selectedItemId = R.id.bottomNavigationItemUserRecipes
+                viewModel.selectUserRecipes()
+            }
+            else -> {
+                dataBinding.bottomNavigationBar.selectedItemId = R.id.bottomNavigationItemStandartRecipes
+                viewModel.selectStandartRecipes()
+            }
+        }
+
+
         val recipesNameObserver = Observer<List<DishesModel>> { it ->
             recyclerViewRecipes.adapter = RecipeListAdapter(it, viewModel)
 
         }
         viewModel.recipesNames.observe(viewLifecycleOwner, recipesNameObserver)
-
 
         dataBinding.bottomNavigationBar.setOnNavigationItemSelectedListener {
             if (it.itemId != dataBinding.bottomNavigationBar.selectedItemId)
@@ -73,16 +90,13 @@ class RecipeListFragment : Fragment(), RecipeListClickNavigator {
 
         dataBinding.addDishButton.setOnClickListener {
             val action = RecipeListFragmentDirections
-                    .actionRecipeListFragmentToRecipeCreateNavigation()
+                .actionRecipeListFragmentToRecipeCreateNavigation(args.day, args.timeOfDay)
             this.findNavController().navigate(action)
         }
 
     }
 
     override fun onRecipeCreateClick() {
-        val action = RecipeListFragmentDirections
-            .actionRecipeListFragmentToRecipeCreateNavigation()
-        this.findNavController().navigate(action)
     }
 
 

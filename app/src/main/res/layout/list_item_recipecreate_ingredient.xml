@@ -7,6 +7,8 @@
     <data>
         <import type="android.view.View" />
 
+        <import type="com.example.diethelperapp.recipecreate.RecipeCreateUtils" />
+
         <variable
             name="viewModel"
             type="com.example.diethelperapp.recipecreate.RecipeCreateViewModel" />
@@ -61,6 +63,7 @@
                 tools:text="Название" />
 
                 <com.google.android.material.textfield.TextInputLayout
+
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -80,7 +83,8 @@
                         android:importantForAutofill="no"
                         android:inputType="number"
                         android:textColor="#ffffff"
-                        android:text="100"
+                        android:text="@={viewModel.thisIngredientsList[ingredientListPosition].amount}"
+                        android:onClick="@{() -> viewModel.calculateNutrition()}"
                         android:hint="Кол-во (г)"/>
 
                 </com.google.android.material.textfield.TextInputLayout>

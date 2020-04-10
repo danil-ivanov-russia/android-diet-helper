@@ -4,7 +4,7 @@ import com.example.diethelperapp.db2.DietDAO
 
 interface RecipeCreateRepository {
 
-    suspend fun addRecipeToDatabase(): DietDAO.Dishes
+    suspend fun addRecipeToDatabase(dish: DietDAO.Dishes)
 
     suspend fun loadIngredients(): List<DietDAO.Ingredients>
 

@@ -72,7 +72,7 @@ class DietPlanFragment :  Fragment(), DietPlanButtonClickNavigator  {
 
     override fun onRecipeAddClick(day: Int, timeOfDay: Int) {
             val action = DietPlanFragmentDirections
-                .actionDietPlanFragmentToRecipeListFragment(day, timeOfDay)
+                .actionDietPlanFragmentToRecipeListFragment(day, timeOfDay, 1)
             this.findNavController().navigate(action)
         }
 

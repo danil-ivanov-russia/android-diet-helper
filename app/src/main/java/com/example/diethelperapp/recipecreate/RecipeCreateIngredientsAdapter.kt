@@ -4,9 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diethelperapp.databinding.ListItemRecipecreateIngredientBinding
-import com.example.diethelperapp.db2.DietDAO
 
-class RecipeCreateIngredientsAdapter(var ingredientsList: List<DietDAO.Ingredients>, var viewModel: RecipeCreateViewModel):
+class RecipeCreateIngredientsAdapter(var ingredientsList: List<IngredientWithAmount>, var viewModel: RecipeCreateViewModel):
     RecyclerView.Adapter<RecipeCreateIngredientsAdapter.RecipeCreateIngredientListViewHolder>() {
 
     override fun getItemCount() = ingredientsList.size
@@ -25,7 +24,7 @@ class RecipeCreateIngredientsAdapter(var ingredientsList: List<DietDAO.Ingredien
 
     override fun onBindViewHolder(holder: RecipeCreateIngredientListViewHolder, position: Int) {
         holder.ingredientBinding.viewModel = viewModel
-        holder.ingredientBinding.ingredientName = ingredientsList[position].ingredientsName
+        holder.ingredientBinding.ingredientName = ingredientsList[position].ingredient.ingredientsName
         holder.ingredientBinding.ingredientListPosition = position
     }
 

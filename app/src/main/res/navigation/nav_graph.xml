@@ -64,9 +64,19 @@
         <argument
             android:name="timeOfDay"
             app:argType="integer" />
+        <argument
+            android:name="preopenedCategory"
+            app:argType="integer" />
         <action
             android:id="@+id/action_recipeListFragment_to_recipe_create_navigation"
-            app:destination="@id/recipe_create_navigation" />
+            app:destination="@id/recipe_create_navigation" >
+            <argument
+                android:name="day"
+                app:argType="integer" />
+            <argument
+                android:name="timeOfDay"
+                app:argType="integer" />
+        </action>
     </fragment>
     <navigation android:id="@+id/recipe_create_navigation"
         app:startDestination="@id/recipeCreateFragment">
@@ -86,6 +96,15 @@
             <action
                 android:id="@+id/action_recipeCreateFragment_to_ingredientListFragment"
                 app:destination="@id/ingredientListFragment" />
+            <argument android:name="day"
+                app:argType="integer" />
+            <argument android:name="timeOfDay"
+                app:argType="integer" />
         </fragment>
+        <action
+            android:id="@+id/action_global_recipeListFragment2"
+            app:destination="@id/recipeListFragment"
+            app:popUpTo="@id/recipeListFragment"
+            app:popUpToInclusive="true" />
     </navigation>
 </navigation>

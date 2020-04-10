@@ -7,6 +7,8 @@ import com.example.diethelperapp.dietplan.DietPlanRepository
 import com.example.diethelperapp.dietplan.DietPlanRepositoryImplementation
 import com.example.diethelperapp.recipecreate.RecipeCreateRepository
 import com.example.diethelperapp.recipecreate.RecipeCreateRepositoryImplementation
+import com.example.diethelperapp.recipelist.RecipeListRepository
+import com.example.diethelperapp.recipelist.RecipeListRepositoryImplementation
 import dagger.Module
 import dagger.Provides
 @Module
@@ -30,6 +32,13 @@ class RepositoryModel
     fun recipeCreate(
         dao: AppDatabase
     ): RecipeCreateRepository = RecipeCreateRepositoryImplementation(
+        dao = dao.getDietDAO()
+    )
+
+    @Provides
+    fun recipeList(
+        dao: AppDatabase
+    ): RecipeListRepository = RecipeListRepositoryImplementation(
         dao = dao.getDietDAO()
     )
 }

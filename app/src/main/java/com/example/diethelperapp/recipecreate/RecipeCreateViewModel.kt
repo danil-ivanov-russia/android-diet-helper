@@ -19,33 +19,36 @@ class RecipeCreateViewModel(
         }
     val allIngredientsList: MutableLiveData<List<DietDAO.Ingredients>> = MutableLiveData()
 
-    private var _thisIngredientsList: MutableList<DietDAO.Ingredients>? = mutableListOf<DietDAO.Ingredients>()
+
+    private var _thisIngredientsList: MutableList<IngredientWithAmount>? =
+        mutableListOf<IngredientWithAmount>()
         set(value) {
             field = value
             (thisIngredientsList as MutableLiveData).postValue(value)
         }
-    val thisIngredientsList: MutableLiveData<List<DietDAO.Ingredients>> = MutableLiveData()
+    val thisIngredientsList: MutableLiveData<MutableList<IngredientWithAmount>> = MutableLiveData()
 
-    private var _customRecipe: DietDAO.Dishes? = null
-        set(value) {
-            field = value
-            (customRecipe as MutableLiveData).postValue(value)
-        }
-    val customRecipe: MutableLiveData<DietDAO.Dishes> = MutableLiveData()
+    /*
+        private var _customRecipeName: String? = null
+            set(value) {
+                field = value
+                (customRecipeName as MutableLiveData).postValue(value)
+            }
+        val customRecipeName: MutableLiveData<String> = MutableLiveData()
 
-    private var _customRecipeName: String? = null
-        set(value) {
-            field = value
-            (customRecipeName as MutableLiveData).postValue(value)
-        }
-    val customRecipeName: MutableLiveData<String> = MutableLiveData()
+        private var _customRecipeDescription: String? = ""
+            set(value) {
+                field = value
+                (customRecipeDescription as MutableLiveData).postValue(value)
+            }
+        val customRecipeDescription: MutableLiveData<String> = MutableLiveData()
 
-    private var _customRecipeDescription: String? = null
-        set(value) {
-            field = value
-            (customRecipeDescription as MutableLiveData).postValue(value)
-        }
-    val customRecipeDescription: MutableLiveData<String> = MutableLiveData()
+     */
+    var customRecipe: DietDAO.Dishes? = null
+
+    val customRecipeName = MutableLiveData<String>()
+
+    val customRecipeDescription = MutableLiveData<String>()
 
     private var _customRecipeCalories: Double? = 0.0
         set(value) {
@@ -82,7 +85,7 @@ class RecipeCreateViewModel(
         }
     val isLoading: LiveData<Boolean> = MutableLiveData(_isLoading)
 
-    var selectedIngredient: DietDAO.Ingredients?= null
+    var selectedIngredient: DietDAO.Ingredients? = null
 
     init {
         viewModelScope.launch {
@@ -99,30 +102,64 @@ class RecipeCreateViewModel(
         }
     }
 
-    fun toIngredientList(){
-        navigator.onIngredientAddClick()
+
+    fun calculateNutrition() {
+        _customRecipeCalories =
+            _thisIngredientsList!!.sumByDouble { it.ingredient.calories!! * it.amount.toDouble() / 100.0 }
+        _customRecipeProtein =
+            _thisIngredientsList!!.sumByDouble { it.ingredient.protein!! * it.amount.toDouble() / 100.0 }
+        _customRecipeFat =
+            _thisIngredientsList!!.sumByDouble { it.ingredient.fat!! * it.amount.toDouble() / 100.0 }
+        _customRecipeCarbohydrate =
+            _thisIngredientsList!!.sumByDouble { it.ingredient.carbohydrates!! * it.amount.toDouble() / 100.0 }
     }
 
-    fun calculateNutrition(){
-        _customRecipeCalories = _thisIngredientsList!!.sumByDouble { it.calories!! }
-        _customRecipeProtein = _thisIngredientsList!!.sumByDouble { it.protein!! }
-        _customRecipeFat = _thisIngredientsList!!.sumByDouble { it.fat!! }
-        _customRecipeCarbohydrate = _thisIngredientsList!!.sumByDouble { it.carbohydrates!! }
-    }
-
-    fun chooseIngredient(id: String){
+    fun chooseIngredient(id: String) {
         viewModelScope.launch {
-            _thisIngredientsList?.add(repository.getIngredientByName(id))
+            _thisIngredientsList?.add(
+                IngredientWithAmount(
+                    "100.0",
+                    repository.getIngredientByName(id)
+                )
+            )
             _thisIngredientsList = _thisIngredientsList
             calculateNutrition()
             navigator.onIngredientChooseClick()
         }
     }
 
-    fun removeIngredient(position: Int){
+    fun removeIngredient(position: Int) {
         _thisIngredientsList?.remove(_thisIngredientsList!![position])
         _thisIngredientsList = _thisIngredientsList
         calculateNutrition()
     }
 
+    fun createRecipe() {
+        calculateNutrition()
+        viewModelScope.launch {
+            customRecipeName.value?.let {
+                customRecipe = DietDAO.Dishes(
+                    99,
+                    it!!,
+                    _customRecipeProtein!!,
+                    _customRecipeFat!!,
+                    _customRecipeCarbohydrate!!,
+                    _customRecipeCalories!!,
+                    "Пользовательская",
+                    mutableListOf("Завтрак", "Обед", "Ужин", "Перекус"),
+                    customRecipeDescription.value ?: "",
+                    1
+                )
+            }
+            customRecipe?.let {
+                repository.addRecipeToDatabase(it)
+            }
+
+        }
+    }
 }
+
+class IngredientWithAmount(
+    var amount: String = "100.0",
+    var ingredient: DietDAO.Ingredients
+)

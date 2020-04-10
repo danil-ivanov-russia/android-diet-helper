@@ -81,6 +81,7 @@
 
         <!--
         <Spinner
+            android:onClick="@{()-> viewModel.createRecipe()}"
         android:onClick="@{()-> viewModel.toIngredientList()}"
             android:id="@+id/spinnerIngredients"
             android:layout_width="0dp"

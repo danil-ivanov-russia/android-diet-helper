@@ -9,16 +9,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.diethelperapp.R
 import com.example.diethelperapp.databinding.FragmentRecipecreateBinding
 import com.example.diethelperapp.db2.App
-import com.example.diethelperapp.db2.DietDAO
 import com.example.diethelperapp.ingredientlist.IngredientListFragmentDirections
 
 class RecipeCreateFragment:  Fragment(), RecipeCreateClickNavigator {
 
+    val args: RecipeCreateFragmentArgs by navArgs()
 
     private val viewModel: RecipeCreateViewModel by navGraphViewModels(R.id.recipe_create_navigation) {
         object: ViewModelProvider.Factory {
@@ -55,7 +56,7 @@ class RecipeCreateFragment:  Fragment(), RecipeCreateClickNavigator {
 
         dataBinding.recyclerViewCurrentIngredients.layoutManager = LinearLayoutManager(requireContext())
 
-        val ingredientObserver = Observer<List<DietDAO.Ingredients>> { it ->
+        val ingredientObserver = Observer<MutableList<IngredientWithAmount>> { it ->
             dataBinding.recyclerViewCurrentIngredients.adapter = RecipeCreateIngredientsAdapter(it, viewModel)
 
         }
@@ -66,17 +67,24 @@ class RecipeCreateFragment:  Fragment(), RecipeCreateClickNavigator {
                 .actionRecipeCreateFragmentToIngredientListFragment()
             this.findNavController().navigate(action)
         }
-    }
 
-    override fun onIngredientAddClick() {
-        val action = RecipeCreateFragmentDirections
-            .actionRecipeCreateFragmentToIngredientListFragment()
-        this.findNavController().navigate(action)
+
+        dataBinding.buttonCreateDish.setOnClickListener{
+            viewModel.createRecipe()
+            val action = RecipeCreateFragmentDirections
+                .actionGlobalRecipeListFragment2(args.day, args.timeOfDay, 2)
+            viewModel.customRecipe?.let{
+                this.findNavController().navigate(action)
+            }
+        }
     }
 
     override fun onIngredientChooseClick() {
         val action = IngredientListFragmentDirections
             .actionIngredientListFragmentToRecipeCreateFragment()
         this.findNavController().navigate(action)
+    }
+
+    override fun onCreateRecipeConfirm() {
     }
 }
