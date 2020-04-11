@@ -139,8 +139,8 @@ class RecipeCreateViewModel(
         viewModelScope.launch {
             customRecipeName.value?.let {
                 customRecipe = DietDAO.Dishes(
-                    99,
-                    it!!,
+                    0,
+                    it,
                     _customRecipeProtein!!,
                     _customRecipeFat!!,
                     _customRecipeCarbohydrate!!,
