@@ -9,4 +9,6 @@ interface RecipeListRepository {
     suspend fun loadUserRecipes(): List<DishesModel>
 
     suspend fun loadRecipesFromWeb(): List<DishesModel>
+
+    suspend fun deleteUserRecipe(dish: DishesModel)
 }

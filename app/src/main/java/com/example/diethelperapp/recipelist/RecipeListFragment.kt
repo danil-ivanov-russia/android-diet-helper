@@ -65,7 +65,7 @@ class RecipeListFragment : Fragment(), RecipeListClickNavigator {
             recyclerViewRecipes.adapter = RecipeListAdapter(it, viewModel)
 
         }
-        viewModel.recipesNames.observe(viewLifecycleOwner, recipesNameObserver)
+        viewModel.recipes.observe(viewLifecycleOwner, recipesNameObserver)
 
         dataBinding.bottomNavigationBar.setOnNavigationItemSelectedListener {
             if (it.itemId != dataBinding.bottomNavigationBar.selectedItemId)

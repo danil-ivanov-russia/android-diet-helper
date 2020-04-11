@@ -1,7 +1,7 @@
 package com.example.diethelperapp.recipelist
 
-import com.example.diethelperapp.db2.DietDAO
 import com.example.diethelperapp.common.models.DishesModel
+import com.example.diethelperapp.db2.DietDAO
 
 class RecipeListRepositoryMocked: RecipeListRepository {
     override suspend fun loadStandartRecipes(): List<DishesModel> {
@@ -138,5 +138,9 @@ class RecipeListRepositoryMocked: RecipeListRepository {
                 "lorem ipsum dolor sit"
             )
         )
+    }
+
+    override suspend fun deleteUserRecipe(dish: DishesModel) {
+        TODO("Not yet implemented")
     }
 }

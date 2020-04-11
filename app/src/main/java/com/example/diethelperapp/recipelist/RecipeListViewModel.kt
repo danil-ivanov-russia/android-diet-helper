@@ -11,12 +11,12 @@ class RecipeListViewModel(
     private val repository: RecipeListRepository,
     var navigator: RecipeListClickNavigator
 ) : ViewModel() {
-    private var _recipesNames: List<DishesModel>? = null
+    private var _recipes: List<DishesModel>? = null
         set(value) {
             field = value
-            (recipesNames as MutableLiveData).postValue(value)
+            (recipes as MutableLiveData).postValue(value)
         }
-    val recipesNames: MutableLiveData<List<DishesModel>> = MutableLiveData()
+    val recipes: MutableLiveData<List<DishesModel>> = MutableLiveData()
 
     private var _isLoading = true
         set(value) {
@@ -43,12 +43,8 @@ class RecipeListViewModel(
 
             _isLoading = false
             _isUserRecipes = false
-            recipesNames?.let { _recipesNames = it }
+            recipesNames?.let { _recipes = it }
         }
-    }
-
-    fun toCreateRecipe(){
-        navigator.onRecipeCreateClick()
     }
 
     fun selectStandartRecipes(){
@@ -61,7 +57,7 @@ class RecipeListViewModel(
             }
             _isLoading = false
             _isUserRecipes = false
-            recipesNames?.let { _recipesNames = it }
+            recipesNames?.let { _recipes = it }
         }
     }
 
@@ -76,7 +72,7 @@ class RecipeListViewModel(
             }
             _isLoading = false
             _isUserRecipes = true
-            recipesNames?.let { _recipesNames = it }
+            recipesNames?.let { _recipes = it }
         }
     }
 
@@ -91,8 +87,16 @@ class RecipeListViewModel(
             }
             _isLoading = false
             _isUserRecipes = false
-            recipesNames?.let { _recipesNames = it }
+            recipesNames?.let { _recipes = it }
         }
+    }
+
+    fun deleteUserRecipe(dish: DishesModel){
+        viewModelScope.launch {
+            repository.deleteUserRecipe(dish)
+            selectUserRecipes()
+        }
+
     }
 
 

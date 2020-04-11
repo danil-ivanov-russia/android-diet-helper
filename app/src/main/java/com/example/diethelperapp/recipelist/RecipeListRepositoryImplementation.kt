@@ -49,4 +49,8 @@ class RecipeListRepositoryImplementation(private val dao: DietDAO): RecipeListRe
             )
         )
     }
+
+    override suspend fun deleteUserRecipe(dish: DishesModel) {
+        dao.deleteDishes(dish as DietDAO.Dishes)
+    }
 }

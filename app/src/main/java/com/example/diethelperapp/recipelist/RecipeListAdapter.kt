@@ -25,7 +25,8 @@ class RecipeListAdapter(var recipesList: List<DishesModel>, var viewModel: Recip
 
 
     override fun onBindViewHolder(holder: DietListViewHolder, position: Int) {
-        holder.recipeBinding.recipeName = viewModel.recipesNames.value?.get(position)?.dishesName
+        holder.recipeBinding.dish = viewModel.recipes.value?.get(position)
+        holder.recipeBinding.viewModel = viewModel
     }
 
     class DietListViewHolder(val recipeBinding: ListItemRecipeBinding):RecyclerView.ViewHolder(recipeBinding.root){
