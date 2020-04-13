@@ -61,7 +61,7 @@ abstract class DietDAO {
 
 
     @Query("SELECT currentDiet From User ")
-    abstract suspend fun getCurrentDiet(): Int
+    abstract suspend fun getCurrentDiet(): Int?
 
     @Query("SELECT * From Ingredients ")
     abstract suspend fun getAllIngredient(): List<Ingredients>
@@ -118,6 +118,9 @@ abstract class DietDAO {
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun updateDishes(link: Dishes)
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun updateCalendar(calendar: Calendar)
 
     @Delete()
     abstract suspend fun deleteDishes(dishes: Dishes)
@@ -202,7 +205,7 @@ abstract class DietDAO {
     @Entity()
     class User(
         @PrimaryKey
-        override val currentDiet: Int
+        override val currentDiet: Int? = -1
     ) : UserModel
 
 

@@ -32,6 +32,7 @@ class DietPlanViewModel(
             val dietPlan: List<DietPlanRepository.DietPlanDay>? = try{
                 if (ctx != null) {
                     repository.fillCalendar(dietId,ctx)
+                    repository.setCalendar()
                 }
                 repository.loadDietPlan()
             } catch (t: Throwable){
