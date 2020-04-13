@@ -50,9 +50,13 @@ class DietPlanViewModel(
     }
 
 
-    fun removeRecipe(day: Int, timeOfDay: Int){
-        //тут убирать в базе?
-        navigator.onRecipeRemoveClick(day, timeOfDay)
+    fun removeRecipe(recipeId: Int, day: Int, timeOfDay: Int){
+        viewModelScope.launch {
+            //_isLoading = true
+            repository.deleteDishesFromDay(recipeId, timeOfDay, day)
+            _dietPlan = repository.loadDietPlan()
+        }
+        //_isLoading = false
     }
 
     fun replaceRecipe(day: Int, timeOfDay: Int){

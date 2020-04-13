@@ -18,6 +18,15 @@
         <variable
             name="recipeId"
             type="Integer" />
+
+        <variable
+            name="dayNumber"
+            type="Integer" />
+
+        <variable
+            name="timeOfDayNumber"
+            type="Integer" />
+
     </data>
 
 
@@ -57,23 +66,15 @@
                     tools:text="Название" />
 
                 <Button
-                    android:id="@+id/changeRecipeButton"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="/"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    card_view:layout_constraintEnd_toEndOf="parent"/>
-                <Button
                     android:id="@+id/removeRecipeButton"
+                    android:onClick="@{()-> viewModel.removeRecipe(recipeId, dayNumber, timeOfDayNumber)}"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:text="-"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    card_view:layout_constraintEnd_toStartOf="@+id/changeRecipeButton"/>
+                    card_view:layout_constraintEnd_toEndOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

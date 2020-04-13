@@ -2,8 +2,8 @@ package com.example.diethelperapp.dietplan
 
 import android.content.Context
 import com.example.diethelperapp.common.JsonUtil
-import com.example.diethelperapp.db2.DietDAO
 import com.example.diethelperapp.common.models.DishesModel
+import com.example.diethelperapp.db2.DietDAO
 import com.example.diethelperapp.db2.relationDataClasses.CalendarWithDishes
 
 class DietPlanRepositoryImplementation(private val dao: DietDAO) : DietPlanRepository {
@@ -118,12 +118,37 @@ class DietPlanRepositoryImplementation(private val dao: DietDAO) : DietPlanRepos
         dishesId: Int, foodLabel: Int, dayLabel: Int
     ) {
 
-        val tmpDay = calendar[foodLabel].Calendar
-        when (dayLabel) {
-            0 -> tmpDay.dishesInBreakfast.remove(dishesId.toString())
-            1 -> tmpDay.dishesInLunch.remove(dishesId.toString())
-            2 -> tmpDay.dishesInDinner.remove(dishesId.toString())
-            3 -> tmpDay.dishesInSnack.remove(dishesId.toString())
+        val tmpDay = calendar[dayLabel].Calendar
+        when (foodLabel) {
+            0 -> {
+                if (tmpDay.dishesInBreakfast.size > 1) {
+                    tmpDay.dishesInBreakfast[tmpDay.dishesInBreakfast.size-1] =
+                        tmpDay.dishesInBreakfast.last().trimStart()
+                }
+                tmpDay.dishesInBreakfast.remove(dishesId.toString())
+            }
+            1 ->
+            {
+                if (tmpDay.dishesInLunch.size > 1) {
+                    tmpDay.dishesInLunch[tmpDay.dishesInLunch.size-1] =
+                        tmpDay.dishesInLunch.last().trimStart()
+                }
+                tmpDay.dishesInLunch.remove(dishesId.toString())
+            }
+            2 -> {
+                if (tmpDay.dishesInDinner.size > 1) {
+                    tmpDay.dishesInDinner[tmpDay.dishesInDinner.size-1] =
+                        tmpDay.dishesInDinner.last().trimStart()
+                }
+                tmpDay.dishesInDinner.remove(dishesId.toString())
+            }
+            3 -> {
+                if (tmpDay.dishesInSnack.size > 1) {
+                    tmpDay.dishesInSnack[tmpDay.dishesInSnack.size-1] =
+                        tmpDay.dishesInSnack.last().trimStart()
+                }
+                tmpDay.dishesInSnack.remove(dishesId.toString())
+            }
         }
         dao.updateCalendar(tmpDay)
 
