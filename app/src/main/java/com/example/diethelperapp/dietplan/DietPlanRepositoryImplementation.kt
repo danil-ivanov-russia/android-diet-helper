@@ -8,8 +8,6 @@ import com.example.diethelperapp.common.models.DishesModel
 class DietPlanRepositoryImplementation(private val dao: DietDAO) : DietPlanRepository {
     override suspend fun loadDietPlan(): List<DietPlanRepository.DietPlanDay> {
         val listDietPlanDay = mutableListOf<DietPlanRepository.DietPlanDay>()
-//        val tmpObj1 = dao.getCalendar()
-//        dao.deleteCalendar()
         val tmpObj = dao.getCalendar()
 
         for (i in tmpObj) {

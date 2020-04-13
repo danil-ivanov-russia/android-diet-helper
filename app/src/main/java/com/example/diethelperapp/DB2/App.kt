@@ -25,9 +25,8 @@ class App : Application() {
         val tmpStr: String = listOf<String>("ddd", "ddd").joinToString()
         val qwe = tmpStr.split(",").toList()
 
-        val tmpList = mutableListOf(1, 3)
-        val mark = 4
-        tmpList.add(0,mark)
+        val tmpList = mutableListOf(1, 3,4,5,1,1,2,3)
+        val q = tmpList.filter { it == 1 }[0]
 
 
 
