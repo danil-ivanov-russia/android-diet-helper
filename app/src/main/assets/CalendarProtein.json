@@ -7,31 +7,129 @@
         2,
         3,
         4
+      ],
+      "dishesInBreakfast": [
+        "1",
+        "2"
+      ],
+      "dishesInLunch": [
+        "3",
+        "1"
+      ],
+      "dishesInDinner": [
+        "5"
+      ],
+      "dishesInSnack": [
+        "4"
       ]
     },
     {
       "markDay": "Protein2",
-      "arrayDishes": []
+      "arrayDishes": [],
+      "dishesInBreakfast": [
+        "1",
+        "2"
+      ],
+      "dishesInLunch": [
+        "3",
+        "1"
+      ],
+      "dishesInDinner": [
+        "5"
+      ],
+      "dishesInSnack": [
+        "4"
+      ]
     },
     {
       "markDay": "Protein3",
-      "arrayDishes": []
+      "arrayDishes": [],
+      "dishesInBreakfast": [
+        "1",
+        "2"
+      ],
+      "dishesInLunch": [
+        "3",
+        "1"
+      ],
+      "dishesInDinner": [
+        "5"
+      ],
+      "dishesInSnack": [
+        "4"
+      ]
     },
     {
       "markDay": "Protein4",
-      "arrayDishes": []
+      "arrayDishes": [],
+      "dishesInBreakfast": [
+        "1",
+        "2"
+      ],
+      "dishesInLunch": [
+        "3",
+        "1"
+      ],
+      "dishesInDinner": [
+        "5"
+      ],
+      "dishesInSnack": [
+        "4"
+      ]
     },
     {
       "markDay": "Protein5",
-      "arrayDishes": []
+      "arrayDishes": [],
+      "dishesInBreakfast": [
+        "1",
+        "2"
+      ],
+      "dishesInLunch": [
+        "3",
+        "1"
+      ],
+      "dishesInDinner": [
+        "5"
+      ],
+      "dishesInSnack": [
+        "4"
+      ]
     },
     {
       "markDay": "Protein6",
-      "arrayDishes": []
+      "arrayDishes": [],
+      "dishesInBreakfast": [
+        "1",
+        "2"
+      ],
+      "dishesInLunch": [
+        "3",
+        "1"
+      ],
+      "dishesInDinner": [
+        "5"
+      ],
+      "dishesInSnack": [
+        "4"
+      ]
     },
     {
       "markDay": "Protein7",
-      "arrayDishes": []
+      "arrayDishes": [],
+      "dishesInBreakfast": [
+        "1",
+        "2"
+      ],
+      "dishesInLunch": [
+        "3",
+        "1"
+      ],
+      "dishesInDinner": [
+        "5"
+      ],
+      "dishesInSnack": [
+        "4"
+      ]
     }
   ]
 }

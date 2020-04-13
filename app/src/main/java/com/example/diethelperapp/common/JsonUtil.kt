@@ -8,11 +8,11 @@ import com.google.gson.Gson
 
 class JsonUtil(_ctx: Context) {
     var listCrossRefDietOwnDishes: MutableCollection<DietDAO.CrossRefDietOwnDishes>? =
-            mutableListOf()
+        mutableListOf()
     var listDiets: MutableCollection<DietDAO.Diet>? = mutableListOf()
     var listDishes: MutableCollection<DietDAO.Dishes>? = mutableListOf()
     var listCrossRefCalendarOwnDishes: MutableCollection<DietDAO.CrossRefCalendarOwnDishes>? =
-            mutableListOf()
+        mutableListOf()
     var listCalendar: MutableCollection<DietDAO.Calendar>? = mutableListOf()
     var listIngredients: MutableCollection<DietDAO.Ingredients>? = mutableListOf()
     var listCrossRefIngredients: MutableCollection<DietDAO.ListIngredients>? = mutableListOf()
@@ -28,39 +28,38 @@ class JsonUtil(_ctx: Context) {
     init {
         setListDietsAndCrossRefDietOwnDishes()
         setListDishes()
-       // setCalendarAndCrossRefCalendarWithDishes()
+        // setCalendarAndCrossRefCalendarWithDishes()
         setIngredients()
         setCrossRefListIngredient()
     }
 
 
     private fun getJsonString(fileString: String): String =
-            context?.assets?.open(fileString)?.bufferedReader().use {
-                it!!.readText()
-            }
+        context?.assets?.open(fileString)?.bufferedReader().use {
+            it!!.readText()
+        }
 
 
-    // не нравиться мне такой подход, надо бы узнать как сделать лучше
     private fun setListDietsAndCrossRefDietOwnDishes() {
         val obj: DCDiet = Gson().fromJson(getJsonString("Diet.json"), DCDiet::class.java)
         var i = 0;
         for (i in obj.arrayDiet) {
             listDiets?.add(
-                    DietDAO.Diet(
-                            i.dietId,
-                            i.dietName,
-                            i.supportingInformation,
-                            i.duration
-                    )
+                DietDAO.Diet(
+                    i.dietId,
+                    i.dietName,
+                    i.supportingInformation,
+                    i.duration
+                )
             )
         }
         for (i in obj.arrayDiet) {
             for (j in i.arrayDishesBelongDiet)
                 listCrossRefDietOwnDishes?.add(
-                        DietDAO.CrossRefDietOwnDishes(
-                                i.dietId,
-                                j
-                        )
+                    DietDAO.CrossRefDietOwnDishes(
+                        i.dietId,
+                        j
+                    )
                 )
         }
 
@@ -69,33 +68,40 @@ class JsonUtil(_ctx: Context) {
 
     private fun setListDishes() {
         val obj: DCDishes =
-                Gson().fromJson(getJsonString("Dishes.json"), DCDishes::class.java)
+            Gson().fromJson(getJsonString("Dishes.json"), DCDishes::class.java)
         for (i in obj.arrayDishes) {
             listDishes?.add(
-                    DietDAO.Dishes(
-                            i.dishesId,
-                            i.dishesName,
-                            i.protein,
-                            i.fat,
-                            i.carbohydrates,
-                            i.calories,
-                            i.category,
-                            i.mark,
-                            i.description,
-                            i.amount
-                    )
+                DietDAO.Dishes(
+                    i.dishesId,
+                    i.dishesName,
+                    i.protein,
+                    i.fat,
+                    i.carbohydrates,
+                    i.calories,
+                    i.category,
+                    i.mark,
+                    i.description,
+                    i.amount
+                )
             )
         }
 
     }
 
 
-
-     fun setCalendarAndCrossRefCalendarWithDishes() {
+    fun setCalendarAndCrossRefCalendarWithDishes() {
         val obj: DCCalendar =
-                Gson().fromJson(getJsonString(chooseCalendarJSON(nameDiet)), DCCalendar::class.java)
+            Gson().fromJson(getJsonString(chooseCalendarJSON(nameDiet)), DCCalendar::class.java)
         for (i in obj.arrayCalendar) {
-            listCalendar?.add(DietDAO.Calendar(i.markDay))
+            listCalendar?.add(
+                DietDAO.Calendar(
+                    i.markDay,
+                    i.dishesInBreakfast,
+                    i.dishesInLunch,
+                    i.dishesInDinner,
+                    i.dishesInSnack
+                )
+            )
         }
 
         for (i in obj.arrayCalendar)
@@ -107,30 +113,30 @@ class JsonUtil(_ctx: Context) {
 
     private fun setIngredients() {
         val obj: DCIngredients =
-                Gson().fromJson(getJsonString("Ingredients.json"), DCIngredients::class.java)
+            Gson().fromJson(getJsonString("Ingredients.json"), DCIngredients::class.java)
         for (i in obj.arrayIngredients) {
             listIngredients?.add(
-                    DietDAO.Ingredients(
-                            i.ingredientsName,
-                            i.protein,
-                            i.fat,
-                            i.carbohydrates,
-                            i.calories
+                DietDAO.Ingredients(
+                    i.ingredientsName,
+                    i.protein,
+                    i.fat,
+                    i.carbohydrates,
+                    i.calories
 
-                    )
+                )
             )
         }
     }
 
     private fun setCrossRefListIngredient() {
         val obj: DCListIngredients =
-                Gson().fromJson(
-                        getJsonString("ListIngredients.json"),
-                        DCListIngredients::class.java
-                )
+            Gson().fromJson(
+                getJsonString("ListIngredients.json"),
+                DCListIngredients::class.java
+            )
         for (j in obj.arrayDishesWithIngredients) {
             listCrossRefIngredients?.add(
-                    DietDAO.ListIngredients(j.ingredientId, j.ingredientsCount, j.dishesId)
+                DietDAO.ListIngredients(j.ingredientId, j.ingredientsCount, j.dishesId)
             )
         }
     }

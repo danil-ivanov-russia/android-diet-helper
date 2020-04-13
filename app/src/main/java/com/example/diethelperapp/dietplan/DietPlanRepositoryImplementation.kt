@@ -97,13 +97,14 @@ class DietPlanRepositoryImplementation(private val dao: DietDAO) : DietPlanRepos
 
     override suspend fun fillCalendar(dietId: Int, ctx: Context) {
 
+
+
         // val i =  dao.getCurrentDiet()
 //        if(!checkCurrentDiet(dietId, dao.getCurrentDiet()))
 //        {
 //            return
 //        }
         dao.deleteCalendar()
-        val tmpObj1 = dao.getCalendar()
         dao.insertUserCurrentDiet(DietDAO.User(dietId))
         val dietName = dao.getNameCertainDiet(dietId)
         var jsonUtil = JsonUtil(ctx, dietName)

@@ -192,7 +192,11 @@ abstract class DietDAO {
     @Entity()
     class Calendar(
         @PrimaryKey
-        override var markDay: String
+        override var markDay: String,
+        override val dishesInBreakfast: MutableList<String>,
+        override val dishesInLunch: MutableList<String>,
+        override val dishesInDinner: MutableList<String>,
+        override val dishesInSnack: MutableList<String>
     ) : ModelCalendar
 
     @Entity()
