@@ -26,7 +26,13 @@
     },
     {
       "markDay": "Buckwheat2",
-      "arrayDishes": [],
+       "arrayDishes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
       "dishesInBreakfast": [
         "1",
         "2"
@@ -44,7 +50,13 @@
     },
     {
       "markDay": "Buckwheat3",
-      "arrayDishes": [],
+       "arrayDishes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
       "dishesInBreakfast": [
         "1",
         "2"
@@ -62,7 +74,13 @@
     },
     {
       "markDay": "Buckwheat4",
-      "arrayDishes": [],
+       "arrayDishes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
       "dishesInBreakfast": [
         "1",
         "2"
@@ -80,7 +98,13 @@
     },
     {
       "markDay": "Buckwheat5",
-      "arrayDishes": [],
+       "arrayDishes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
       "dishesInBreakfast": [
         "1",
         "2"
@@ -98,7 +122,13 @@
     },
     {
       "markDay": "Buckwheat6",
-      "arrayDishes": [],
+       "arrayDishes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
       "dishesInBreakfast": [
         "1",
         "2"
@@ -116,7 +146,13 @@
     },
     {
       "markDay": "Buckwheat7",
-      "arrayDishes": [],
+       "arrayDishes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
       "dishesInBreakfast": [
         "1",
         "2"

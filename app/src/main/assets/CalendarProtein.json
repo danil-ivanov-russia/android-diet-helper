@@ -6,7 +6,8 @@
         1,
         2,
         3,
-        4
+        4,
+        5
       ],
       "dishesInBreakfast": [
         "1",
@@ -25,7 +26,13 @@
     },
     {
       "markDay": "Protein2",
-      "arrayDishes": [],
+      "arrayDishes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
       "dishesInBreakfast": [
         "1",
         "2"
@@ -43,7 +50,13 @@
     },
     {
       "markDay": "Protein3",
-      "arrayDishes": [],
+      "arrayDishes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
       "dishesInBreakfast": [
         "1",
         "2"
@@ -61,7 +74,13 @@
     },
     {
       "markDay": "Protein4",
-      "arrayDishes": [],
+      "arrayDishes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
       "dishesInBreakfast": [
         "1",
         "2"
@@ -79,7 +98,13 @@
     },
     {
       "markDay": "Protein5",
-      "arrayDishes": [],
+      "arrayDishes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
       "dishesInBreakfast": [
         "1",
         "2"
@@ -97,7 +122,13 @@
     },
     {
       "markDay": "Protein6",
-      "arrayDishes": [],
+      "arrayDishes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
       "dishesInBreakfast": [
         "1",
         "2"
@@ -115,7 +146,13 @@
     },
     {
       "markDay": "Protein7",
-      "arrayDishes": [],
+      "arrayDishes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
       "dishesInBreakfast": [
         "1",
         "2"

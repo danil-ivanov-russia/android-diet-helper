@@ -4,7 +4,14 @@ import android.content.Context
 import com.example.diethelperapp.common.JsonUtil
 import com.example.diethelperapp.db2.DietDAO
 import com.example.diethelperapp.common.models.DishesModel
-
+/*  DietDAO.Dishes(
+                            j.dishesId,
+                            j.dishesName,
+                            j.calories,
+                            j.protein,
+                            j.fat,
+                            j.carbohydrates
+                        )*/
 class DietPlanRepositoryImplementation(private val dao: DietDAO) : DietPlanRepository {
     override suspend fun loadDietPlan(): List<DietPlanRepository.DietPlanDay> {
         val listDietPlanDay = mutableListOf<DietPlanRepository.DietPlanDay>()
@@ -16,50 +23,53 @@ class DietPlanRepositoryImplementation(private val dao: DietDAO) : DietPlanRepos
             val currentDinnerList = mutableListOf<DishesModel>()
             val currentOtherList = mutableListOf<DishesModel>()
 
-            for (j in i.Dishes) {
-                when (j.mark[0]) {
-                    "Завтрак" -> currentBreakfastList.add(
-                        DietDAO.Dishes(
-                            j.dishesId,
-                            j.dishesName,
-                            j.calories,
-                            j.protein,
-                            j.fat,
-                            j.carbohydrates
-                        )
-
-                    )
-                    "Обед" -> currentLunchList.add(
-                        DietDAO.Dishes(
-                            j.dishesId,
-                            j.dishesName,
-                            j.calories,
-                            j.protein,
-                            j.fat,
-                            j.carbohydrates
-                        )
-                    )
-                    "Ужин" -> currentDinnerList.add(
-                        DietDAO.Dishes(
-                            j.dishesId,
-                            j.dishesName,
-                            j.calories,
-                            j.protein,
-                            j.fat,
-                            j.carbohydrates
-                        )
-                    )
-                    "Перекус" -> currentOtherList.add(
-                        DietDAO.Dishes(
-                            j.dishesId,
-                            j.dishesName,
-                            j.calories,
-                            j.protein,
-                            j.fat,
-                            j.carbohydrates
-                        )
-                    )
-                }
+            for(j in i.Calendar.dishesInBreakfast)
+            {
+                val tmpDishes = i.Dishes.filter { it.dishesId==j.trim().toInt() }[0]
+                currentBreakfastList.add(DietDAO.Dishes(
+                    tmpDishes.dishesId,
+                    tmpDishes.dishesName,
+                    tmpDishes.calories,
+                    tmpDishes.protein,
+                    tmpDishes.fat,
+                    tmpDishes.carbohydrates
+                ))
+            }
+            for(j in i.Calendar.dishesInDinner)
+            {
+                val tmpDishes = i.Dishes.filter { it.dishesId==j.trim().toInt() }[0]
+                currentDinnerList.add(DietDAO.Dishes(
+                    tmpDishes.dishesId,
+                    tmpDishes.dishesName,
+                    tmpDishes.calories,
+                    tmpDishes.protein,
+                    tmpDishes.fat,
+                    tmpDishes.carbohydrates
+                ))
+            }
+            for(j in i.Calendar.dishesInLunch)
+            {
+                val tmpDishes = i.Dishes.filter { it.dishesId==j.trim().toInt() }[0]
+                currentLunchList.add(DietDAO.Dishes(
+                    tmpDishes.dishesId,
+                    tmpDishes.dishesName,
+                    tmpDishes.calories,
+                    tmpDishes.protein,
+                    tmpDishes.fat,
+                    tmpDishes.carbohydrates
+                ))
+            }
+            for(j in i.Calendar.dishesInSnack)
+            {
+                val tmpDishes = i.Dishes.filter { it.dishesId==j.trim().toInt() }[0]
+                currentOtherList.add(DietDAO.Dishes(
+                    tmpDishes.dishesId,
+                    tmpDishes.dishesName,
+                    tmpDishes.calories,
+                    tmpDishes.protein,
+                    tmpDishes.fat,
+                    tmpDishes.carbohydrates
+                ))
             }
             listDietPlanDay.add(
                 DietPlanRepository.DietPlanDay(
@@ -98,12 +108,6 @@ class DietPlanRepositoryImplementation(private val dao: DietDAO) : DietPlanRepos
     override suspend fun fillCalendar(dietId: Int, ctx: Context) {
 
 
-
-        // val i =  dao.getCurrentDiet()
-//        if(!checkCurrentDiet(dietId, dao.getCurrentDiet()))
-//        {
-//            return
-//        }
         dao.deleteCalendar()
         dao.insertUserCurrentDiet(DietDAO.User(dietId))
         val dietName = dao.getNameCertainDiet(dietId)
